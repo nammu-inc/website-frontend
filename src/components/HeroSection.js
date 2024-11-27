@@ -1,56 +1,102 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const HeroSection = () => (
-  <div style={styles.hero}>
-    <div style={styles.logoContainer}>
-      <img src="logo.png" alt="Nammu Logo" style={styles.logo} />
-    </div>
-    <p style={styles.subtitle}>Transforming Food Distribution with AI</p>
-    <div style={styles.valueAdds}>
-      <div style={styles.valueAdd}>
-        <h2 style={styles.valueTitle}>Streamline Key Operations</h2>
-        <p style={styles.valueText}>
-          Automate order entry, inventory updates, and product allocation,
-          saving significant time and resources.
-        </p>
+const HeroSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+    // Set initial state
+    setIsMobile(mediaQuery.matches);
+
+    // Add event listener for viewport changes
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+
+    // Cleanup event listener on unmount
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  return (
+    <div
+      style={{
+        ...styles.hero,
+        backgroundImage: `url(${
+          isMobile ? "mobileheroimage.jpg" : "heroimage.jpg"
+        })`,
+      }}
+    >
+      <div style={styles.logoContainer}>
+        <img
+          src="invertedlogo.png"
+          alt="Nammu Logo"
+          style={{
+            ...styles.logo,
+            height: isMobile ? "80px" : "120px",
+          }}
+        />
       </div>
-      <div style={styles.valueAdd}>
-        <h2 style={styles.valueTitle}>Convert Data to Actionable Insights</h2>
-        <p style={styles.valueText}>
-          Provide real-time recommendations for pricing, sales, and purchasing
-          decisions, driving efficiency and profit.
-        </p>
+      <p
+        style={{
+          ...styles.subtitle,
+          fontSize: isMobile ? "1.5rem" : "2rem", // Adjust font size based on viewport
+        }}
+      >
+        Transforming Food Distribution with AI
+      </p>
+      <div
+        style={{
+          ...styles.valueAdds,
+          flexDirection: isMobile ? "column" : "row",
+        }}
+      >
+        <div style={styles.valueAdd}>
+          <h2 style={styles.valueTitle}>Streamline Key Operations</h2>
+          <p style={styles.valueText}>
+            Automate order entry, inventory updates, and product allocation,
+            saving significant time and resources.
+          </p>
+        </div>
+        <div style={styles.valueAdd}>
+          <h2 style={styles.valueTitle}>Convert Data to Insights</h2>
+          <p style={styles.valueText}>
+            Provide real-time recommendations for pricing, sales, and purchasing
+            decisions, driving efficiency and profit.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const styles = {
   hero: {
     padding: "60px 20px",
     textAlign: "center",
-    backgroundColor: "#f4f4f9",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     color: "#333",
+    position: "relative",
+    backgroundBlendMode: "overlay",
+    backgroundColor: "rgba(0, 0, 0, 0.35)",
   },
+
   logoContainer: {
     marginBottom: "20px",
-  },
-  logo: {
-    height: "120px", // Adjust as needed
   },
   subtitle: {
     fontSize: "2rem",
     fontWeight: "300",
     marginBottom: "40px",
-    color: "#333",
+    color: "#fff",
     maxWidth: "800px",
     margin: "0 auto",
   },
   valueAdds: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     gap: "30px",
-    flexWrap: "wrap",
     maxWidth: "1200px",
     margin: "0 auto",
     paddingTop: "40px",
