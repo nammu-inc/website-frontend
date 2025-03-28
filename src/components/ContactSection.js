@@ -4,7 +4,7 @@ const ContactSection = () => (
   <div style={styles.contact}>
     <h2 style={styles.title}>Get in Touch</h2>
     <p>
-      Email us at <a href="mailto:info@nammu.com">team@nammu.com</a>
+      Email us at <a href="mailto:team@nammu.ai">team@nammu.ai</a>
     </p>
   </div>
 );
