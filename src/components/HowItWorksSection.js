@@ -74,7 +74,7 @@ const HowItWorksSection = () => {
       alignItems: "center",
       color: sharedStyles.colors.white,
       fontSize: "1.5rem",
-      aspectRatio: "1 / 1", // Maintain aspect ratio on mobile
+      aspectRatio: "1 / 1",
     },
     featureTitle: {
       ...sharedStyles.typography.h3,
