@@ -38,7 +38,7 @@ const BookDemoSection = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/public/send-email`, {
+      const response = await fetch(`${API_BASE_URL}/public/send-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
