@@ -42,7 +42,10 @@ const BookDemoSection = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
+        credentials: "include",
+        mode: "cors",
         body: JSON.stringify({
           to: "hello@nammu.ai",
           subject: `Demo Request from ${formData.name}`,
