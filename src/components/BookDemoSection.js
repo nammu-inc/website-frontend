@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { sharedStyles } from "../styles";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL;
-
 const BookDemoSection = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -38,20 +36,20 @@ const BookDemoSection = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/public/send-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        credentials: "include",
-        mode: "cors",
-        body: JSON.stringify({
-          to: "hello@nammu.ai",
-          subject: `Demo Request from ${formData.name}`,
-          data: formData,
-        }),
-      });
+      const response = await fetch(
+        `https://website-backend-blush.vercel.app/send-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: "hello@nammu.ai",
+            subject: `Demo Request from ${formData.name}`,
+            data: formData,
+          }),
+        }
+      );
 
       const result = await response.json();
 
