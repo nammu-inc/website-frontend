@@ -202,7 +202,7 @@ const HowItWorksSection = () => {
           <div style={styles.featureHeader}>
             <BrainIcon />
             <div>
-              <h3 style={styles.featureTitle}>AI-Optimized Sales</h3>
+              <h3 style={styles.featureTitle}>Data-Driven Sales</h3>
             </div>
           </div>
           <p style={styles.featureTagline}>

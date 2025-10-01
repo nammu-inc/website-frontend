@@ -63,7 +63,7 @@ const HeroSection = () => {
         <div style={styles.logoContainer}>
           <img src="invertedlogo.png" alt="Nammu Logo" style={styles.logo} />
         </div>
-        <h1 style={styles.title}>AI Solutions for Food Distributors</h1>
+        <h1 style={styles.title}>Where Seafood Meets Smart Software</h1>
       </div>
     </div>
   );

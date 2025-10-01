@@ -234,8 +234,8 @@ const BookDemoSection = () => {
         <div style={styles.contentColumn}>
           <h2 style={styles.title}>Join Our Early Access Program</h2>
           <p style={styles.subtitle}>
-            We're inviting select food distributors to transform their
-            operations with our AI platform.
+            We're inviting select seafood companies to transform their
+            operations with Nammu.
           </p>
 
           <div style={styles.earlyAccessBlock}>
