@@ -27,13 +27,13 @@ const HowItWorksSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
-      backgroundColor: sharedStyles.colors.light,
+      backgroundColor: sharedStyles.colors.gray.light,
       textAlign: "center",
       margin: "0 auto",
     },
     title: {
       ...sharedStyles.typography.h2,
-      color: sharedStyles.colors.primary,
+      color: sharedStyles.colors.primary.dark,
     },
     subtitle: {
       ...sharedStyles.typography.subtitle,
@@ -67,7 +67,7 @@ const HowItWorksSection = () => {
       width: "50px",
       height: "50px",
       marginRight: "15px",
-      backgroundColor: sharedStyles.colors.primary,
+      backgroundColor: sharedStyles.colors.primary.medium,
       borderRadius: "50%",
       display: "flex",
       justifyContent: "center",
@@ -78,7 +78,7 @@ const HowItWorksSection = () => {
     },
     featureTitle: {
       ...sharedStyles.typography.h3,
-      color: sharedStyles.colors.primary,
+      color: sharedStyles.colors.primary.dark,
       marginBottom: "5px",
     },
     featureTagline: {
@@ -98,7 +98,7 @@ const HowItWorksSection = () => {
       alignItems: "flex-start",
     },
     benefitIcon: {
-      color: sharedStyles.colors.primary,
+      color: sharedStyles.colors.primary.medium,
       marginRight: "10px",
       fontSize: "1.2rem",
       marginTop: "2px",
@@ -155,7 +155,7 @@ const HowItWorksSection = () => {
   );
 
   return (
-    <div style={styles.section}>
+    <div id="how" style={styles.section}>
       <h2 style={styles.title}>How Nammu Works</h2>
       <p style={styles.subtitle}>
         Nammu combines real-time analytics and AI sales intelligence to drive

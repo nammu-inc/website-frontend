@@ -23,7 +23,7 @@ const TractionSection = () => {
     },
     title: {
       ...sharedStyles.typography.h2,
-      color: sharedStyles.colors.primary,
+      color: sharedStyles.colors.primary.dark,
       marginBottom: "20px",
     },
     subtitle: {
@@ -41,7 +41,7 @@ const TractionSection = () => {
     },
     resultCard: {
       flex: "1 1 30%",
-      backgroundColor: sharedStyles.colors.light,
+      backgroundColor: sharedStyles.colors.primary.light,
       borderRadius: sharedStyles.elements.card.borderRadius,
       padding: sharedStyles.spacing.element.padding,
       boxShadow: sharedStyles.elements.card.boxShadow,
@@ -55,7 +55,7 @@ const TractionSection = () => {
       width: "50px",
       height: "50px",
       margin: "0 auto 15px",
-      backgroundColor: sharedStyles.colors.primary,
+      backgroundColor: sharedStyles.colors.primary.dark,
       borderRadius: "50%",
       display: "flex",
       justifyContent: "center",
@@ -65,7 +65,7 @@ const TractionSection = () => {
     },
     resultTitle: {
       ...sharedStyles.typography.h3,
-      color: sharedStyles.colors.primary,
+      color: sharedStyles.colors.primary.dark,
       marginBottom: "10px",
     },
     resultDescription: {
@@ -76,65 +76,10 @@ const TractionSection = () => {
     resultMetric: {
       fontSize: "2rem",
       fontWeight: "700",
-      color: sharedStyles.colors.secondary,
+      color: sharedStyles.colors.secondary.medium,
       marginTop: "auto",
     },
-    testimonialContainer: {
-      backgroundColor: sharedStyles.colors.light,
-      borderRadius: sharedStyles.elements.card.borderRadius,
-      padding: "30px",
-      boxShadow: sharedStyles.elements.card.boxShadow,
-      display: "flex",
-      flexDirection: isMobile ? "column" : "row",
-      alignItems: "center",
-      gap: "30px",
-      maxWidth: "900px",
-      margin: "0 auto 50px",
-      textAlign: "left",
-    },
-    testimonialContent: {
-      flex: "1",
-      display: "flex",
-      flexDirection: "column",
-    },
-    testimonialAuthor: {
-      marginTop: "15px",
-      fontWeight: "600",
-      color: sharedStyles.colors.text.dark,
-      textAlign: "right",
-    },
-    logoContainer: {
-      flex: "0 0 auto",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      marginBottom: isMobile ? "20px" : "0",
-    },
-    logoPlaceholder: {
-      width: "120px",
-      height: "120px",
-      backgroundColor: "#e0e0e0",
-      borderRadius: "8px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: "#888",
-      fontWeight: "bold",
-      marginBottom: "10px",
-    },
-    companyName: {
-      fontWeight: "600",
-      color: sharedStyles.colors.text.dark,
-      marginTop: "10px",
-    },
-    quote: {
-      ...sharedStyles.typography.body,
-      fontStyle: "italic",
-      color: sharedStyles.colors.text.medium,
-      position: "relative",
-      paddingLeft: "20px",
-      borderLeft: `3px solid ${sharedStyles.colors.primary}`,
-    },
+    // testimonial styles removed
   };
 
   const RevenueIcon = () => (
@@ -195,57 +140,29 @@ const TractionSection = () => {
   );
 
   return (
-    <div style={styles.section}>
-      <h2 style={styles.title}>Proven Results</h2>
+    <div id="traction" style={styles.section}>
+      <h2 style={styles.title}>The Industry Leading Sales Engine</h2>
       <p style={styles.subtitle}>
-        Our partners are seeing immediate impact with our AI-powered platform
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
 
       <div style={styles.resultsContainer}>
-        {/* Revenue Recovery Result */}
         <div style={styles.resultCard}>
           <RevenueIcon />
-          <h3 style={styles.resultTitle}>Revenue Growth</h3>
-          <p style={styles.resultDescription}>
-            Better account prioritization and early trend detection
-          </p>
-          <div style={styles.resultMetric}>12%</div>
+          <h3 style={styles.resultTitle}>Save Time</h3>
+          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
         </div>
 
-        {/* Profit Boost Result */}
         <div style={styles.resultCard}>
           <ProfitIcon />
-          <h3 style={styles.resultTitle}>Boosted Gross Profit</h3>
-          <p style={styles.resultDescription}>
-            AI-guided product, quantity, and pricing optimization
-          </p>
-          <div style={styles.resultMetric}>15%</div>
+          <h3 style={styles.resultTitle}>Boost Revenue</h3>
+          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
         </div>
 
-        {/* Time Savings Result */}
         <div style={styles.resultCard}>
           <TimeIcon />
-          <h3 style={styles.resultTitle}>Time Savings</h3>
-          <p style={styles.resultDescription}>
-            Automated analytics and streamlined order creation
-          </p>
-          <div style={styles.resultMetric}>20 hrs/week</div>
-        </div>
-      </div>
-
-      <div style={styles.testimonialContainer}>
-        <div style={styles.logoContainer}>
-          <div style={styles.logoPlaceholder}>LOGO</div>
-          <div style={styles.companyName}>Company X</div>
-        </div>
-        <div style={styles.testimonialContent}>
-          <blockquote style={styles.quote}>
-            "Nammu has transformed how we analyze and act on our sales data.
-            With instant insights into customer patterns and product
-            performance, we've been able to make strategic decisions that
-            directly impact our bottom line."
-          </blockquote>
-          <div style={styles.testimonialAuthor}>John Doe - COO</div>
+          <h3 style={styles.resultTitle}>Lorem ipsum</h3>
+          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
         </div>
       </div>
     </div>

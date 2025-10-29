@@ -1,9 +1,19 @@
 export const sharedStyles = {
   // Color palette
   colors: {
-    primary: "#09142F",
-    secondary: "#1a2d5a",
-    light: "#f9f9f9",
+    primary: {
+      dark: "#09142f",
+      medium: "#209bdd",
+      light: "#c0dffa",
+    },
+    secondary: {
+      dark: "#024149",
+      medium: "#0d9aab",
+      light: "#cbf2f7",
+    },
+    gray: {
+      light: "#e9ecef",
+    },
     white: "#ffffff",
     text: {
       dark: "#333333",
