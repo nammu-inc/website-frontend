@@ -13,6 +13,8 @@ const HeroSection = ({ onRequestDemo }) => {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
+  const [ctaHover, setCtaHover] = useState(false);
+
   const styles = {
     hero: {
       padding: `${sharedStyles.spacing.section.vertical} ${
@@ -54,23 +56,31 @@ const HeroSection = ({ onRequestDemo }) => {
     title: {
       ...sharedStyles.typography.h1,
       color: sharedStyles.colors.primary.dark,
-      maxWidth: "840px",
+      maxWidth: "800px",
       margin: "0 auto",
     },
     subtitle: {
       ...sharedStyles.typography.subtitle,
       color: sharedStyles.colors.primary.dark,
       opacity: 0.9,
-      maxWidth: "820px",
+      maxWidth: "600px",
       margin: "16px auto 0",
     },
     ctaButton: {
       ...sharedStyles.elements.button,
-      backgroundColor: sharedStyles.colors.primary.dark,
-      color: sharedStyles.colors.white,
+      backgroundColor: sharedStyles.colors.white,
+      color: sharedStyles.colors.secondary.dark,
+      border: `1px solid ${sharedStyles.colors.secondary.dark}`,
       textDecoration: "none",
-      marginTop: "28px",
+      marginTop: "36px",
       display: "inline-block",
+    },
+    ctaButtonHover: {
+      backgroundColor: sharedStyles.colors.secondary.medium,
+      color: sharedStyles.colors.white,
+      borderColor: sharedStyles.colors.secondary.medium,
+      transform: "translateY(-1px)",
+      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
     },
   };
 
@@ -242,14 +252,21 @@ const HeroSection = ({ onRequestDemo }) => {
             lineHeight: isMobile ? "1.2" : "1.15",
           }}
         >
-          Where Seafood Meets
-          <br />
-          Smart Software
+          Where Seafood Meets Smart Software
         </h1>
         <p style={styles.subtitle}>
-          Take your sales to the next level with Nammu
+          With intuitive visuals and clear insights, Nammu gives teams the
+          confidence to sell swiftly and decisively.
         </p>
-        <button style={styles.ctaButton} onClick={onRequestDemo}>
+        <button
+          style={{
+            ...styles.ctaButton,
+            ...(ctaHover ? styles.ctaButtonHover : {}),
+          }}
+          onMouseEnter={() => setCtaHover(true)}
+          onMouseLeave={() => setCtaHover(false)}
+          onClick={onRequestDemo}
+        >
           Request a demo
         </button>
         <ProductCarousel />

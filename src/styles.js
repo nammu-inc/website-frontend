@@ -95,6 +95,7 @@ export const sharedStyles = {
       borderRadius: "6px",
       border: "1px solid #ddd",
       fontSize: "1rem",
+      fontFamily: "inherit",
     },
   },
 

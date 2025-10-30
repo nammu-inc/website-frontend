@@ -44,15 +44,6 @@ const BookDemoSection = ({ onRequestDemo }) => {
     logo: {
       height: "40px",
     },
-    footerText: {
-      ...sharedStyles.typography.body,
-      opacity: 0.9,
-    },
-    footerRight: {
-      display: "flex",
-      alignItems: "center",
-    },
-
     ctaButton: {
       ...sharedStyles.elements.button,
       backgroundColor: sharedStyles.colors.white,
@@ -60,9 +51,14 @@ const BookDemoSection = ({ onRequestDemo }) => {
       textDecoration: "none",
       border: `1px solid ${sharedStyles.colors.primary.dark}`,
     },
+    ctaButtonHover: {
+      backgroundColor: sharedStyles.colors.secondary.medium,
+      color: sharedStyles.colors.white,
+      borderColor: sharedStyles.colors.secondary.medium,
+      transform: "translateY(-1px)",
+      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+    },
   };
-
-  const CheckIcon = () => <span style={styles.benefitIcon}>✓</span>;
 
   return (
     <div id="demo" style={styles.section}>
@@ -72,13 +68,19 @@ const BookDemoSection = ({ onRequestDemo }) => {
             <img src="invertedlogo.png" alt="Nammu Logo" style={styles.logo} />
           </div>
           <div style={styles.footerRight}>
-            <button style={styles.ctaButton} onClick={onRequestDemo}>
+            <button
+              style={styles.ctaButton}
+              onMouseEnter={(e) =>
+                Object.assign(e.currentTarget.style, styles.ctaButtonHover)
+              }
+              onMouseLeave={(e) =>
+                Object.assign(e.currentTarget.style, styles.ctaButton)
+              }
+              onClick={onRequestDemo}
+            >
               Request a demo
             </button>
           </div>
-        </div>
-        <div style={styles.footerText}>
-          Helping seafood teams turn data into decisions and orders.
         </div>
       </div>
     </div>

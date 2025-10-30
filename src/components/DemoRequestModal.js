@@ -199,7 +199,6 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="What challenges are you looking to solve?"
             />
           </div>
           <button

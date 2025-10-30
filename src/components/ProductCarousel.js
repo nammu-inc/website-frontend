@@ -4,15 +4,16 @@ import Product1 from "../assets/Product1.png";
 import Product2 from "../assets/Product2.png";
 import Product3 from "../assets/Product3.png";
 import Product4 from "../assets/Product4.png";
+import Product5 from "../assets/Product5.png";
 
 const ProductCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const screenshots = [Product1, Product2, Product3, Product4];
+  const screenshots = [Product1, Product2, Product3, Product4, Product5];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % screenshots.length);
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [screenshots.length]);
@@ -31,13 +32,13 @@ const ProductCarousel = () => {
       };
     } else if (wrappedOffset === -1 || wrappedOffset === total - 1) {
       return {
-        transform: "translateX(calc(-50% - 65%)) scale(0.85)",
+        transform: "translateX(calc(-50% - 55%)) scale(0.65)",
         opacity: 0.6,
         zIndex: 2,
       };
     } else if (wrappedOffset === 1 || wrappedOffset === -(total - 1)) {
       return {
-        transform: "translateX(calc(-50% + 65%)) scale(0.85)",
+        transform: "translateX(calc(-50% + 55%)) scale(0.65)",
         opacity: 0.6,
         zIndex: 2,
       };
@@ -54,7 +55,7 @@ const ProductCarousel = () => {
     wrapper: {
       width: "100%",
       maxWidth: "840px",
-      margin: "36px auto 0",
+      margin: "48px auto 0",
       position: "relative",
       overflow: "visible",
       paddingBottom: "56.25%",
@@ -68,20 +69,22 @@ const ProductCarousel = () => {
       position: "absolute",
       top: 0,
       left: "50%",
-      width: "100%",
-      height: "100%",
+      width: "90%",
+      height: "90%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: sharedStyles.elements.card.borderRadius,
-      boxShadow: sharedStyles.elements.card.boxShadow,
-      transition: "transform 600ms ease, opacity 600ms ease",
+      boxShadow: "0 12px 24px rgba(0,0,0,0.18)",
+      border: `1px solid ${sharedStyles.colors.secondary.dark}`,
+      transition: "transform 800ms ease, opacity 800ms ease",
       overflow: "hidden",
     },
     image: {
       width: "100%",
       height: "100%",
       objectFit: "cover",
+      objectPosition: "top",
     },
   };
 

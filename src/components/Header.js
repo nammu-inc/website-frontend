@@ -3,6 +3,7 @@ import { sharedStyles } from "../styles";
 
 const Header = ({ onRequestDemo }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -44,6 +45,11 @@ const Header = ({ onRequestDemo }) => {
       color: sharedStyles.colors.white,
       textDecoration: "none",
     },
+    buttonHover: {
+      backgroundColor: sharedStyles.colors.primary.medium,
+      transform: "translateY(-1px)",
+      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+    },
   };
 
   return (
@@ -54,7 +60,15 @@ const Header = ({ onRequestDemo }) => {
             <img src="logo.png" alt="Nammu" style={styles.logo} />
           </a>
         </div>
-        <button style={styles.button} onClick={onRequestDemo}>
+        <button
+          style={{
+            ...styles.button,
+            ...(isHover ? styles.buttonHover : {}),
+          }}
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+          onClick={onRequestDemo}
+        >
           Request a demo
         </button>
       </div>
