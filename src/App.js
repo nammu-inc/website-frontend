@@ -22,7 +22,6 @@ const App = () => {
       <Header onRequestDemo={openDemo} />
       <HeroSection onRequestDemo={openDemo} />
       <ImpactSection />
-      <HowItWorksSection />
       <TeamEmpowerSection />
       <WhyNammuSection />
       <TestimonialSection />

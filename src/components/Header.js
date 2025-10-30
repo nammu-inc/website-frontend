@@ -4,6 +4,7 @@ import { sharedStyles } from "../styles";
 const Header = ({ onRequestDemo }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -13,13 +14,22 @@ const Header = ({ onRequestDemo }) => {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const styles = {
     bar: {
       position: "sticky",
       top: 0,
       zIndex: 1000,
-      backgroundColor: sharedStyles.colors.white,
-      borderBottom: "1px solid #eee",
+      backgroundColor: scrolled
+        ? sharedStyles.colors.white
+        : sharedStyles.colors.secondary.light,
+      borderBottom: scrolled ? "1px solid #eee" : "none",
     },
     inner: {
       display: "flex",

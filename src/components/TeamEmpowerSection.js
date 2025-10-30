@@ -4,13 +4,14 @@ import BCLogo from "../assets/BC.png";
 import SeaSoftLogo from "../assets/SeaSoft.png";
 import SAPLogo from "../assets/SAP.png";
 import NetSuiteLogo from "../assets/NetSuite.png";
+import NetYieldLogo from "../assets/NetYield.png";
 import Product1 from "../assets/Product1.png";
-import Product2 from "../assets/Product2.png";
 import Product4 from "../assets/Product4.png";
+import Product2 from "../assets/Product2.png";
 
 const TeamEmpowerSection = () => {
   const [isMobile, setIsMobile] = useState(false);
-  // Replaced carousel with three static cards
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -23,18 +24,36 @@ const TeamEmpowerSection = () => {
   const carouselItems = [
     {
       title: "Planning",
-      text:
-        "Analyze trends, track performance, and guide strategy in real-time.",
+      text: (
+        <>
+          Analyze trends, set targets, track performance, and
+          <br />
+          guide strategy in real-time.
+        </>
+      ),
+      image: Product1,
     },
     {
       title: "Execution",
-      text:
-        "Sell confidently with instant access to live inventory and customer-specific product recommendations.",
+      text: (
+        <>
+          Sell confidently with instant access to live inventory and
+          <br />
+          customer-specific product recommendations.
+        </>
+      ),
+      image: Product4,
     },
     {
       title: "Automation",
-      text:
-        "Enable customers to order autonomously, freeing up sales reps for higher-value tasks.",
+      text: (
+        <>
+          Enable customers to order autonomously, freeing up sales reps
+          <br />
+          for higher-value tasks.
+        </>
+      ),
+      image: Product2,
     },
   ];
 
@@ -60,13 +79,14 @@ const TeamEmpowerSection = () => {
     },
     leftColumn: {
       flex: "1 1 45%",
-      borderRadius: sharedStyles.elements.card.borderRadius,
-      overflow: "hidden",
-      boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: sharedStyles.colors.gray.light,
+      borderRadius: 0,
+      overflow: "visible",
+      boxShadow: "none",
+      backgroundColor: "transparent",
       display: "flex",
-      alignItems: "center",
+      alignItems: "flex-start",
       justifyContent: "center",
+      paddingTop: "59px",
       minHeight: isMobile ? "320px" : "480px",
     },
     portrait: {
@@ -79,33 +99,38 @@ const TeamEmpowerSection = () => {
       flex: "1 1 55%",
       display: "flex",
       flexDirection: "column",
-      gap: "20px",
-      justifyContent: "space-between",
+      gap: "16px",
+      justifyContent: "center",
     },
     bullets: {
       listStyle: "none",
       padding: 0,
-      margin: "20px 0 34px",
+      margin: "48px 0 0",
       display: "flex",
-      flexDirection: "column",
-      gap: "28px",
+      flexDirection: "row",
+      gap: "20px",
+      alignItems: "center",
+      justifyContent: "center",
+      flexWrap: isMobile ? "wrap" : "nowrap",
     },
     bulletItem: {
-      display: "flex",
-      gap: "12px",
-      alignItems: "flex-start",
+      flex: "1 1 0",
+      textAlign: "center",
       color: sharedStyles.colors.text.medium,
       ...sharedStyles.typography.body,
       fontSize: "1.25rem",
       lineHeight: 1.7,
+      maxWidth: "280px",
     },
-    bulletDot: {
-      width: "10px",
-      height: "10px",
-      marginTop: "8px",
-      borderRadius: "50%",
-      backgroundColor: sharedStyles.colors.primary.medium,
-      flex: "0 0 10px",
+    arrow: {
+      flexShrink: 0,
+      color: sharedStyles.colors.primary.medium,
+      fontSize: "3.3rem", // larger for prominence
+      fontWeight: "500",   // slightly bolder
+      margin: "0 28px",    // more space around
+      opacity: 0.92,       // slightly more visible
+      lineHeight: 1.1,
+      textShadow: "0 2px 12px #c0dffa99", // subtle glow for prominence
     },
     carouselCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
@@ -116,17 +141,28 @@ const TeamEmpowerSection = () => {
       overflow: "hidden",
       minHeight: "170px",
     },
-    cardsRow: {
-      display: "flex",
-      flexDirection: isMobile ? "column" : "row",
-      gap: "16px",
-    },
     stageCard: {
-      flex: "1 1 0",
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
       backgroundColor: sharedStyles.elements.card.backgroundColor,
-      padding: sharedStyles.spacing.element.padding,
+      padding: "24px",
+      display: "flex",
+      flexDirection: "column",
+      position: "relative",
+    },
+    cardContent: {
+      paddingLeft: "44px",
+      paddingRight: "44px",
+      display: "flex",
+      flexDirection: "column",
+    },
+    cardImage: {
+      width: "100%",
+      height: "auto",
+      maxHeight: "240px",
+      objectFit: "contain",
+      borderRadius: "8px",
+      marginBottom: "16px",
     },
     // removed carousel label row and separators
     carouselHeader: {
@@ -139,54 +175,177 @@ const TeamEmpowerSection = () => {
       ...sharedStyles.typography.body,
       color: sharedStyles.colors.text.medium,
       lineHeight: 1.7,
-      marginTop: "6px",
+      textAlign: "center",
       maxWidth: "60ch",
+      margin: "0 auto",
     },
     carouselBody: {
       position: "relative",
       zIndex: 1,
     },
-    // removed nav arrows
+    navigationControls: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "8px",
+      marginBottom: "4px",
+    },
+    navButton: {
+      padding: "8px 16px",
+      borderRadius: "20px",
+      border: "none",
+      backgroundColor: "transparent",
+      color: sharedStyles.colors.text.light,
+      cursor: "pointer",
+      fontSize: "1rem",
+      fontWeight: 500,
+      transition: "all 0.2s ease",
+    },
+    navButtonActive: {
+      backgroundColor: sharedStyles.colors.primary.light,
+      color: sharedStyles.colors.primary.dark,
+      fontWeight: 600,
+    },
+    navButtonHover: {
+      color: sharedStyles.colors.primary.medium,
+    },
+    cardArrow: {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      background: sharedStyles.colors.white,
+      border: `1px solid ${sharedStyles.colors.primary.light}`,
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+      userSelect: "none",
+      transition: "all 0.2s ease",
+      zIndex: 10,
+    },
+    cardArrowLeft: {
+      left: "24px",
+    },
+    cardArrowRight: {
+      right: "24px",
+    },
+    cardArrowHover: {
+      backgroundColor: sharedStyles.colors.primary.light,
+      transform: "translateY(-50%) scale(1.1)",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    },
+    cardArrowIcon: {
+      fontSize: "1.2rem",
+      color: sharedStyles.colors.primary.dark,
+      fontWeight: "600",
+    },
   };
 
-  // Static cards, no navigation needed
+  const handleNavClick = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
+  };
+
+  const currentItem = carouselItems[currentIndex];
 
   return (
     <section style={styles.section}>
       <h2 style={styles.title}>
-        Nammu empowers every member of your team
-        <br />
-        to perform at their best.
+        How Nammu Works
       </h2>
+      <ul style={styles.bullets}>
+        <li style={styles.bulletItem}>
+          Seamlessly integrates with your existing ERP
+        </li>
+        <span style={styles.arrow}>›</span>
+        <li style={styles.bulletItem}>
+          Transforms your data into intuitive visuals and insights
+        </li>
+        <span style={styles.arrow}>›</span>
+        <li style={styles.bulletItem}>
+          Supports every stage of the sales process
+        </li>
+      </ul>
+
       <div style={styles.contentRow}>
         <div style={styles.leftColumn}>
           <LeftGraphic />
         </div>
         <div style={styles.rightColumn}>
-          <ul style={styles.bullets}>
-            <li style={styles.bulletItem}>
-              <span style={styles.bulletDot} />
-              <span>Seamlessly integrates with your existing ERP</span>
-            </li>
-            <li style={styles.bulletItem}>
-              <span style={styles.bulletDot} />
-              <span>
-                Transforms your data into intuitive visuals and actionable insights
-              </span>
-            </li>
-            <li style={styles.bulletItem}>
-              <span style={styles.bulletDot} />
-              <span>Supports every stage of the sales process</span>
-            </li>
-          </ul>
-
-          <div style={styles.cardsRow}>
-            {carouselItems.map((item) => (
-              <div key={item.title} style={styles.stageCard}>
-                <div style={styles.carouselHeader}>{item.title}</div>
-                <div style={styles.carouselText}>{item.text}</div>
-              </div>
+          <div style={styles.navigationControls}>
+            {carouselItems.map((item, idx) => (
+              <button
+                key={item.title}
+                onClick={() => handleNavClick(idx)}
+                style={{
+                  ...styles.navButton,
+                  ...(idx === currentIndex ? styles.navButtonActive : {}),
+                }}
+                onMouseEnter={(e) => {
+                  if (idx !== currentIndex) {
+                    e.currentTarget.style.color = sharedStyles.colors.primary.medium;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (idx !== currentIndex) {
+                    e.currentTarget.style.color = sharedStyles.colors.text.light;
+                  }
+                }}
+              >
+                {item.title}
+              </button>
             ))}
+          </div>
+          <div style={styles.stageCard}>
+            <button
+              aria-label="Previous"
+              onClick={handlePrev}
+              style={{ ...styles.cardArrow, ...styles.cardArrowLeft }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.primary.light;
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.transform = "translateY(-50%)";
+              }}
+            >
+              <span style={styles.cardArrowIcon}>‹</span>
+            </button>
+            <button
+              aria-label="Next"
+              onClick={handleNext}
+              style={{ ...styles.cardArrow, ...styles.cardArrowRight }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.primary.light;
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.transform = "translateY(-50%)";
+              }}
+            >
+              <span style={styles.cardArrowIcon}>›</span>
+            </button>
+            <div style={styles.cardContent}>
+              <img
+                src={currentItem.image}
+                alt={currentItem.title}
+                style={styles.cardImage}
+              />
+              <div style={styles.carouselText}>{currentItem.text}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -197,23 +356,17 @@ const TeamEmpowerSection = () => {
 export default TeamEmpowerSection;
 
 const LeftGraphic = () => {
-  // Responsive SVG diagram: 4 top squares -> center circle -> 3 bottom rectangles
+  // Responsive SVG diagram: 5 left-stacked squares -> center circle -> right connector to Planning card
   const vb = { w: 1000, h: 800 };
+  // Move top and bottom left column squares halfway right toward the right column (x: 190, midpoint of 120 and 260)
   const topSquares = [
-    { x: 120, y: 90, size: 110 },
-    { x: 330, y: 90, size: 110 },
-    { x: 540, y: 90, size: 110 },
-    { x: 750, y: 90, size: 110 },
+    { x: 190, y: 120, size: 110 },  // Adjusted: halfway between 120 (left) and 260 (right)
+    { x: 120, y: 340, size: 110 },  // Left column, middle (unchanged)
+    { x: 190, y: 560, size: 110 },  // Adjusted: halfway between 120 (left) and 260 (right)
+    { x: 260, y: 265, size: 110 },  // Right column, top (centered around y=400)
+    { x: 260, y: 425, size: 110 },  // Right column, bottom (centered around y=400)
   ];
-  const center = { x: 500, y: 380, r: 58 };
-  const bottomY = 620; // unified vertical position, slightly closer to center
-  // Even horizontal spacing across 1000 viewBox width:
-  // widths: 220, 240, 220 → total 680; gaps (left, between, between, right) all 80
-  const bottomRects = [
-    { x: 80, y: bottomY, w: 220, h: 120, rx: 12 }, // left
-    { x: 380, y: bottomY, w: 240, h: 120, rx: 12 }, // middle
-    { x: 700, y: bottomY, w: 220, h: 120, rx: 12 }, // right
-  ];
+  const center = { x: 620, y: 400, r: 70 };
 
   // Simple staggered delays only (uniform cadence)
 
@@ -241,6 +394,36 @@ const LeftGraphic = () => {
           <stop offset="0%" stopColor="#c0dffa" />
           <stop offset="100%" stopColor="#ffffff" />
         </linearGradient>
+        <marker
+          id="arrowhead"
+          markerWidth="10"
+          markerHeight="10"
+          refX="9"
+          refY="3"
+          orient="auto"
+        >
+          {/* Only two lines, no polygon, for an "open" arrow end */}
+          <line
+            x1="2"
+            y1="1"
+            x2="9"
+            y2="3"
+            stroke="#209bdd"
+            strokeWidth="1.5"
+            opacity="0.9"
+            strokeLinecap="round"
+          />
+          <line
+            x1="2"
+            y1="5"
+            x2="9"
+            y2="3"
+            stroke="#209bdd"
+            strokeWidth="1.5"
+            opacity="0.9"
+            strokeLinecap="round"
+          />
+        </marker>
 
         {/* Clip paths for top squares (rounded) */}
         {topSquares.map((sq, idx) => (
@@ -254,25 +437,19 @@ const LeftGraphic = () => {
           <circle cx={center.x} cy={center.y} r={center.r} />
         </clipPath>
 
-        {/* Clip paths for bottom rectangles (rounded) */}
-        {bottomRects.map((br, idx) => (
-          <clipPath id={`clip-bottom-${idx}`} key={`clip-bottom-${idx}`}>
-            <rect x={br.x} y={br.y} width={br.w} height={br.h} rx={br.rx} />
-          </clipPath>
-        ))}
       </defs>
 
-      {/* Flowing connectors from top squares to center (cubic Béziers) */}
+      {/* Flowing connectors from left squares to center (cubic Béziers) */}
       {topSquares.map((sq, idx) => {
-        const x1 = sq.x + sq.size / 2;
-        const y1 = sq.y + sq.size;
-        const x2 = center.x;
-        const y2 = center.y - center.r;
-        const midY = (y1 + y2) / 2;
-        const c1x = x1;
-        const c1y = midY - 40; // pull upward a bit
-        const c2x = x2;
-        const c2y = midY + 40; // pull downward toward center
+        const x1 = sq.x + sq.size; // right edge of square
+        const y1 = sq.y + sq.size / 2;
+        const x2 = center.x - center.r; // left edge of circle
+        const y2 = center.y;
+        const midX = (x1 + x2) / 2;
+        const c1x = midX - 60;
+        const c1y = y1;
+        const c2x = midX + 60;
+        const c2y = y2;
         const d = `M ${x1},${y1} C ${c1x},${c1y} ${c2x},${c2y} ${x2},${y2}`;
         return (
           <g key={`t-${idx}`}>
@@ -297,27 +474,25 @@ const LeftGraphic = () => {
         );
       })}
 
-      {/* Flowing connectors from center to bottom rectangles (cubic Béziers) */}
-      {bottomRects.map((br, idx) => {
-        const x1 = center.x;
-        const y1 = center.y + center.r;
-        const x2 = br.x + br.w / 2;
-        const y2 = br.y;
-        const midY = (y1 + y2) / 2;
-        const horizontalPull = (x2 - x1) * 0.25; // subtle horizontal curve
-        const c1x = x1 + horizontalPull;
-        const c1y = midY - 40;
-        const c2x = x2 - horizontalPull;
-        const c2y = midY + 40;
-        const d = `M ${x1},${y1} C ${c1x},${c1y} ${c2x},${c2y} ${x2},${y2}`;
+      {/* Connector from center circle to right edge (toward Planning card) */}
+      {(() => {
+        const x1 = center.x + center.r;
+        const y1 = center.y;
+        const x2 = 950;
+        const y2 = center.y;
+        const d = `M ${x1},${y1} L ${x2},${y2}`;
+        // Arrowhead paths that extend from the endpoint
+        const arrowLeft = `M ${x2 - 8},${y2 - 4} L ${x2},${y2}`;
+        const arrowRight = `M ${x2 - 8},${y2 + 4} L ${x2},${y2}`;
         return (
-          <g key={`b-${idx}`}>
+          <g>
             <path
               d={d}
               fill="none"
               stroke="#cbd5e1"
               strokeWidth="4"
               strokeLinecap="round"
+              markerEnd="url(#arrowhead)"
             />
             <path
               d={d}
@@ -327,16 +502,37 @@ const LeftGraphic = () => {
               strokeWidth="4"
               strokeLinecap="round"
               className="nm-flow"
-              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `${0.5 + idx * 0.3}s` }}
+              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `0.6s` }}
+            />
+            {/* Animated arrowhead paths that flow with the animation */}
+            <path
+              d={arrowLeft}
+              fill="none"
+              stroke="#209bdd"
+              strokeWidth="1.5"
+              strokeOpacity="0.9"
+              strokeLinecap="round"
+              className="nm-flow"
+              style={{ strokeDasharray: "4 4", strokeDashoffset: 0, animationDelay: `0.6s` }}
+            />
+            <path
+              d={arrowRight}
+              fill="none"
+              stroke="#209bdd"
+              strokeWidth="1.5"
+              strokeOpacity="0.9"
+              strokeLinecap="round"
+              className="nm-flow"
+              style={{ strokeDasharray: "4 4", strokeDashoffset: 0, animationDelay: `0.6s` }}
             />
           </g>
         );
-      })}
+      })()}
 
       {/* Top squares (with logos) */}
       {topSquares.map((sq, idx) => {
-        // Map logos: 0=BC, 1=SeaSoft, 2=SAP, 3=NetSuite (fallback to /logo.png if missing)
-        const topImages = [BCLogo, SeaSoftLogo, SAPLogo, NetSuiteLogo];
+        // Map logos: 0=BC, 1=SeaSoft, 2=SAP, 3=NetSuite, 4=NetYield (fallback to /logo.png if missing)
+        const topImages = [BCLogo, SeaSoftLogo, SAPLogo, NetSuiteLogo, NetYieldLogo];
         const href = topImages[idx] || "/logo.png";
         const pad = 14; // inset padding to keep aspect logos comfortable
         return (
@@ -365,58 +561,19 @@ const LeftGraphic = () => {
 
       {/* Center circle with logo192 (padded) */}
       <g filter="url(#softShadow)">
-        <circle cx={center.x} cy={center.y} r={center.r} fill="#ffffff" stroke="#e5e7eb" strokeWidth="2" />
+        <circle cx={center.x} cy={center.y} r={center.r} fill="url(#nodeFill)" stroke="#e5e7eb" strokeWidth="2" />
         <image
           href="/logo192.png"
-          x={center.x - center.r + 14}
-          y={center.y - center.r + 14}
-          width={center.r * 2 - 28}
-          height={center.r * 2 - 28}
+          x={center.x - center.r + 22}
+          y={center.y - center.r + 22}
+          width={center.r * 2 - 44}
+          height={center.r * 2 - 44}
           preserveAspectRatio="xMidYMid meet"
           clipPath="url(#clip-center)"
         />
       </g>
 
-      {/* Bottom rectangles (with product images + labels underneath) */}
-      {bottomRects.map((br, idx) => {
-        // Map images (order request): left=Product1, middle=Product4, right=Product2
-        const productImages = [Product1, Product4, Product2];
-        const href = productImages[idx] || Product1;
-        const bottomLabels = ["Planning", "Execution", "Automation"];
-        return (
-          <g key={`br-${idx}`} filter="url(#softShadow)">
-            <rect
-              x={br.x}
-              y={br.y}
-              width={br.w}
-              height={br.h}
-              rx={br.rx}
-              fill="#ffffff"
-              stroke="#e5e7eb"
-            />
-            <image
-              href={href}
-              x={br.x}
-              y={br.y}
-              width={br.w}
-              height={br.h}
-              preserveAspectRatio="xMidYMid slice"
-              clipPath={`url(#clip-bottom-${idx})`}
-            />
-            {/* Label centered under each rectangle */}
-            <text
-              x={br.x + br.w / 2}
-              y={br.y + br.h + 22}
-              textAnchor="middle"
-              fill="#09142f"
-              fontSize="16"
-              fontWeight="600"
-            >
-              {bottomLabels[idx]}
-            </text>
-          </g>
-        );
-      })}
+      {/* bottom rectangles removed in new layout */}
     </svg>
   );
 };
