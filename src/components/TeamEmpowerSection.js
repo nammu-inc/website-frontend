@@ -10,7 +10,7 @@ import Product4 from "../assets/Product4.png";
 
 const TeamEmpowerSection = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Replaced carousel with three static cards
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -24,17 +24,17 @@ const TeamEmpowerSection = () => {
     {
       title: "Planning",
       text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+        "Analyze trends, track performance, and guide strategy in real-time.",
     },
     {
       title: "Execution",
       text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+        "Sell confidently with instant access to live inventory and customer-specific product recommendations.",
     },
     {
       title: "Automation",
       text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+        "Enable customers to order autonomously, freeing up sales reps for higher-value tasks.",
     },
   ];
 
@@ -96,8 +96,8 @@ const TeamEmpowerSection = () => {
       alignItems: "flex-start",
       color: sharedStyles.colors.text.medium,
       ...sharedStyles.typography.body,
-      fontSize: "1.15rem",
-      lineHeight: 1.6,
+      fontSize: "1.25rem",
+      lineHeight: 1.7,
     },
     bulletDot: {
       width: "10px",
@@ -116,49 +116,24 @@ const TeamEmpowerSection = () => {
       overflow: "hidden",
       minHeight: "170px",
     },
-    carouselTopRow: {
+    cardsRow: {
       display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: "18px",
+      flexDirection: isMobile ? "column" : "row",
+      gap: "16px",
     },
-    carouselLabels: {
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      color: sharedStyles.colors.text.light,
-      ...sharedStyles.typography.small,
-      flexWrap: "nowrap",
+    stageCard: {
+      flex: "1 1 0",
+      borderRadius: sharedStyles.elements.card.borderRadius,
+      boxShadow: sharedStyles.elements.card.boxShadow,
+      backgroundColor: sharedStyles.elements.card.backgroundColor,
+      padding: sharedStyles.spacing.element.padding,
     },
-    labelItem: (active) => ({
-      color: active
-        ? sharedStyles.colors.primary.dark
-        : sharedStyles.colors.text.light,
-      fontWeight: active ? 700 : 500,
-      whiteSpace: "nowrap",
-      cursor: "default",
-      padding: active ? "6px 10px" : "6px 10px",
-      borderRadius: "999px",
-      backgroundColor: active ? sharedStyles.colors.primary.light : "transparent",
-    }),
-    dotSeparator: {
-      width: "6px",
-      height: "6px",
-      borderRadius: "50%",
-      backgroundColor: sharedStyles.colors.text.light,
-      opacity: 0.8,
-      display: "inline-block",
-    },
-    stepIndicator: {
-      ...sharedStyles.typography.small,
-      color: sharedStyles.colors.text.light,
-      whiteSpace: "nowrap",
-      marginLeft: "12px",
-    },
+    // removed carousel label row and separators
     carouselHeader: {
       ...sharedStyles.typography.h3,
       color: sharedStyles.colors.primary.dark,
       marginBottom: "10px",
+      fontSize: "1.4rem",
     },
     carouselText: {
       ...sharedStyles.typography.body,
@@ -171,45 +146,10 @@ const TeamEmpowerSection = () => {
       position: "relative",
       zIndex: 1,
     },
-    navButton: {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      background: sharedStyles.colors.white,
-      border: "1px solid #ddd",
-      width: "36px",
-      height: "36px",
-      borderRadius: "18px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-      userSelect: "none",
-      zIndex: 2,
-    },
-    navPrev: {
-      left: "12px",
-    },
-    navNext: {
-      right: "12px",
-    },
-    navArrow: {
-      fontSize: "18px",
-      color: sharedStyles.colors.primary.dark,
-      lineHeight: 1,
-    },
+    // removed nav arrows
   };
 
-  const goPrev = () =>
-    setCurrentIndex((i) => (i <= 0 ? 0 : i - 1));
-  const goNext = () =>
-    setCurrentIndex((i) => (i >= 2 ? 2 : i + 1));
-
-  const { title, text } = carouselItems[currentIndex];
-  const isFirst = currentIndex === 0;
-  const isLast = currentIndex === 2;
-  const stepLabel = `${currentIndex + 1}/3`;
+  // Static cards, no navigation needed
 
   return (
     <section style={styles.section}>
@@ -240,39 +180,13 @@ const TeamEmpowerSection = () => {
             </li>
           </ul>
 
-          <div style={styles.carouselCard}>
-            <div style={styles.carouselTopRow}>
-              <div style={styles.carouselLabels}>
-                <span style={styles.labelItem(currentIndex === 0)}>Planning</span>
-                <span style={styles.dotSeparator} />
-                <span style={styles.labelItem(currentIndex === 1)}>Execution</span>
-                <span style={styles.dotSeparator} />
-                <span style={styles.labelItem(currentIndex === 2)}>Automation</span>
+          <div style={styles.cardsRow}>
+            {carouselItems.map((item) => (
+              <div key={item.title} style={styles.stageCard}>
+                <div style={styles.carouselHeader}>{item.title}</div>
+                <div style={styles.carouselText}>{item.text}</div>
               </div>
-              <span style={styles.stepIndicator}>{stepLabel}</span>
-            </div>
-            {!isFirst && (
-              <button
-                aria-label="Previous"
-                onClick={goPrev}
-                style={{ ...styles.navButton, ...styles.navPrev }}
-              >
-                <span style={styles.navArrow}>‹</span>
-              </button>
-            )}
-            {!isLast && (
-              <button
-                aria-label="Next"
-                onClick={goNext}
-                style={{ ...styles.navButton, ...styles.navNext }}
-              >
-                <span style={styles.navArrow}>›</span>
-              </button>
-            )}
-
-            <div style={styles.carouselBody}>
-              <div style={styles.carouselText}>{text}</div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -301,6 +215,8 @@ const LeftGraphic = () => {
     { x: 700, y: bottomY, w: 220, h: 120, rx: 12 }, // right
   ];
 
+  // Simple staggered delays only (uniform cadence)
+
   return (
     <svg
       role="img"
@@ -311,6 +227,12 @@ const LeftGraphic = () => {
       preserveAspectRatio="xMidYMid meet"
       style={{ display: "block" }}
     >
+      <style>
+        {`
+          @keyframes nmFlow { to { stroke-dashoffset: -180; } }
+          .nm-flow { animation: nmFlow 3s linear infinite; }
+        `}
+      </style>
       <defs>
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.08" />
@@ -353,14 +275,25 @@ const LeftGraphic = () => {
         const c2y = midY + 40; // pull downward toward center
         const d = `M ${x1},${y1} C ${c1x},${c1y} ${c2x},${c2y} ${x2},${y2}`;
         return (
-          <path
-            key={`t-${idx}`}
-            d={d}
-            fill="none"
-            stroke="#cbd5e1"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
+          <g key={`t-${idx}`}>
+            <path
+              d={d}
+              fill="none"
+              stroke="#cbd5e1"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+            <path
+              d={d}
+              fill="none"
+              stroke="#209bdd"
+              strokeOpacity="0.7"
+              strokeWidth="4"
+              strokeLinecap="round"
+              className="nm-flow"
+              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `${idx * 0.25}s` }}
+            />
+          </g>
         );
       })}
 
@@ -378,14 +311,25 @@ const LeftGraphic = () => {
         const c2y = midY + 40;
         const d = `M ${x1},${y1} C ${c1x},${c1y} ${c2x},${c2y} ${x2},${y2}`;
         return (
-          <path
-            key={`b-${idx}`}
-            d={d}
-            fill="none"
-            stroke="#cbd5e1"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
+          <g key={`b-${idx}`}>
+            <path
+              d={d}
+              fill="none"
+              stroke="#cbd5e1"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+            <path
+              d={d}
+              fill="none"
+              stroke="#209bdd"
+              strokeOpacity="0.7"
+              strokeWidth="4"
+              strokeLinecap="round"
+              className="nm-flow"
+              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `${0.5 + idx * 0.3}s` }}
+            />
+          </g>
         );
       })}
 
