@@ -20,6 +20,7 @@ const ImpactSection = () => {
       backgroundColor: sharedStyles.colors.white,
       textAlign: "center",
       margin: "0 auto",
+      marginTop: sharedStyles.spacing.section.vertical,
     },
     title: {
       ...sharedStyles.typography.h2,
@@ -37,7 +38,6 @@ const ImpactSection = () => {
       justifyContent: "space-between",
       flexDirection: isMobile ? "column" : "row",
       gap: sharedStyles.spacing.component.gap,
-      marginBottom: "50px",
     },
     resultCard: {
       flex: "1 1 30%",
@@ -46,7 +46,7 @@ const ImpactSection = () => {
       boxShadow: sharedStyles.elements.card.boxShadow,
       display: "flex",
       flexDirection: "column",
-      height: isMobile ? "auto" : "240px",
+      height: "auto",
       marginBottom: isMobile ? "20px" : "0",
       backgroundColor: sharedStyles.colors.white,
     },

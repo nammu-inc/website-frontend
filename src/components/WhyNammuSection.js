@@ -18,146 +18,98 @@ const WhyNammuSection = () => {
         isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
       backgroundColor: sharedStyles.colors.white,
-      textAlign: "center",
       margin: "0 auto",
+    },
+    header: {
+      textAlign: "center",
+      margin: "0 auto 40px",
+      maxWidth: 900,
     },
     title: {
       ...sharedStyles.typography.h2,
       color: sharedStyles.colors.primary.dark,
+      marginBottom: 12,
     },
-    subtitle: {
-      ...sharedStyles.typography.subtitle,
-      maxWidth: "1000px",
-      margin: "0 auto 40px",
-      color: sharedStyles.colors.text.light,
-    },
-    cards: {
-      display: "flex",
-      justifyContent: "space-between",
-      flexDirection: isMobile ? "column" : "row",
-      gap: sharedStyles.spacing.component.gap,
-    },
-    card: {
-      flex: "1 1 30%",
-      backgroundColor: sharedStyles.colors.white,
-      borderRadius: sharedStyles.elements.card.borderRadius,
-      padding: sharedStyles.spacing.element.padding,
-      boxShadow: sharedStyles.elements.card.boxShadow,
-      textAlign: "left",
+    stepsWrap: {
       display: "flex",
       flexDirection: "column",
+      gap: 16,
+      maxWidth: 900,
+      margin: "0 auto",
+    },
+    step: {
+      backgroundColor: sharedStyles.colors.white,
+      borderRadius: sharedStyles.elements.card.borderRadius,
+      boxShadow: sharedStyles.elements.card.boxShadow,
+      padding: sharedStyles.spacing.element.padding,
+      textAlign: "left",
+      display: "flex",
+      gap: 12,
       alignItems: "flex-start",
     },
-    icon: {
-      width: "50px",
-      height: "50px",
-      marginBottom: "15px",
+    badge: {
+      minWidth: 32,
+      height: 32,
+      borderRadius: 16,
       backgroundColor: sharedStyles.colors.secondary.dark,
-      borderRadius: "50%",
+      color: sharedStyles.colors.white,
       display: "flex",
-      justifyContent: "center",
       alignItems: "center",
-      color: sharedStyles.colors.secondary.light,
-      fontSize: "1.5rem",
+      justifyContent: "center",
+      fontWeight: 700,
     },
-    cardTitle: {
+    stepContent: {
+      flex: 1,
+    },
+    stepTitle: {
       ...sharedStyles.typography.h3,
-      color: sharedStyles.colors.secondary.dark,
-      marginBottom: "8px",
+      color: sharedStyles.colors.primary.dark,
+      marginBottom: 6,
     },
-    cardText: {
+    stepText: {
       ...sharedStyles.typography.body,
-      color: sharedStyles.colors.secondary.dark,
+      color: sharedStyles.colors.text.medium,
+      margin: 0,
+      lineHeight: 1.6,
     },
   };
 
-  const LightningIcon = () => (
-    <div style={styles.icon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"></path>
-      </svg>
-    </div>
-  );
-
-  const TargetIcon = () => (
-    <div style={styles.icon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10"></circle>
-        <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
-      </svg>
-    </div>
-  );
-
-  const ShieldIcon = () => (
-    <div style={styles.icon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-      </svg>
-    </div>
-  );
-
   return (
     <div id="why" style={styles.section}>
-      <h2 style={styles.title}>Why Nammu</h2>
-      <p style={styles.subtitle}>Three reasons teams choose us and stay.</p>
+      <div style={styles.header}>
+        <h2 style={styles.title}>Why Nammu</h2>
+      </div>
 
-      <div style={styles.cards}>
-        <div style={styles.card}>
-          <LightningIcon />
-          <h3 style={styles.cardTitle}>Seafood Specific</h3>
-          <p style={styles.cardText}>
-            We focus exclusively on seafood, giving us unmatched insight to
-            solve the industry’s unique challenges.
-          </p>
+      <div style={styles.stepsWrap}>
+        <div style={styles.step}>
+          <div style={styles.badge}>1</div>
+          <div style={styles.stepContent}>
+            <h4 style={styles.stepTitle}>Seafood Specific</h4>
+            <p style={styles.stepText}>
+              We focus exclusively on seafood, giving us unmatched insight to
+              solve theindustry’s unique challenges.
+            </p>
+          </div>
         </div>
-
-        <div style={styles.card}>
-          <TargetIcon />
-          <h3 style={styles.cardTitle}>Seamless Integration</h3>
-          <p style={styles.cardText}>
-            Works with your current systems, delivering value quickly—no costly
-            or disruptive ERP migrations.
-          </p>
+        <div style={styles.step}>
+          <div style={styles.badge}>2</div>
+          <div style={styles.stepContent}>
+            <h4 style={styles.stepTitle}>Seamless Integration</h4>
+            <p style={styles.stepText}>
+              Works with your current systems to deliver value quickly–no costly
+              or disruptive ERP migrations.
+            </p>
+          </div>
         </div>
-
-        <div style={styles.card}>
-          <ShieldIcon />
-          <h3 style={styles.cardTitle}>People First</h3>
-          <p style={styles.cardText}>
-            Our intuitive platform empowers every salesperson to act confidently
-            on data, regardless of technical background.
-          </p>
+        <div style={styles.step}>
+          <div style={styles.badge}>3</div>
+          <div style={styles.stepContent}>
+            <h4 style={styles.stepTitle}>User-Centric Design</h4>
+            <p style={styles.stepText}>
+              Our intuitive platform empowers reps to confidently act on data,
+              regardless of technical background.
+            </p>
+          </div>
         </div>
       </div>
     </div>

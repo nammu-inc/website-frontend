@@ -24,13 +24,7 @@ const TestimonialSection = () => {
     title: {
       ...sharedStyles.typography.h2,
       color: sharedStyles.colors.primary.dark,
-      marginBottom: "20px",
-    },
-    subtitle: {
-      ...sharedStyles.typography.subtitle,
-      maxWidth: "800px",
       margin: "0 auto 40px",
-      color: sharedStyles.colors.text.light,
     },
     testimonialContainer: {
       backgroundColor: sharedStyles.colors.light,
@@ -93,19 +87,33 @@ const TestimonialSection = () => {
   return (
     <div id="testimonials" style={styles.section}>
       <h2 style={styles.title}>What Our Customers Say</h2>
-      <p style={styles.subtitle}>Real stories from teams growing with Nammu</p>
-
       <div style={styles.testimonialContainer}>
         <div style={styles.logoContainer}>
           <div style={styles.logoPlaceholder}>LOGO</div>
-          <div style={styles.companyName}>Acme Wholesale</div>
+          <div style={styles.companyName}>Stavis Seafoods</div>
         </div>
         <div style={styles.testimonialContent}>
           <blockquote style={styles.quote}>
             “Nammu helps our sales reps find opportunities we would have missed
             and turn insights into orders in minutes.”
           </blockquote>
-          <div style={styles.testimonialAuthor}>Alex Kim — VP Sales</div>
+          <div style={styles.testimonialAuthor}>Todd Rushing — VP Sales</div>
+        </div>
+      </div>
+
+      <div style={styles.testimonialContainer}>
+        <div style={styles.logoContainer}>
+          <div style={styles.logoPlaceholder}>LOGO</div>
+          <div style={styles.companyName}>Stavis Seafoods</div>
+        </div>
+        <div style={styles.testimonialContent}>
+          <blockquote style={styles.quote}>
+            “With Nammu, our team moves faster and spends more time selling. The
+            recommendations feel tailor‑made for each customer.”
+          </blockquote>
+          <div style={styles.testimonialAuthor}>
+            Tiffany Walker - Sales Manager
+          </div>
         </div>
       </div>
     </div>

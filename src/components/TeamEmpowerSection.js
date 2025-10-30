@@ -23,18 +23,15 @@ const TeamEmpowerSection = () => {
   const carouselItems = [
     {
       title: "Planning",
-      text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+      text: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
     },
     {
       title: "Execution",
-      text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+      text: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
     },
     {
       title: "Automation",
-      text:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
+      text: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.",
     },
   ];
 
@@ -139,7 +136,9 @@ const TeamEmpowerSection = () => {
       cursor: "default",
       padding: active ? "6px 10px" : "6px 10px",
       borderRadius: "999px",
-      backgroundColor: active ? sharedStyles.colors.primary.light : "transparent",
+      backgroundColor: active
+        ? sharedStyles.colors.primary.light
+        : "transparent",
     }),
     dotSeparator: {
       width: "6px",
@@ -201,10 +200,8 @@ const TeamEmpowerSection = () => {
     },
   };
 
-  const goPrev = () =>
-    setCurrentIndex((i) => (i <= 0 ? 0 : i - 1));
-  const goNext = () =>
-    setCurrentIndex((i) => (i >= 2 ? 2 : i + 1));
+  const goPrev = () => setCurrentIndex((i) => (i <= 0 ? 0 : i - 1));
+  const goNext = () => setCurrentIndex((i) => (i >= 2 ? 2 : i + 1));
 
   const { title, text } = carouselItems[currentIndex];
   const isFirst = currentIndex === 0;
@@ -231,7 +228,8 @@ const TeamEmpowerSection = () => {
             <li style={styles.bulletItem}>
               <span style={styles.bulletDot} />
               <span>
-                Transforms your data into intuitive visuals and actionable insights
+                Transforms your data into intuitive visuals and actionable
+                insights
               </span>
             </li>
             <li style={styles.bulletItem}>
@@ -243,11 +241,17 @@ const TeamEmpowerSection = () => {
           <div style={styles.carouselCard}>
             <div style={styles.carouselTopRow}>
               <div style={styles.carouselLabels}>
-                <span style={styles.labelItem(currentIndex === 0)}>Planning</span>
+                <span style={styles.labelItem(currentIndex === 0)}>
+                  Planning
+                </span>
                 <span style={styles.dotSeparator} />
-                <span style={styles.labelItem(currentIndex === 1)}>Execution</span>
+                <span style={styles.labelItem(currentIndex === 1)}>
+                  Execution
+                </span>
                 <span style={styles.dotSeparator} />
-                <span style={styles.labelItem(currentIndex === 2)}>Automation</span>
+                <span style={styles.labelItem(currentIndex === 2)}>
+                  Automation
+                </span>
               </div>
               <span style={styles.stepIndicator}>{stepLabel}</span>
             </div>
@@ -421,7 +425,14 @@ const LeftGraphic = () => {
 
       {/* Center circle with logo192 (padded) */}
       <g filter="url(#softShadow)">
-        <circle cx={center.x} cy={center.y} r={center.r} fill="#ffffff" stroke="#e5e7eb" strokeWidth="2" />
+        <circle
+          cx={center.x}
+          cy={center.y}
+          r={center.r}
+          fill="#ffffff"
+          stroke="#e5e7eb"
+          strokeWidth="2"
+        />
         <image
           href="/logo192.png"
           x={center.x - center.r + 14}
@@ -476,5 +487,3 @@ const LeftGraphic = () => {
     </svg>
   );
 };
-
-
