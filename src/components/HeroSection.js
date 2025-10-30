@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { sharedStyles } from "../styles";
+import ProductCarousel from "./ProductCarousel";
 
 const HeroSection = ({ onRequestDemo }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -70,22 +71,6 @@ const HeroSection = ({ onRequestDemo }) => {
       textDecoration: "none",
       marginTop: "28px",
       display: "inline-block",
-    },
-    // CTA now lives in the sticky header; keep hero focused on messaging and visual
-    productFrame: {
-      width: "100%",
-      maxWidth: "840px",
-      aspectRatio: "16 / 9",
-      border: `2px dashed ${sharedStyles.colors.primary.medium}`,
-      borderRadius: "10px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: sharedStyles.colors.white,
-      fontWeight: 600,
-      margin: "36px auto 0",
-      background: "rgba(0,0,0,0.15)",
-      backdropFilter: "blur(2px)",
     },
   };
 
@@ -262,12 +247,12 @@ const HeroSection = ({ onRequestDemo }) => {
           Smart Software
         </h1>
         <p style={styles.subtitle}>
-          Turbocharge your revenue with Nammu's industry-leading sales engine.
+          Take your sales to the next level with Nammu
         </p>
         <button style={styles.ctaButton} onClick={onRequestDemo}>
           Request a demo
         </button>
-        <div style={styles.productFrame}>Product Visual Placeholder</div>
+        <ProductCarousel />
       </div>
     </div>
   );
