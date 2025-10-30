@@ -126,9 +126,9 @@ const TeamEmpowerSection = () => {
       flexShrink: 0,
       color: sharedStyles.colors.primary.medium,
       fontSize: "3.3rem", // larger for prominence
-      fontWeight: "500",   // slightly bolder
-      margin: "0 28px",    // more space around
-      opacity: 0.92,       // slightly more visible
+      fontWeight: "500", // slightly bolder
+      margin: "0 28px", // more space around
+      opacity: 0.92, // slightly more visible
       lineHeight: 1.1,
       textShadow: "0 2px 12px #c0dffa99", // subtle glow for prominence
     },
@@ -256,20 +256,22 @@ const TeamEmpowerSection = () => {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? carouselItems.length - 1 : prev - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === carouselItems.length - 1 ? 0 : prev + 1
+    );
   };
 
   const currentItem = carouselItems[currentIndex];
 
   return (
     <section style={styles.section}>
-      <h2 style={styles.title}>
-        How Nammu Works
-      </h2>
+      <h2 style={styles.title}>How Nammu Works</h2>
       <ul style={styles.bullets}>
         <li style={styles.bulletItem}>
           Seamlessly integrates with your existing ERP
@@ -300,12 +302,14 @@ const TeamEmpowerSection = () => {
                 }}
                 onMouseEnter={(e) => {
                   if (idx !== currentIndex) {
-                    e.currentTarget.style.color = sharedStyles.colors.primary.medium;
+                    e.currentTarget.style.color =
+                      sharedStyles.colors.primary.medium;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (idx !== currentIndex) {
-                    e.currentTarget.style.color = sharedStyles.colors.text.light;
+                    e.currentTarget.style.color =
+                      sharedStyles.colors.text.light;
                   }
                 }}
               >
@@ -319,11 +323,13 @@ const TeamEmpowerSection = () => {
               onClick={handlePrev}
               style={{ ...styles.cardArrow, ...styles.cardArrowLeft }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.primary.light;
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.primary.light;
                 e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.white;
                 e.currentTarget.style.transform = "translateY(-50%)";
               }}
             >
@@ -334,11 +340,13 @@ const TeamEmpowerSection = () => {
               onClick={handleNext}
               style={{ ...styles.cardArrow, ...styles.cardArrowRight }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.primary.light;
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.primary.light;
                 e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.white;
                 e.currentTarget.style.transform = "translateY(-50%)";
               }}
             >
@@ -366,11 +374,11 @@ const LeftGraphic = () => {
   const vb = { w: 1000, h: 800 };
   // Move top and bottom left column squares halfway right toward the right column (x: 190, midpoint of 120 and 260)
   const topSquares = [
-    { x: 190, y: 120, size: 110 },  // Adjusted: halfway between 120 (left) and 260 (right)
-    { x: 120, y: 340, size: 110 },  // Left column, middle (unchanged)
-    { x: 190, y: 560, size: 110 },  // Adjusted: halfway between 120 (left) and 260 (right)
-    { x: 260, y: 265, size: 110 },  // Right column, top (centered around y=400)
-    { x: 260, y: 425, size: 110 },  // Right column, bottom (centered around y=400)
+    { x: 190, y: 120, size: 110 }, // Adjusted: halfway between 120 (left) and 260 (right)
+    { x: 120, y: 340, size: 110 }, // Left column, middle (unchanged)
+    { x: 190, y: 560, size: 110 }, // Adjusted: halfway between 120 (left) and 260 (right)
+    { x: 260, y: 265, size: 110 }, // Right column, top (centered around y=400)
+    { x: 260, y: 425, size: 110 }, // Right column, bottom (centered around y=400)
   ];
   const center = { x: 620, y: 400, r: 70 };
 
@@ -442,7 +450,6 @@ const LeftGraphic = () => {
         <clipPath id="clip-center">
           <circle cx={center.x} cy={center.y} r={center.r} />
         </clipPath>
-
       </defs>
 
       {/* Flowing connectors from left squares to center (cubic Béziers) */}
@@ -474,7 +481,11 @@ const LeftGraphic = () => {
               strokeWidth="4"
               strokeLinecap="round"
               className="nm-flow"
-              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `${idx * 0.25}s` }}
+              style={{
+                strokeDasharray: "28 160",
+                strokeDashoffset: 0,
+                animationDelay: `${idx * 0.25}s`,
+              }}
             />
           </g>
         );
@@ -508,7 +519,11 @@ const LeftGraphic = () => {
               strokeWidth="4"
               strokeLinecap="round"
               className="nm-flow"
-              style={{ strokeDasharray: "28 160", strokeDashoffset: 0, animationDelay: `0.6s` }}
+              style={{
+                strokeDasharray: "28 160",
+                strokeDashoffset: 0,
+                animationDelay: `0.6s`,
+              }}
             />
             {/* Animated arrowhead paths that flow with the animation */}
             <path
@@ -519,7 +534,11 @@ const LeftGraphic = () => {
               strokeOpacity="0.9"
               strokeLinecap="round"
               className="nm-flow"
-              style={{ strokeDasharray: "4 4", strokeDashoffset: 0, animationDelay: `0.6s` }}
+              style={{
+                strokeDasharray: "4 4",
+                strokeDashoffset: 0,
+                animationDelay: `0.6s`,
+              }}
             />
             <path
               d={arrowRight}
@@ -529,7 +548,11 @@ const LeftGraphic = () => {
               strokeOpacity="0.9"
               strokeLinecap="round"
               className="nm-flow"
-              style={{ strokeDasharray: "4 4", strokeDashoffset: 0, animationDelay: `0.6s` }}
+              style={{
+                strokeDasharray: "4 4",
+                strokeDashoffset: 0,
+                animationDelay: `0.6s`,
+              }}
             />
           </g>
         );
@@ -538,7 +561,13 @@ const LeftGraphic = () => {
       {/* Top squares (with logos) */}
       {topSquares.map((sq, idx) => {
         // Map logos: 0=BC, 1=SeaSoft, 2=SAP, 3=NetSuite, 4=NetYield (fallback to /logo.png if missing)
-        const topImages = [BCLogo, SeaSoftLogo, SAPLogo, NetSuiteLogo, NetYieldLogo];
+        const topImages = [
+          BCLogo,
+          SeaSoftLogo,
+          SAPLogo,
+          NetSuiteLogo,
+          NetYieldLogo,
+        ];
         const href = topImages[idx] || "/logo.png";
         const pad = 14; // inset padding to keep aspect logos comfortable
         return (
@@ -567,7 +596,14 @@ const LeftGraphic = () => {
 
       {/* Center circle with logo192 (padded) */}
       <g filter="url(#softShadow)">
-        <circle cx={center.x} cy={center.y} r={center.r} fill="url(#nodeFill)" stroke="#e5e7eb" strokeWidth="2" />
+        <circle
+          cx={center.x}
+          cy={center.y}
+          r={center.r}
+          fill="url(#nodeFill)"
+          stroke="#e5e7eb"
+          strokeWidth="2"
+        />
         <image
           href="/logo192.png"
           x={center.x - center.r + 22}
@@ -583,5 +619,3 @@ const LeftGraphic = () => {
     </svg>
   );
 };
-
-
