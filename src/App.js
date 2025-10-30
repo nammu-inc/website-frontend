@@ -22,7 +22,7 @@ const App = () => {
       <Header onRequestDemo={openDemo} />
       <HeroSection onRequestDemo={openDemo} />
       <ImpactSection />
-      <HowItWorksSection />
+      {/* <HowItWorksSection /> */}
       <TeamEmpowerSection />
       <WhyNammuSection />
       <TestimonialSection />

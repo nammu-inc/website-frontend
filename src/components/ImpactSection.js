@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { sharedStyles } from "../styles";
 
-const TractionSection = () => {
+const ImpactSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -41,132 +41,92 @@ const TractionSection = () => {
     },
     resultCard: {
       flex: "1 1 30%",
-      backgroundColor: sharedStyles.colors.primary.light,
       borderRadius: sharedStyles.elements.card.borderRadius,
       padding: sharedStyles.spacing.element.padding,
       boxShadow: sharedStyles.elements.card.boxShadow,
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
-      height: isMobile ? "auto" : "220px",
+      height: isMobile ? "auto" : "240px",
       marginBottom: isMobile ? "20px" : "0",
+      backgroundColor: sharedStyles.colors.white,
     },
-    resultIcon: {
-      width: "50px",
-      height: "50px",
-      margin: "0 auto 15px",
-      backgroundColor: sharedStyles.colors.primary.dark,
-      borderRadius: "50%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: sharedStyles.colors.white,
-      fontSize: "1.5rem",
+    cardLight: {
+      border: `1px solid ${sharedStyles.colors.secondary.medium}`,
+      color: sharedStyles.colors.primary.dark,
+    },
+    cardMedium: {
+      border: `1px solid ${sharedStyles.colors.primary.medium}`,
+      color: sharedStyles.colors.primary.dark,
+    },
+    cardDark: {
+      border: `1px solid ${sharedStyles.colors.primary.dark}`,
+      color: sharedStyles.colors.primary.dark,
     },
     resultTitle: {
       ...sharedStyles.typography.h3,
-      color: sharedStyles.colors.primary.dark,
-      marginBottom: "10px",
+      marginTop: "6px",
+      marginBottom: "6px",
     },
     resultDescription: {
       ...sharedStyles.typography.body,
+      marginTop: "6px",
       color: sharedStyles.colors.text.medium,
-      marginBottom: "10px",
     },
     resultMetric: {
-      fontSize: "2rem",
-      fontWeight: "700",
-      color: sharedStyles.colors.secondary.medium,
-      marginTop: "auto",
+      fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+      fontWeight: 900,
+      lineHeight: 1,
+      marginBottom: "12px",
     },
-    // testimonial styles removed
+    metricLight: {
+      color: sharedStyles.colors.secondary.medium,
+    },
+    metricMedium: {
+      color: sharedStyles.colors.primary.medium,
+    },
+    metricDark: {
+      color: sharedStyles.colors.primary.dark,
+    },
   };
-
-  const RevenueIcon = () => (
-    <div style={styles.resultIcon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-      </svg>
-    </div>
-  );
-
-  const ProfitIcon = () => (
-    <div style={styles.resultIcon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="m2 20 2-2m0 0 5-5m-5 5v-5m0 5h5"></path>
-        <path d="M22 4v5h-5"></path>
-        <path d="m22 4-9 9"></path>
-      </svg>
-    </div>
-  );
-
-  const TimeIcon = () => (
-    <div style={styles.resultIcon}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 16 14"></polyline>
-      </svg>
-    </div>
-  );
 
   return (
     <div id="traction" style={styles.section}>
-      <h2 style={styles.title}>The Industry Leading Sales Engine</h2>
-      <p style={styles.subtitle}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </p>
+      <h2 style={styles.title}>The industry leading sales engine</h2>
+      <p style={styles.subtitle}></p>
 
       <div style={styles.resultsContainer}>
-        <div style={styles.resultCard}>
-          <RevenueIcon />
-          <h3 style={styles.resultTitle}>Save Time</h3>
-          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
+        <div style={{ ...styles.resultCard, ...styles.cardLight }}>
+          <div style={{ ...styles.resultMetric, ...styles.metricLight }}>
+            30–50%
+          </div>
+          <h3 style={{ ...styles.resultTitle }}>Time Saved</h3>
+          <p style={{ ...styles.resultDescription }}>
+            From automated reporting and less spreadsheet chaos
+          </p>
         </div>
 
-        <div style={styles.resultCard}>
-          <ProfitIcon />
-          <h3 style={styles.resultTitle}>Boost Revenue</h3>
-          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
+        <div style={{ ...styles.resultCard, ...styles.cardMedium }}>
+          <div style={{ ...styles.resultMetric, ...styles.metricMedium }}>
+            +1–3
+          </div>
+          <h3 style={{ ...styles.resultTitle }}>Cross-Sells per Order</h3>
+          <p style={{ ...styles.resultDescription }}>
+            Driven by inventory-aware recommendations
+          </p>
         </div>
 
-        <div style={styles.resultCard}>
-          <TimeIcon />
-          <h3 style={styles.resultTitle}>Lorem ipsum</h3>
-          <p style={styles.resultDescription}>Lorem ipsum dolor sit amet.</p>
+        <div style={{ ...styles.resultCard, ...styles.cardDark }}>
+          <div style={{ ...styles.resultMetric, ...styles.metricDark }}>
+            2–4 weeks
+          </div>
+          <h3 style={{ ...styles.resultTitle }}>To Go Live</h3>
+          <p style={{ ...styles.resultDescription }}>
+            From kickoff to measurable value
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default TractionSection;
+export default ImpactSection;
