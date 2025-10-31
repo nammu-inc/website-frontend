@@ -15,7 +15,7 @@ const WhyNammuSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       paddingTop: "30px",
       backgroundColor: "transparent",

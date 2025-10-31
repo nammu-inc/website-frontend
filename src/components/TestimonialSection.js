@@ -15,7 +15,7 @@ const TestimonialSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       backgroundColor: "transparent",
       textAlign: "center",
@@ -55,7 +55,7 @@ const TestimonialSection = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      marginBottom: isMobile ? "20px" : "0",
+      marginBottom: isMobile ? "30px" : "0",
     },
     logoPlaceholder: {
       width: "120px",

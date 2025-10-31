@@ -17,7 +17,7 @@ const Footer = () => {
   const styles = {
     section: {
       padding: `16px ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       marginTop: sharedStyles.spacing.section.vertical,
       borderTop: `1px solid ${sharedStyles.colors.gray.light}`,

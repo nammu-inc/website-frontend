@@ -34,7 +34,7 @@ const HeroSection = ({ onRequestDemo }) => {
   const styles = {
     hero: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       textAlign: "center",
       background: `linear-gradient(180deg, ${sharedStyles.colors.secondary.light} 0%, ${sharedStyles.colors.primary.light} 100%)`,

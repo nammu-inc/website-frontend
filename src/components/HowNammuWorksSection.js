@@ -57,7 +57,7 @@ const HowNammuWorksSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       paddingBottom: "30px",
       backgroundColor: "transparent",
@@ -129,6 +129,40 @@ const HowNammuWorksSection = () => {
       opacity: 0.92, // slightly more visible
       lineHeight: 1.1,
       textShadow: "0 2px 12px #c0dffa99", // subtle glow for prominence
+    },
+    processCard: {
+      ...sharedStyles.elements.card,
+      flex: "1 1 0",
+      minWidth: isMobile ? "auto" : "200px",
+      padding: "24px",
+      textAlign: "center",
+      backgroundColor: sharedStyles.colors.white,
+      border: `2px solid ${sharedStyles.colors.primary.light}`,
+      borderRadius: "24px",
+    },
+    processCardsContainer: {
+      display: "flex",
+      alignItems: "stretch",
+      justifyContent: "center",
+      gap: isMobile ? "30px" : "24px",
+      flexDirection: isMobile ? "column" : "row",
+      maxWidth: "900px",
+      margin: isMobile ? "32px auto 0" : "48px auto 0",
+    },
+    processArrow: {
+      fontSize: "2.8rem",
+      color: sharedStyles.colors.primary.medium,
+      fontWeight: 700,
+      alignSelf: "center",
+      lineHeight: 1,
+      userSelect: "none",
+    },
+    processCardText: {
+      fontSize: "1rem",
+      fontWeight: 500,
+      color: sharedStyles.colors.text.dark,
+      lineHeight: "1.5",
+      margin: 0,
     },
     carouselCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
@@ -270,103 +304,23 @@ const HowNammuWorksSection = () => {
   return (
     <section style={styles.section}>
       <h2 style={styles.title}>How Nammu Works</h2>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "24px",
-          margin: "48px 0 0 0",
-          flexWrap: "nowrap",
-          width: "100%",
-          overflowX: "auto",
-        }}
-      >
-        <div
-          style={{
-            minWidth: "230px",
-            backgroundColor: "transparent",
-            border: `2px solid ${sharedStyles.colors.primary.light}`,
-            borderRadius: "18px",
-            padding: "20px 22px",
-            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "1.03rem",
-            fontWeight: 500,
-            color: sharedStyles.colors.text.dark,
-            letterSpacing: "0.01em",
-            transition: "box-shadow 0.2s",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Seamlessly integrates with your existing ERP
+      <div style={styles.processCardsContainer}>
+        <div style={styles.processCard}>
+          <p style={styles.processCardText}>
+            Seamlessly integrates with your existing ERP
+          </p>
         </div>
-        <span
-          style={{
-            fontSize: "2.8rem",
-            color: sharedStyles.colors.primary.medium,
-            fontWeight: 700,
-            margin: "0 0 8px 0",
-            alignSelf: "center",
-            lineHeight: 1,
-            userSelect: "none",
-          }}
-        >
-          &rsaquo;
-        </span>
-        <div
-          style={{
-            minWidth: "230px",
-            backgroundColor: "transparent",
-            border: `2px solid ${sharedStyles.colors.primary.light}`,
-            borderRadius: "18px",
-            padding: "20px 22px",
-            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "1.03rem",
-            fontWeight: 500,
-            color: sharedStyles.colors.text.dark,
-            letterSpacing: "0.01em",
-            transition: "box-shadow 0.2s",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Transforms your data into intuitive visuals and insights
+        {!isMobile && <span style={styles.processArrow}>&rsaquo;</span>}
+        <div style={styles.processCard}>
+          <p style={styles.processCardText}>
+            Transforms your data into intuitive insights
+          </p>
         </div>
-        <span
-          style={{
-            fontSize: "2.8rem",
-            color: sharedStyles.colors.primary.medium,
-            fontWeight: 700,
-            margin: "0 0 8px 0",
-            alignSelf: "center",
-            lineHeight: 1,
-            userSelect: "none",
-          }}
-        >
-          &rsaquo;
-        </span>
-        <div
-          style={{
-            minWidth: "230px",
-            backgroundColor: "transparent",
-            border: `2px solid ${sharedStyles.colors.primary.light}`,
-            borderRadius: "18px",
-            padding: "20px 22px",
-            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "1.03rem",
-            fontWeight: 500,
-            color: sharedStyles.colors.text.dark,
-            letterSpacing: "0.01em",
-            transition: "box-shadow 0.2s",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Supports every stage of the sales process
+        {!isMobile && <span style={styles.processArrow}>&rsaquo;</span>}
+        <div style={styles.processCard}>
+          <p style={styles.processCardText}>
+            Supports every stage of the sales process
+          </p>
         </div>
       </div>
 

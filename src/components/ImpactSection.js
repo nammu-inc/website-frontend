@@ -15,7 +15,7 @@ const ImpactSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       backgroundColor: "transparent",
       textAlign: "center",
@@ -48,7 +48,7 @@ const ImpactSection = () => {
       display: "flex",
       flexDirection: "column",
       height: "auto",
-      marginBottom: isMobile ? "20px" : "0",
+      marginBottom: isMobile ? "30px" : "0",
       backgroundColor: "transparent",
     },
     cardLight: {
