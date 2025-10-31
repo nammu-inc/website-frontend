@@ -17,7 +17,7 @@ const TestimonialSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
-      backgroundColor: sharedStyles.colors.white,
+      backgroundColor: "transparent",
       textAlign: "center",
       margin: "0 auto",
     },
@@ -27,7 +27,7 @@ const TestimonialSection = () => {
       margin: "0 auto 40px",
     },
     testimonialContainer: {
-      backgroundColor: sharedStyles.colors.light,
+      backgroundColor: "transparent",
       borderRadius: sharedStyles.elements.card.borderRadius,
       padding: "30px",
       boxShadow: sharedStyles.elements.card.boxShadow,

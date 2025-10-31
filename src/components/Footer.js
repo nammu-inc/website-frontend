@@ -21,7 +21,7 @@ const Footer = () => {
       }`,
       marginTop: sharedStyles.spacing.section.vertical,
       borderTop: `1px solid ${sharedStyles.colors.gray.light}`,
-      backgroundColor: sharedStyles.colors.white,
+      backgroundColor: "transparent",
       margin: "0 auto",
     },
     footerInner: {

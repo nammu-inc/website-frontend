@@ -9,7 +9,7 @@ import Product1 from "../assets/Product1.png";
 import Product4 from "../assets/Product4.png";
 import Product2 from "../assets/Product2.png";
 
-const TeamEmpowerSection = () => {
+const HowNammuWorksSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -62,7 +62,8 @@ const TeamEmpowerSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
-      backgroundColor: sharedStyles.colors.white,
+      paddingBottom: "30px",
+      backgroundColor: "transparent",
       margin: "0 auto",
     },
     title: {
@@ -135,7 +136,7 @@ const TeamEmpowerSection = () => {
     carouselCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: sharedStyles.elements.card.backgroundColor,
+      backgroundColor: "transparent",
       padding: "30px 56px",
       position: "relative",
       overflow: "hidden",
@@ -144,7 +145,7 @@ const TeamEmpowerSection = () => {
     stageCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: sharedStyles.elements.card.backgroundColor,
+      backgroundColor: "transparent",
       padding: "24px",
       display: "flex",
       flexDirection: "column",
@@ -272,19 +273,103 @@ const TeamEmpowerSection = () => {
   return (
     <section style={styles.section}>
       <h2 style={styles.title}>How Nammu Works</h2>
-      <ul style={styles.bullets}>
-        <li style={styles.bulletItem}>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "24px",
+        margin: "48px 0 0 0",
+        flexWrap: "nowrap",
+        width: "100%",
+        overflowX: "auto"
+      }}>
+        <div
+          style={{
+            minWidth: "230px",
+            backgroundColor: "transparent",
+            border: `2px solid ${sharedStyles.colors.primary.light}`,
+            borderRadius: "18px",
+            padding: "20px 22px",
+            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.03rem",
+            fontWeight: 500,
+            color: sharedStyles.colors.text.dark,
+            letterSpacing: "0.01em",
+            transition: "box-shadow 0.2s",
+            whiteSpace: "nowrap",
+          }}
+        >
           Seamlessly integrates with your existing ERP
-        </li>
-        <span style={styles.arrow}>›</span>
-        <li style={styles.bulletItem}>
+        </div>
+        <span
+          style={{
+            fontSize: "2.8rem",
+            color: sharedStyles.colors.primary.medium,
+            fontWeight: 700,
+            margin: "0 0 8px 0",
+            alignSelf: "center",
+            lineHeight: 1,
+            userSelect: "none",
+          }}
+        >
+          &rsaquo;
+        </span>
+        <div
+          style={{
+            minWidth: "230px",
+            backgroundColor: "transparent",
+            border: `2px solid ${sharedStyles.colors.primary.light}`,
+            borderRadius: "18px",
+            padding: "20px 22px",
+            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.03rem",
+            fontWeight: 500,
+            color: sharedStyles.colors.text.dark,
+            letterSpacing: "0.01em",
+            transition: "box-shadow 0.2s",
+            whiteSpace: "nowrap",
+          }}
+        >
           Transforms your data into intuitive visuals and insights
-        </li>
-        <span style={styles.arrow}>›</span>
-        <li style={styles.bulletItem}>
+        </div>
+        <span
+          style={{
+            fontSize: "2.8rem",
+            color: sharedStyles.colors.primary.medium,
+            fontWeight: 700,
+            margin: "0 0 8px 0",
+            alignSelf: "center",
+            lineHeight: 1,
+            userSelect: "none",
+          }}
+        >
+          &rsaquo;
+        </span>
+        <div
+          style={{
+            minWidth: "230px",
+            backgroundColor: "transparent",
+            border: `2px solid ${sharedStyles.colors.primary.light}`,
+            borderRadius: "18px",
+            padding: "20px 22px",
+            boxShadow: "0 2px 10px 0 rgba(32, 155, 221, 0.07)",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.03rem",
+            fontWeight: 500,
+            color: sharedStyles.colors.text.dark,
+            letterSpacing: "0.01em",
+            transition: "box-shadow 0.2s",
+            whiteSpace: "nowrap",
+          }}
+        >
           Supports every stage of the sales process
-        </li>
-      </ul>
+        </div>
+      </div>
 
       <div style={styles.contentRow}>
         <div style={styles.leftColumn}>
@@ -367,7 +452,7 @@ const TeamEmpowerSection = () => {
   );
 };
 
-export default TeamEmpowerSection;
+export default HowNammuWorksSection;
 
 const LeftGraphic = () => {
   // Responsive SVG diagram: 5 left-stacked squares -> center circle -> right connector to Planning card

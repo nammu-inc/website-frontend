@@ -17,7 +17,7 @@ const ImpactSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
-      backgroundColor: sharedStyles.colors.white,
+      backgroundColor: "transparent",
       textAlign: "center",
       margin: "0 auto",
       marginTop: sharedStyles.spacing.section.vertical,
@@ -48,7 +48,7 @@ const ImpactSection = () => {
       flexDirection: "column",
       height: "auto",
       marginBottom: isMobile ? "20px" : "0",
-      backgroundColor: sharedStyles.colors.white,
+      backgroundColor: "transparent",
     },
     cardLight: {
       border: `1px solid ${sharedStyles.colors.secondary.medium}`,
@@ -91,38 +91,29 @@ const ImpactSection = () => {
 
   return (
     <div id="traction" style={styles.section}>
-      <h2 style={styles.title}>The industry leading sales engine</h2>
+      <h2 style={styles.title}>Nammu Delivers</h2>
       <p style={styles.subtitle}></p>
 
       <div style={styles.resultsContainer}>
         <div style={{ ...styles.resultCard, ...styles.cardLight }}>
           <div style={{ ...styles.resultMetric, ...styles.metricLight }}>
-            30–50%
+            26%
           </div>
-          <h3 style={{ ...styles.resultTitle }}>Time Saved</h3>
-          <p style={{ ...styles.resultDescription }}>
-            From automated reporting and less spreadsheet chaos
-          </p>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricLight }}>Time Saved per Week</h3>
         </div>
 
         <div style={{ ...styles.resultCard, ...styles.cardMedium }}>
           <div style={{ ...styles.resultMetric, ...styles.metricMedium }}>
-            +1–3
+            +1.2
           </div>
-          <h3 style={{ ...styles.resultTitle }}>Cross-Sells per Order</h3>
-          <p style={{ ...styles.resultDescription }}>
-            Driven by inventory-aware recommendations
-          </p>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricMedium }}>Cross-Sells per Order</h3>
         </div>
 
         <div style={{ ...styles.resultCard, ...styles.cardDark }}>
           <div style={{ ...styles.resultMetric, ...styles.metricDark }}>
-            2–4 weeks
+            &lt;3 weeks
           </div>
-          <h3 style={{ ...styles.resultTitle }}>To Go Live</h3>
-          <p style={{ ...styles.resultDescription }}>
-            From kickoff to measurable value
-          </p>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricDark }}>To Go Live</h3>
         </div>
       </div>
     </div>

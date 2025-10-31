@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import DemoRequestModal from "./components/DemoRequestModal";
 import Header from "./components/Header";
-import TeamEmpowerSection from "./components/TeamEmpowerSection";
+import HowNammuWorksSection from "./components/HowNammuWorksSection";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -21,7 +21,7 @@ const App = () => {
       <Header onRequestDemo={openDemo} />
       <HeroSection onRequestDemo={openDemo} />
       <ImpactSection />
-      <TeamEmpowerSection />
+      <HowNammuWorksSection />
       <WhyNammuSection />
       <TestimonialSection />
       <Footer onRequestDemo={openDemo} />
