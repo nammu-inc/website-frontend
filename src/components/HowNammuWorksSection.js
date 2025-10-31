@@ -26,9 +26,8 @@ const HowNammuWorksSection = () => {
       title: "Planning",
       text: (
         <>
-          Analyze trends, set targets, track performance, and
-          <br />
-          guide strategy in real-time.
+          Keep your team aligned with real-time data to set targets, track
+          trends and guide strategy.
         </>
       ),
       image: Product1,
@@ -38,7 +37,6 @@ const HowNammuWorksSection = () => {
       text: (
         <>
           Sell confidently with instant access to live inventory and
-          <br />
           customer-specific product recommendations.
         </>
       ),
@@ -48,9 +46,8 @@ const HowNammuWorksSection = () => {
       title: "Automation",
       text: (
         <>
-          Enable customers to order autonomously, freeing up sales reps
-          <br />
-          for higher-value tasks.
+          Enable customers to order autonomously, freeing up sales reps for
+          higher-value tasks.
         </>
       ),
       image: Product2,
@@ -273,16 +270,18 @@ const HowNammuWorksSection = () => {
   return (
     <section style={styles.section}>
       <h2 style={styles.title}>How Nammu Works</h2>
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "24px",
-        margin: "48px 0 0 0",
-        flexWrap: "nowrap",
-        width: "100%",
-        overflowX: "auto"
-      }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "24px",
+          margin: "48px 0 0 0",
+          flexWrap: "nowrap",
+          width: "100%",
+          overflowX: "auto",
+        }}
+      >
         <div
           style={{
             minWidth: "230px",

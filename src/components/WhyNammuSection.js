@@ -73,7 +73,7 @@ const WhyNammuSection = () => {
       ...sharedStyles.typography.body,
       color: sharedStyles.colors.text.medium,
       marginTop: 0,
-      marginBottom: 16
+      marginBottom: 16,
     },
   };
 
@@ -145,7 +145,9 @@ const WhyNammuSection = () => {
           <div style={styles.stepContent}>
             <h4 style={styles.stepTitle}>Seafood Specific</h4>
             <p style={styles.stepText}>
-            Built exclusively for the seafood industry, Nammu brings unmatched insight to the unique challenges and workflows that define your business.
+              Built exclusively for the seafood industry, Nammu brings unmatched
+              insight to the unique challenges and workflows that define your
+              business.
             </p>
           </div>
         </div>
@@ -156,7 +158,8 @@ const WhyNammuSection = () => {
           <div style={styles.stepContent}>
             <h4 style={styles.stepTitle}>Seamless Integration</h4>
             <p style={styles.stepText}>
-            Nammu connects directly to your existing systems and delivers immediate value without costly or disruptive ERP migrations.
+              Nammu connects directly to your existing systems and delivers
+              immediate value without costly or disruptive ERP migrations.
             </p>
           </div>
         </div>
@@ -167,7 +170,9 @@ const WhyNammuSection = () => {
           <div style={styles.stepContent}>
             <h4 style={styles.stepTitle}>User-Centric Design</h4>
             <p style={styles.stepText}>
-            Designed for real-world users, Nammu makes data simple to understand and act on, empowering every rep regardless of technical background.
+              Nammu’s intuitive platform makes data easy to understand and act
+              on, empowering every salesperson regardless of technical
+              background.
             </p>
           </div>
         </div>
