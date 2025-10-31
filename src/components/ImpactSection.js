@@ -49,8 +49,7 @@ const ImpactSection = () => {
       display: "flex",
       flexDirection: "column",
       height: "auto",
-      marginBottom: isMobile ? "30px" : "0",
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
     },
     cardLight: {
       border: `1px solid ${sharedStyles.colors.secondary.medium}`,
@@ -117,10 +116,10 @@ const ImpactSection = () => {
 
         <div style={{ ...styles.resultCard, ...styles.cardDark }}>
           <div style={{ ...styles.resultMetric, ...styles.metricDark }}>
-            &lt;3
+            &lt;1
           </div>
           <h3 style={{ ...styles.resultTitle, ...styles.metricDark }}>
-            Weeks To Go Live
+            Month To Go Live
           </h3>
         </div>
       </div>

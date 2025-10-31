@@ -64,7 +64,7 @@ export const sharedStyles = {
   // Spacing
   spacing: {
     section: {
-      vertical: "60px",
+      vertical: "80px",
       horizontal: "160px",
     },
     component: {

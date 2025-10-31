@@ -21,6 +21,15 @@ const HowNammuWorksSection = () => {
     return () => mq.removeEventListener("change", handle);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) =>
+        prev === carouselItems.length - 1 ? 0 : prev + 1
+      );
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   const carouselItems = [
     {
       title: "Planning",
@@ -83,7 +92,7 @@ const HowNammuWorksSection = () => {
       boxShadow: "none",
       backgroundColor: "transparent",
       display: "flex",
-      alignItems: "flex-start",
+      alignItems: isMobile ? "center" : "flex-start",
       justifyContent: "center",
       paddingTop: isMobile ? "0" : "59px",
       minHeight: isMobile ? "400px" : "480px",
@@ -199,7 +208,8 @@ const HowNammuWorksSection = () => {
       width: "100%",
       aspectRatio: "2",
       overflow: "hidden",
-      borderRadius: sharedStyles.elements.card.borderRadius,
+      borderTopLeftRadius: sharedStyles.elements.card.borderRadius,
+      borderTopRightRadius: sharedStyles.elements.card.borderRadius,
     },
     cardImage: {
       width: "100%",
@@ -207,6 +217,8 @@ const HowNammuWorksSection = () => {
       objectFit: "cover",
       objectPosition: "top",
       display: "block",
+      borderTopLeftRadius: sharedStyles.elements.card.borderRadius,
+      borderTopRightRadius: sharedStyles.elements.card.borderRadius,
     },
     carouselTextCaption: {
       backgroundColor: sharedStyles.colors.primary.dark,
@@ -216,6 +228,8 @@ const HowNammuWorksSection = () => {
       fontSize: isMobile ? "0.95rem" : "1rem",
       lineHeight: 1.5,
       textAlign: "center",
+      borderBottomLeftRadius: sharedStyles.elements.card.borderRadius,
+      borderBottomRightRadius: sharedStyles.elements.card.borderRadius,
     },
     paginationDots: {
       display: "flex",

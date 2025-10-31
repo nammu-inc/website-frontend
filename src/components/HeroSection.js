@@ -33,7 +33,7 @@ const HeroSection = ({ onRequestDemo }) => {
 
   const styles = {
     hero: {
-      padding: `${sharedStyles.spacing.section.vertical} ${
+      padding: `60px ${
         isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       textAlign: "center",

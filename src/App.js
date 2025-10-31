@@ -17,22 +17,35 @@ const App = () => {
   const closeDemo = () => setIsDemoOpen(false);
 
   return (
-    <div style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
+      }}
+    >
       <Analytics />
       <Header onRequestDemo={openDemo} />
-      <HeroSection onRequestDemo={openDemo} />
 
-      <div style={{ position: "relative" }}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <BubbleBackground />
-        </div>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "100vw",
+          overflowX: "hidden",
+        }}
+      >
+        <HeroSection onRequestDemo={openDemo} />
 
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <ImpactSection />
-          <HowNammuWorksSection />
-          <WhyNammuSection />
-          <TestimonialSection />
-          <Footer onRequestDemo={openDemo} />
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+            <BubbleBackground />
+          </div>
+
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <ImpactSection />
+            <HowNammuWorksSection />
+            <WhyNammuSection />
+            <TestimonialSection />
+            <Footer onRequestDemo={openDemo} />
+          </div>
         </div>
       </div>
 
