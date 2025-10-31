@@ -26,8 +26,8 @@ const HowNammuWorksSection = () => {
       title: "Planning",
       text: (
         <>
-          Keep your team aligned with real-time data to set targets, track
-          trends and guide strategy.
+          Use real-time data to align your team, track trends, and guide
+          strategy.
         </>
       ),
       image: Product1,
@@ -36,8 +36,8 @@ const HowNammuWorksSection = () => {
       title: "Execution",
       text: (
         <>
-          Sell confidently with instant access to live inventory and
-          customer-specific product recommendations.
+          Sell confidently with live inventory and smart product
+          recommendations.
         </>
       ),
       image: Product4,
@@ -46,7 +46,7 @@ const HowNammuWorksSection = () => {
       title: "Automation",
       text: (
         <>
-          Enable customers to order autonomously, freeing up sales reps for
+          Enable customers to order autonomously, freeing up time for
           higher-value tasks.
         </>
       ),
@@ -57,11 +57,12 @@ const HowNammuWorksSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "30px" : "40px"
       }`,
       paddingBottom: "30px",
       backgroundColor: "transparent",
       margin: "0 auto",
+      maxWidth: "1300px",
     },
     title: {
       ...sharedStyles.typography.h2,
@@ -76,7 +77,7 @@ const HowNammuWorksSection = () => {
       alignItems: "stretch",
     },
     leftColumn: {
-      flex: "1 1 45%",
+      flex: isMobile ? "0 0 auto" : "1",
       borderRadius: 0,
       overflow: "visible",
       boxShadow: "none",
@@ -84,8 +85,11 @@ const HowNammuWorksSection = () => {
       display: "flex",
       alignItems: "flex-start",
       justifyContent: "center",
-      paddingTop: "59px",
-      minHeight: isMobile ? "320px" : "480px",
+      paddingTop: isMobile ? "0" : "59px",
+      minHeight: isMobile ? "400px" : "480px",
+      transform: isMobile ? "rotate(90deg)" : "none",
+      margin: isMobile ? "80px 0" : "0",
+      width: isMobile ? "100%" : "auto",
     },
     portrait: {
       width: "100%",
@@ -94,11 +98,13 @@ const HowNammuWorksSection = () => {
       aspectRatio: "3 / 4",
     },
     rightColumn: {
-      flex: "1 1 55%",
+      flex: isMobile ? "0 0 auto" : "1",
+      paddingTop: isMobile ? "0" : "59px",
       display: "flex",
       flexDirection: "column",
       gap: "16px",
       justifyContent: "center",
+      width: isMobile ? "100%" : "auto",
     },
     bullets: {
       listStyle: "none",
@@ -181,7 +187,7 @@ const HowNammuWorksSection = () => {
       display: "flex",
       flexDirection: "column",
       position: "relative",
-      overflow: "hidden",
+      overflow: "visible",
     },
     cardContent: {
       display: "flex",
@@ -193,6 +199,7 @@ const HowNammuWorksSection = () => {
       width: "100%",
       aspectRatio: "2",
       overflow: "hidden",
+      borderRadius: sharedStyles.elements.card.borderRadius,
     },
     cardImage: {
       width: "100%",
@@ -209,6 +216,27 @@ const HowNammuWorksSection = () => {
       fontSize: isMobile ? "0.95rem" : "1rem",
       lineHeight: 1.5,
       textAlign: "center",
+    },
+    paginationDots: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "16px",
+      marginTop: "16px",
+    },
+    paginationDot: {
+      width: "8px",
+      height: "8px",
+      borderRadius: "50%",
+      backgroundColor: sharedStyles.colors.white,
+      border: `2px solid ${sharedStyles.colors.primary.light}`,
+      cursor: "pointer",
+      transition: "all 0.3s ease",
+    },
+    paginationDotActive: {
+      backgroundColor: sharedStyles.colors.primary.light,
+      border: `2px solid ${sharedStyles.colors.primary.dark}`,
+      transform: "scale(1.2)",
     },
     // removed carousel label row and separators
     carouselHeader: {
@@ -258,24 +286,25 @@ const HowNammuWorksSection = () => {
       top: "50%",
       transform: "translateY(-50%)",
       background: sharedStyles.colors.white,
-      border: `1px solid ${sharedStyles.colors.primary.light}`,
-      width: "40px",
-      height: "40px",
+      border: `2px solid ${sharedStyles.colors.gray.light}`,
+      width: "44px",
+      height: "44px",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
       userSelect: "none",
       transition: "all 0.2s ease",
       zIndex: 10,
+      opacity: 0.95,
     },
     cardArrowLeft: {
-      left: "24px",
+      left: isMobile ? "16px" : "-8px",
     },
     cardArrowRight: {
-      right: "24px",
+      right: isMobile ? "16px" : "-8px",
     },
     cardArrowHover: {
       backgroundColor: sharedStyles.colors.primary.light,
@@ -283,9 +312,9 @@ const HowNammuWorksSection = () => {
       boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
     },
     cardArrowIcon: {
-      fontSize: "1.2rem",
+      fontSize: "1.5rem",
       color: sharedStyles.colors.primary.dark,
-      fontWeight: "600",
+      fontWeight: "700",
     },
   };
 
@@ -332,7 +361,7 @@ const HowNammuWorksSection = () => {
 
       <div style={styles.contentRow}>
         <div style={styles.leftColumn}>
-          <LeftGraphic />
+          <LeftGraphic isMobile={isMobile} />
         </div>
         <div style={styles.rightColumn}>
           <div style={styles.navigationControls}>
@@ -407,6 +436,18 @@ const HowNammuWorksSection = () => {
               <div style={styles.carouselTextCaption}>{currentItem.text}</div>
             </div>
           </div>
+          <div style={styles.paginationDots}>
+            {carouselItems.map((item, idx) => (
+              <div
+                key={idx}
+                onClick={() => handleNavClick(idx)}
+                style={{
+                  ...styles.paginationDot,
+                  ...(idx === currentIndex ? styles.paginationDotActive : {}),
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -415,7 +456,7 @@ const HowNammuWorksSection = () => {
 
 export default HowNammuWorksSection;
 
-const LeftGraphic = () => {
+const LeftGraphic = ({ isMobile }) => {
   // Responsive SVG diagram: 5 left-stacked squares -> center circle -> right connector to Planning card
   const vb = { x: 90, y: 90, w: 720, h: 610 };
   // Move top and bottom left column squares halfway right toward the right column (x: 190, midpoint of 120 and 260)
@@ -603,6 +644,11 @@ const LeftGraphic = () => {
               height={sq.size - pad * 2}
               preserveAspectRatio="xMidYMid meet"
               clipPath={`url(#clip-top-${idx})`}
+              transform={
+                isMobile
+                  ? `rotate(-90 ${sq.x + sq.size / 2} ${sq.y + sq.size / 2})`
+                  : ""
+              }
             />
           </g>
         );
@@ -626,6 +672,7 @@ const LeftGraphic = () => {
           height={center.r * 2 - 44}
           preserveAspectRatio="xMidYMid meet"
           clipPath="url(#clip-center)"
+          transform={isMobile ? `rotate(-90 ${center.x} ${center.y})` : ""}
         />
       </g>
 

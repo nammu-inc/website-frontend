@@ -21,6 +21,7 @@ const ImpactSection = () => {
       textAlign: "center",
       margin: "0 auto",
       marginTop: sharedStyles.spacing.section.vertical,
+      maxWidth: "1300px",
     },
     title: {
       ...sharedStyles.typography.h2,
