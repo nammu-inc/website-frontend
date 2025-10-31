@@ -27,7 +27,7 @@ const TestimonialSection = () => {
       margin: "0 auto 40px",
     },
     testimonialContainer: {
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       borderRadius: sharedStyles.elements.card.borderRadius,
       padding: "30px",
       boxShadow: sharedStyles.elements.card.boxShadow,

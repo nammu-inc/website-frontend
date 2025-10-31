@@ -48,7 +48,7 @@ const ImpactSection = () => {
       flexDirection: "column",
       height: "auto",
       marginBottom: isMobile ? "20px" : "0",
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
     },
     cardLight: {
       border: `1px solid ${sharedStyles.colors.secondary.medium}`,

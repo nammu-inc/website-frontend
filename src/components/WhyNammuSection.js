@@ -39,7 +39,7 @@ const WhyNammuSection = () => {
       margin: "0 auto",
     },
     step: {
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
       padding: "0 30px 16px",

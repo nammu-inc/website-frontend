@@ -21,14 +21,21 @@ const App = () => {
       <Analytics />
       <Header onRequestDemo={openDemo} />
       <HeroSection onRequestDemo={openDemo} />
-      <div style={{ position: "relative", zIndex: 1 }}>
-        <BubbleBackground />
-        <ImpactSection />
-        <HowNammuWorksSection />
-        <WhyNammuSection />
-        <TestimonialSection />
-        <Footer onRequestDemo={openDemo} />
+
+      <div style={{ position: "relative" }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <BubbleBackground />
+        </div>
+
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <ImpactSection />
+          <HowNammuWorksSection />
+          <WhyNammuSection />
+          <TestimonialSection />
+          <Footer onRequestDemo={openDemo} />
+        </div>
       </div>
+
       <DemoRequestModal isOpen={isDemoOpen} onClose={closeDemo} />
     </div>
   );

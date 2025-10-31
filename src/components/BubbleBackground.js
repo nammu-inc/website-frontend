@@ -98,6 +98,17 @@ const BubbleBackground = () => {
     return () => cancelAnimationFrame(animationId);
   }, [bubbles.length, containerHeight]);
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        setInitialized(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
   const styles = {
     container: {
       position: "absolute",
@@ -129,7 +140,7 @@ const BubbleBackground = () => {
             height: `${bubble.radius * 2}px`,
             left: `${bubble.x}%`,
             top: `${bubble.currentY}px`,
-            transform: 'translateX(-50%)',
+            transform: "translateX(-50%)",
             borderColor: bubble.strokeColor,
             borderWidth: `${bubble.strokeWidth}px`,
           }}

@@ -136,7 +136,7 @@ const HowNammuWorksSection = () => {
     carouselCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       padding: "30px 56px",
       position: "relative",
       overflow: "hidden",
@@ -145,7 +145,7 @@ const HowNammuWorksSection = () => {
     stageCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       padding: "24px",
       display: "flex",
       flexDirection: "column",
@@ -195,7 +195,7 @@ const HowNammuWorksSection = () => {
       padding: "8px 16px",
       borderRadius: "20px",
       border: "none",
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       color: sharedStyles.colors.text.light,
       cursor: "pointer",
       fontSize: "1rem",
@@ -286,7 +286,7 @@ const HowNammuWorksSection = () => {
         <div
           style={{
             minWidth: "230px",
-            backgroundColor: "transparent",
+            backgroundColor: sharedStyles.colors.white,
             border: `2px solid ${sharedStyles.colors.primary.light}`,
             borderRadius: "18px",
             padding: "20px 22px",
@@ -319,7 +319,7 @@ const HowNammuWorksSection = () => {
         <div
           style={{
             minWidth: "230px",
-            backgroundColor: "transparent",
+            backgroundColor: sharedStyles.colors.white,
             border: `2px solid ${sharedStyles.colors.primary.light}`,
             borderRadius: "18px",
             padding: "20px 22px",
@@ -352,7 +352,7 @@ const HowNammuWorksSection = () => {
         <div
           style={{
             minWidth: "230px",
-            backgroundColor: "transparent",
+            backgroundColor: sharedStyles.colors.white,
             border: `2px solid ${sharedStyles.colors.primary.light}`,
             borderRadius: "18px",
             padding: "20px 22px",
