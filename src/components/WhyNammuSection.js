@@ -134,7 +134,7 @@ const WhyNammuSection = () => {
   return (
     <div id="why" style={styles.section}>
       <div style={styles.header}>
-        <h2 style={styles.title}>Why Nammu</h2>
+        <h2 style={styles.title}>Not just another fish in the sea.</h2>
       </div>
 
       <div style={styles.stepsWrap}>

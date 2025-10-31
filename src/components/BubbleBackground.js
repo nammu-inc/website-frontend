@@ -5,9 +5,10 @@ const BubbleBackground = () => {
   const containerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
   const [bubbles, setBubbles] = useState([]);
+  const [initialized, setInitialized] = useState(false);
 
-  // 16 fixed bubble configurations
-  const bubbleConfigs = [
+  // 16 fixed bubble configurations - memoize to prevent recreation
+  const bubbleConfigs = React.useMemo(() => [
     { id: 0, x: 8, y: 15, radius: 45, strokeColor: sharedStyles.colors.primary.medium, strokeWidth: 2.5 },
     { id: 1, x: 25, y: 8, radius: 35, strokeColor: sharedStyles.colors.secondary.light, strokeWidth: 2 },
     { id: 2, x: 45, y: 12, radius: 55, strokeColor: sharedStyles.colors.primary.light, strokeWidth: 3 },
@@ -24,7 +25,7 @@ const BubbleBackground = () => {
     { id: 13, x: 68, y: 82, radius: 39, strokeColor: sharedStyles.colors.secondary.light, strokeWidth: 2.5 },
     { id: 14, x: 88, y: 90, radius: 46, strokeColor: sharedStyles.colors.primary.light, strokeWidth: 2 },
     { id: 15, x: 5, y: 95, radius: 33, strokeColor: sharedStyles.colors.secondary.medium, strokeWidth: 2.5 },
-  ];
+  ], []);
 
   // Pixels per second for bubble movement
   const PIXELS_PER_SECOND = 50;
@@ -42,16 +43,18 @@ const BubbleBackground = () => {
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
-  // Initialize bubbles with their starting positions
+  // Initialize bubbles with their starting positions and random speeds
   useEffect(() => {
-    if (containerHeight > 0) {
+    if (containerHeight > 0 && !initialized) {
       setBubbles(bubbleConfigs.map(config => ({
         ...config,
         currentY: (config.y / 100) * containerHeight,
         isFirstCycle: true,
+        speedMultiplier: 0.5 + Math.random() * 1.0,
       })));
+      setInitialized(true);
     }
-  }, [containerHeight]);
+  }, [containerHeight, initialized, bubbleConfigs]);
 
   // Animate bubbles
   useEffect(() => {
@@ -66,24 +69,24 @@ const BubbleBackground = () => {
         }
 
         const deltaTime = (now - bubble.lastUpdate) / 1000; // Convert to seconds
-        const speedVariation = 0.8 + (bubble.id % 5) * 0.1;
-        const speed = PIXELS_PER_SECOND * speedVariation;
+        const speed = PIXELS_PER_SECOND * bubble.speedMultiplier;
         const movement = speed * deltaTime;
         
         let newY = bubble.currentY - movement;
         let isFirstCycle = bubble.isFirstCycle;
+        let speedMultiplier = bubble.speedMultiplier;
         
-        // Check if bubble has cleared the top
         if (newY < -bubble.radius * 2) {
-          // Reset to bottom
           newY = containerHeight + bubble.radius * 2;
           isFirstCycle = false;
+          speedMultiplier = 0.5 + Math.random() * 1.0;
         }
         
         return {
           ...bubble,
           currentY: newY,
           isFirstCycle,
+          speedMultiplier,
           lastUpdate: now,
         };
       }));

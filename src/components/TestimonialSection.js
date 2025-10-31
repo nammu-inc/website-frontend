@@ -86,7 +86,7 @@ const TestimonialSection = () => {
 
   return (
     <div id="testimonials" style={styles.section}>
-      <h2 style={styles.title}>What Our Customers Say</h2>
+      <h2 style={styles.title}>Fresh perspectives straight from the source.</h2>
       <div style={styles.testimonialContainer}>
         <div style={styles.logoContainer}>
           <div style={styles.logoPlaceholder}>LOGO</div>

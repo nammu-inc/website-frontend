@@ -272,7 +272,7 @@ const HowNammuWorksSection = () => {
 
   return (
     <section style={styles.section}>
-      <h2 style={styles.title}>How Nammu Works</h2>
+      <h2 style={styles.title}>Purpose-built for seafood sales workflows.</h2>
       <div style={{
         display: "flex",
         alignItems: "center",
