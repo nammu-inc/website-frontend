@@ -40,7 +40,8 @@ const ImpactSection = () => {
       gap: sharedStyles.spacing.component.gap,
     },
     resultCard: {
-      flex: "1 1 30%",
+      flex: "1 1 0",
+      minWidth: 0,
       borderRadius: sharedStyles.elements.card.borderRadius,
       padding: sharedStyles.spacing.element.padding,
       boxShadow: sharedStyles.elements.card.boxShadow,
@@ -99,21 +100,27 @@ const ImpactSection = () => {
           <div style={{ ...styles.resultMetric, ...styles.metricLight }}>
             26%
           </div>
-          <h3 style={{ ...styles.resultTitle, ...styles.metricLight }}>Time Saved per Week</h3>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricLight }}>
+            Time Saved per Week
+          </h3>
         </div>
 
         <div style={{ ...styles.resultCard, ...styles.cardMedium }}>
           <div style={{ ...styles.resultMetric, ...styles.metricMedium }}>
             +1.2
           </div>
-          <h3 style={{ ...styles.resultTitle, ...styles.metricMedium }}>Cross-Sells per Order</h3>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricMedium }}>
+            Cross-Sells per Order
+          </h3>
         </div>
 
         <div style={{ ...styles.resultCard, ...styles.cardDark }}>
           <div style={{ ...styles.resultMetric, ...styles.metricDark }}>
-            &lt;3 weeks
+            &lt;3
           </div>
-          <h3 style={{ ...styles.resultTitle, ...styles.metricDark }}>To Go Live</h3>
+          <h3 style={{ ...styles.resultTitle, ...styles.metricDark }}>
+            Weeks To Go Live
+          </h3>
         </div>
       </div>
     </div>
