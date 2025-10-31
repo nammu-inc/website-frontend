@@ -129,23 +129,62 @@ const BubbleBackground = () => {
     },
   };
 
+  // Convert hex color to rgba for gradients
+  const hexToRgba = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   return (
     <div ref={containerRef} style={styles.container}>
-      {bubbles.map((bubble) => (
-        <div
-          key={bubble.id}
-          style={{
-            ...styles.bubble,
-            width: `${bubble.radius * 2}px`,
-            height: `${bubble.radius * 2}px`,
-            left: `${bubble.x}%`,
-            top: `${bubble.currentY}px`,
-            transform: "translateX(-50%)",
-            borderColor: bubble.strokeColor,
-            borderWidth: `${bubble.strokeWidth}px`,
-          }}
-        />
-      ))}
+      {bubbles.map((bubble) => {
+        const bubbleColor = hexToRgba(bubble.strokeColor, 0.15);
+        const bubbleColorMedium = hexToRgba(bubble.strokeColor, 0.25);
+        const bubbleColorLight = hexToRgba(bubble.strokeColor, 0.4);
+
+        return (
+          <div
+            key={bubble.id}
+            style={{
+              ...styles.bubble,
+              width: `${bubble.radius * 2}px`,
+              height: `${bubble.radius * 2}px`,
+              left: `${bubble.x}%`,
+              top: `${bubble.currentY}px`,
+              transform: "translateX(-50%)",
+              borderColor: bubble.strokeColor,
+              borderWidth: `0`,
+              background: `radial-gradient(circle at 35% 35%, ${bubbleColorLight}, ${bubbleColorMedium} 40%, ${bubbleColor} 70%, transparent)`,
+              boxShadow: `inset -8px -8px 25px rgba(255, 255, 255, 0.6), inset 10px 10px 25px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15)`,
+            }}
+          >
+            {/* Large highlight spot */}
+            <div style={{
+              position: "absolute",
+              top: "12%",
+              left: "18%",
+              width: "35%",
+              height: "35%",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4) 50%, transparent 80%)",
+              filter: "blur(2px)",
+            }} />
+            {/* Secondary smaller highlight */}
+            <div style={{
+              position: "absolute",
+              bottom: "20%",
+              right: "15%",
+              width: "20%",
+              height: "20%",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%)",
+              filter: "blur(3px)",
+            }} />
+          </div>
+        );
+      })}
     </div>
   );
 };
