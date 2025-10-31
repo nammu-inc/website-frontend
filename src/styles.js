@@ -101,5 +101,6 @@ export const sharedStyles = {
 
   breakpoints: {
     mobile: "(max-width: 768px)",
+    widescreen: "(min-width: 1400px)",
   },
 };

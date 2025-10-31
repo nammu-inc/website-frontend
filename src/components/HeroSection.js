@@ -4,13 +4,29 @@ import ProductCarousel from "./ProductCarousel";
 
 const HeroSection = ({ onRequestDemo }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isWidescreen, setIsWidescreen] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(sharedStyles.breakpoints.mobile);
-    setIsMobile(mediaQuery.matches);
-    const handleResize = () => setIsMobile(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleResize);
-    return () => mediaQuery.removeEventListener("change", handleResize);
+    const mobileQuery = window.matchMedia(sharedStyles.breakpoints.mobile);
+    const widescreenQuery = window.matchMedia(
+      sharedStyles.breakpoints.widescreen
+    );
+
+    setIsMobile(mobileQuery.matches);
+    setIsWidescreen(widescreenQuery.matches);
+
+    const handleResize = () => {
+      setIsMobile(mobileQuery.matches);
+      setIsWidescreen(widescreenQuery.matches);
+    };
+
+    mobileQuery.addEventListener("change", handleResize);
+    widescreenQuery.addEventListener("change", handleResize);
+
+    return () => {
+      mobileQuery.removeEventListener("change", handleResize);
+      widescreenQuery.removeEventListener("change", handleResize);
+    };
   }, []);
 
   const [ctaHover, setCtaHover] = useState(false);
@@ -56,7 +72,7 @@ const HeroSection = ({ onRequestDemo }) => {
     title: {
       ...sharedStyles.typography.h1,
       color: sharedStyles.colors.primary.dark,
-      maxWidth: "800px",
+      maxWidth: isWidescreen ? "800px" : "600px",
       margin: "0 auto",
     },
     subtitle: {
@@ -248,7 +264,7 @@ const HeroSection = ({ onRequestDemo }) => {
         <h1
           style={{
             ...styles.title,
-            fontSize: isMobile ? "2.6rem" : "3.8rem",
+            fontSize: isMobile ? "2.6rem" : isWidescreen ? "3.8rem" : "3.2rem",
             lineHeight: isMobile ? "1.2" : "1.15",
           }}
         >

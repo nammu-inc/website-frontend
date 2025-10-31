@@ -8,7 +8,16 @@ import Product5 from "../assets/Product5.png";
 
 const ProductCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const screenshots = [Product1, Product2, Product3, Product4, Product5];
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(sharedStyles.breakpoints.mobile);
+    setIsMobile(mediaQuery.matches);
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,14 +42,16 @@ const ProductCarousel = () => {
     } else if (wrappedOffset === -1 || wrappedOffset === total - 1) {
       return {
         transform: "translateX(calc(-50% - 55%)) scale(0.65)",
-        opacity: 0.6,
+        opacity: isMobile ? 0 : 0.6,
         zIndex: 2,
+        pointerEvents: isMobile ? "none" : "auto",
       };
     } else if (wrappedOffset === 1 || wrappedOffset === -(total - 1)) {
       return {
         transform: "translateX(calc(-50% + 55%)) scale(0.65)",
-        opacity: 0.6,
+        opacity: isMobile ? 0 : 0.6,
         zIndex: 2,
+        pointerEvents: isMobile ? "none" : "auto",
       };
     } else {
       return {
