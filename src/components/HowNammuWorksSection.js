@@ -176,25 +176,39 @@ const HowNammuWorksSection = () => {
     stageCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: "transparent",
-      padding: "24px",
+      backgroundColor: sharedStyles.colors.white,
+      padding: "0",
       display: "flex",
       flexDirection: "column",
       position: "relative",
+      overflow: "hidden",
     },
     cardContent: {
-      paddingLeft: "44px",
-      paddingRight: "44px",
       display: "flex",
       flexDirection: "column",
+      width: "100%",
+    },
+    cardImageWrapper: {
+      position: "relative",
+      width: "100%",
+      aspectRatio: "2",
+      overflow: "hidden",
     },
     cardImage: {
       width: "100%",
-      height: "auto",
-      maxHeight: "240px",
-      objectFit: "contain",
-      borderRadius: "8px",
-      marginBottom: "16px",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "top",
+      display: "block",
+    },
+    carouselTextCaption: {
+      backgroundColor: sharedStyles.colors.primary.dark,
+      color: sharedStyles.colors.white,
+      padding: isMobile ? "12px 16px" : "16px 20px",
+      ...sharedStyles.typography.body,
+      fontSize: isMobile ? "0.95rem" : "1rem",
+      lineHeight: 1.5,
+      textAlign: "center",
     },
     // removed carousel label row and separators
     carouselHeader: {
@@ -202,14 +216,6 @@ const HowNammuWorksSection = () => {
       color: sharedStyles.colors.primary.dark,
       marginBottom: "10px",
       fontSize: "1.4rem",
-    },
-    carouselText: {
-      ...sharedStyles.typography.body,
-      color: sharedStyles.colors.text.medium,
-      lineHeight: 1.7,
-      textAlign: "center",
-      maxWidth: "60ch",
-      margin: "0 auto",
     },
     carouselBody: {
       position: "relative",
@@ -391,12 +397,14 @@ const HowNammuWorksSection = () => {
               <span style={styles.cardArrowIcon}>›</span>
             </button>
             <div style={styles.cardContent}>
-              <img
-                src={currentItem.image}
-                alt={currentItem.title}
-                style={styles.cardImage}
-              />
-              <div style={styles.carouselText}>{currentItem.text}</div>
+              <div style={styles.cardImageWrapper}>
+                <img
+                  src={currentItem.image}
+                  alt={currentItem.title}
+                  style={styles.cardImage}
+                />
+              </div>
+              <div style={styles.carouselTextCaption}>{currentItem.text}</div>
             </div>
           </div>
         </div>
@@ -409,7 +417,7 @@ export default HowNammuWorksSection;
 
 const LeftGraphic = () => {
   // Responsive SVG diagram: 5 left-stacked squares -> center circle -> right connector to Planning card
-  const vb = { w: 1000, h: 800 };
+  const vb = { x: 90, y: 90, w: 720, h: 610 };
   // Move top and bottom left column squares halfway right toward the right column (x: 190, midpoint of 120 and 260)
   const topSquares = [
     { x: 190, y: 120, size: 110 }, // Adjusted: halfway between 120 (left) and 260 (right)
@@ -426,10 +434,10 @@ const LeftGraphic = () => {
     <svg
       role="img"
       aria-label="Data flow graphic"
-      viewBox={`0 0 ${vb.w} ${vb.h}`}
+      viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
       width="100%"
       height="100%"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="xMinYMid meet"
       style={{ display: "block" }}
     >
       <style>
@@ -460,7 +468,7 @@ const LeftGraphic = () => {
             y1="1"
             x2="9"
             y2="3"
-            stroke="#209bdd"
+            stroke="#cbd5e1"
             strokeWidth="1.5"
             opacity="0.9"
             strokeLinecap="round"
@@ -470,7 +478,7 @@ const LeftGraphic = () => {
             y1="5"
             x2="9"
             y2="3"
-            stroke="#209bdd"
+            stroke="#cbd5e1"
             strokeWidth="1.5"
             opacity="0.9"
             strokeLinecap="round"
@@ -533,12 +541,9 @@ const LeftGraphic = () => {
       {(() => {
         const x1 = center.x + center.r;
         const y1 = center.y;
-        const x2 = 950;
+        const x2 = 800;
         const y2 = center.y;
         const d = `M ${x1},${y1} L ${x2},${y2}`;
-        // Arrowhead paths that extend from the endpoint
-        const arrowLeft = `M ${x2 - 8},${y2 - 4} L ${x2},${y2}`;
-        const arrowRight = `M ${x2 - 8},${y2 + 4} L ${x2},${y2}`;
         return (
           <g>
             <path
@@ -559,35 +564,6 @@ const LeftGraphic = () => {
               className="nm-flow"
               style={{
                 strokeDasharray: "28 160",
-                strokeDashoffset: 0,
-                animationDelay: `0.6s`,
-              }}
-            />
-            {/* Animated arrowhead paths that flow with the animation */}
-            <path
-              d={arrowLeft}
-              fill="none"
-              stroke="#209bdd"
-              strokeWidth="1.5"
-              strokeOpacity="0.9"
-              strokeLinecap="round"
-              className="nm-flow"
-              style={{
-                strokeDasharray: "4 4",
-                strokeDashoffset: 0,
-                animationDelay: `0.6s`,
-              }}
-            />
-            <path
-              d={arrowRight}
-              fill="none"
-              stroke="#209bdd"
-              strokeWidth="1.5"
-              strokeOpacity="0.9"
-              strokeLinecap="round"
-              className="nm-flow"
-              style={{
-                strokeDasharray: "4 4",
                 strokeDashoffset: 0,
                 animationDelay: `0.6s`,
               }}
