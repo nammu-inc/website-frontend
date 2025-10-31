@@ -173,7 +173,7 @@ const HowNammuWorksSection = () => {
     carouselCard: {
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       padding: "30px 56px",
       position: "relative",
       overflow: "hidden",
@@ -260,7 +260,7 @@ const HowNammuWorksSection = () => {
       padding: "8px 16px",
       borderRadius: "20px",
       border: "none",
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
       color: sharedStyles.colors.text.light,
       cursor: "pointer",
       fontSize: "1rem",
@@ -338,7 +338,7 @@ const HowNammuWorksSection = () => {
 
   return (
     <section style={styles.section}>
-      <h2 style={styles.title}>How Nammu Works</h2>
+      <h2 style={styles.title}>Purpose-built for seafood sales workflows.</h2>
       <div style={styles.processCardsContainer}>
         <div style={styles.processCard}>
           <p style={styles.processCardText}>

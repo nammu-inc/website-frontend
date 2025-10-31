@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { sharedStyles } from "../styles";
 
 const BubbleBackground = () => {
-  // 16 fixed bubble locations manually specified
-  const bubbles = [
+  const containerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [bubbles, setBubbles] = useState([]);
+  const [initialized, setInitialized] = useState(false);
+
+  // 16 fixed bubble configurations - memoize to prevent recreation
+  const bubbleConfigs = React.useMemo(() => [
     { id: 0, x: 8, y: 15, radius: 45, strokeColor: sharedStyles.colors.primary.medium, strokeWidth: 2.5 },
     { id: 1, x: 25, y: 8, radius: 35, strokeColor: sharedStyles.colors.secondary.light, strokeWidth: 2 },
     { id: 2, x: 45, y: 12, radius: 55, strokeColor: sharedStyles.colors.primary.light, strokeWidth: 3 },
@@ -20,15 +25,97 @@ const BubbleBackground = () => {
     { id: 13, x: 68, y: 82, radius: 39, strokeColor: sharedStyles.colors.secondary.light, strokeWidth: 2.5 },
     { id: 14, x: 88, y: 90, radius: 46, strokeColor: sharedStyles.colors.primary.light, strokeWidth: 2 },
     { id: 15, x: 5, y: 95, radius: 33, strokeColor: sharedStyles.colors.secondary.medium, strokeWidth: 2.5 },
-  ];
+  ], []);
+
+  // Pixels per second for bubble movement
+  const PIXELS_PER_SECOND = 50;
+
+  // Measure container height
+  useEffect(() => {
+    const updateHeight = () => {
+      if (containerRef.current) {
+        setContainerHeight(containerRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
+
+  // Initialize bubbles with their starting positions and random speeds
+  useEffect(() => {
+    if (containerHeight > 0 && !initialized) {
+      setBubbles(bubbleConfigs.map(config => ({
+        ...config,
+        currentY: (config.y / 100) * containerHeight,
+        isFirstCycle: true,
+        speedMultiplier: 0.5 + Math.random() * 1.0,
+      })));
+      setInitialized(true);
+    }
+  }, [containerHeight, initialized, bubbleConfigs]);
+
+  // Animate bubbles
+  useEffect(() => {
+    if (bubbles.length === 0 || containerHeight === 0) return;
+
+    const animate = () => {
+      const now = performance.now();
+      
+      setBubbles(prevBubbles => prevBubbles.map(bubble => {
+        if (!bubble.lastUpdate) {
+          return { ...bubble, lastUpdate: now };
+        }
+
+        const deltaTime = (now - bubble.lastUpdate) / 1000; // Convert to seconds
+        const speed = PIXELS_PER_SECOND * bubble.speedMultiplier;
+        const movement = speed * deltaTime;
+        
+        let newY = bubble.currentY - movement;
+        let isFirstCycle = bubble.isFirstCycle;
+        let speedMultiplier = bubble.speedMultiplier;
+        
+        if (newY < -bubble.radius * 2) {
+          newY = containerHeight + bubble.radius * 2;
+          isFirstCycle = false;
+          speedMultiplier = 0.5 + Math.random() * 1.0;
+        }
+        
+        return {
+          ...bubble,
+          currentY: newY,
+          isFirstCycle,
+          speedMultiplier,
+          lastUpdate: now,
+        };
+      }));
+
+      requestAnimationFrame(animate);
+    };
+
+    const animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, [bubbles.length, containerHeight]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        setInitialized(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
 
   const styles = {
     container: {
       position: "absolute",
-      top: 0, // Start at top of sections below hero
+      top: 0,
       left: 0,
       width: "100%",
-      height: "100%", // Only cover sections below hero
+      height: "100%",
       pointerEvents: "none",
       zIndex: 0,
       overflow: "hidden",
@@ -38,68 +125,64 @@ const BubbleBackground = () => {
       borderRadius: "50%",
       backgroundColor: "transparent",
       borderStyle: "solid",
+      transition: "none",
     },
   };
 
+  // Convert hex color to rgba for gradients
+  const hexToRgba = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   return (
-    <div style={styles.container}>
+    <div ref={containerRef} style={styles.container}>
       {bubbles.map((bubble) => {
-        // No delay - bubbles start floating immediately
-        // More varied durations - using different patterns for each bubble
-        // Each bubble moves at a constant rate but different bubbles have different speeds
-        // Increased max duration to slow down the fastest bubbles
-        const baseDuration = 35 + (bubble.id * 1.7) % 35; // Vary duration between 35-70 seconds
-        const animationDuration = Math.round(baseDuration * 10) / 10; // Round to 1 decimal
-        
-        // Calculate the animation so each bubble travels a proportional distance
-        // Bubble starts at y% from top, needs to move y% of container height to reach top
-        // Then after reset, moves full container height (100%) from bottom to top
-        // We use a large fixed container height reference (500vh) to ensure bubbles clear top
-        // But we scale the transform proportionally to each bubble's starting position
-        const containerHeightRef = 500; // Reference height in vh
-        const initialToTopPercent = bubble.y; // Percentage of animation for initial journey
-        
-        // Calculate transform: from y% position, need to move up by y% to reach 0% (top)
-        // Using a proportional calculation based on container height reference
-        const initialTransform = -(containerHeightRef * bubble.y / 100); // Move up by y% of reference
-        const bottomTransform = containerHeightRef; // At bottom, 100% below reference
-        const topTransform = -containerHeightRef; // At top, 100% above reference
-        
-        const animationName = `floatUp-${bubble.id}`;
-        
+        const bubbleColor = hexToRgba(bubble.strokeColor, 0.15);
+        const bubbleColorMedium = hexToRgba(bubble.strokeColor, 0.25);
+        const bubbleColorLight = hexToRgba(bubble.strokeColor, 0.4);
+
         return (
-          <React.Fragment key={bubble.id}>
-            <style>
-              {`
-                @keyframes ${animationName} {
-                  0% {
-                    transform: translate(-50%, 0);
-                  }
-                  ${initialToTopPercent}% {
-                    transform: translate(-50%, ${initialTransform}vh);
-                  }
-                  ${initialToTopPercent + 0.01}% {
-                    transform: translate(-50%, ${bottomTransform}vh);
-                  }
-                  100% {
-                    transform: translate(-50%, ${topTransform}vh);
-                  }
-                }
-              `}
-            </style>
-            <div
-              style={{
-                ...styles.bubble,
-                width: `${bubble.radius * 2}px`,
-                height: `${bubble.radius * 2}px`,
-                left: `${bubble.x}%`,
-                top: `${bubble.y}%`,
-                borderColor: bubble.strokeColor,
-                borderWidth: `${bubble.strokeWidth}px`,
-                animation: `${animationName} ${animationDuration}s linear infinite`,
-              }}
-            />
-          </React.Fragment>
+          <div
+            key={bubble.id}
+            style={{
+              ...styles.bubble,
+              width: `${bubble.radius * 2}px`,
+              height: `${bubble.radius * 2}px`,
+              left: `${bubble.x}%`,
+              top: `${bubble.currentY}px`,
+              transform: "translateX(-50%)",
+              borderColor: bubble.strokeColor,
+              borderWidth: `0`,
+              background: `radial-gradient(circle at 35% 35%, ${bubbleColorLight}, ${bubbleColorMedium} 40%, ${bubbleColor} 70%, transparent)`,
+              boxShadow: `inset -8px -8px 25px rgba(255, 255, 255, 0.6), inset 10px 10px 25px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15)`,
+            }}
+          >
+            {/* Large highlight spot */}
+            <div style={{
+              position: "absolute",
+              top: "12%",
+              left: "18%",
+              width: "35%",
+              height: "35%",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4) 50%, transparent 80%)",
+              filter: "blur(2px)",
+            }} />
+            {/* Secondary smaller highlight */}
+            <div style={{
+              position: "absolute",
+              bottom: "20%",
+              right: "15%",
+              width: "20%",
+              height: "20%",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%)",
+              filter: "blur(3px)",
+            }} />
+          </div>
         );
       })}
     </div>

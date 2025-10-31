@@ -93,7 +93,7 @@ const ImpactSection = () => {
 
   return (
     <div id="traction" style={styles.section}>
-      <h2 style={styles.title}>Nammu Delivers</h2>
+      <h2 style={styles.title}>Empowering teams to perform at their best.</h2>
       <p style={styles.subtitle}></p>
 
       <div style={styles.resultsContainer}>
