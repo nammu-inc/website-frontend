@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import DemoRequestModal from "./components/DemoRequestModal";
 import Header from "./components/Header";
 import HowNammuWorksSection from "./components/HowNammuWorksSection";
+import Hotjar from "./components/Hotjar";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -22,6 +23,7 @@ const App = () => {
       }}
     >
       <Analytics />
+      <Hotjar />
       <Header onRequestDemo={openDemo} />
 
       <div
