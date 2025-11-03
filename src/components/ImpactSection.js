@@ -155,8 +155,8 @@ const ImpactSection = () => {
 
   const RocketIcon = ({ color }) => (
     <svg
-      width="60"
-      height="60"
+      width="52"
+      height="52"
       viewBox="0 0 24 24"
       fill="none"
       stroke={color}

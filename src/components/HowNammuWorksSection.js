@@ -12,6 +12,7 @@ import Product2 from "../assets/Product2.png";
 const HowNammuWorksSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -28,7 +29,7 @@ const HowNammuWorksSection = () => {
       );
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [resetKey]);
 
   const carouselItems = [
     {
@@ -321,18 +322,21 @@ const HowNammuWorksSection = () => {
 
   const handleNavClick = (index) => {
     setCurrentIndex(index);
+    setResetKey((prev) => prev + 1);
   };
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
       prev === 0 ? carouselItems.length - 1 : prev - 1
     );
+    setResetKey((prev) => prev + 1);
   };
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
       prev === carouselItems.length - 1 ? 0 : prev + 1
     );
+    setResetKey((prev) => prev + 1);
   };
 
   const currentItem = carouselItems[currentIndex];

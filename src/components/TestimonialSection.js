@@ -4,6 +4,7 @@ import { sharedStyles } from "../styles";
 const TestimonialSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
 
   const testimonials = [
     {
@@ -33,20 +34,23 @@ const TestimonialSection = () => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [testimonials.length, resetKey]);
 
   const goToPrevious = () => {
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
+    setResetKey((prev) => prev + 1);
   };
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setResetKey((prev) => prev + 1);
   };
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
+    setResetKey((prev) => prev + 1);
   };
 
   const styles = {
