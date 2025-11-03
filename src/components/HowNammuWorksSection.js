@@ -66,24 +66,25 @@ const HowNammuWorksSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "30px" : "40px"
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
-      paddingBottom: "30px",
-      backgroundColor: "transparent",
-      margin: "0 auto",
+      backgroundColor: sharedStyles.colors.gray.light,
+    },
+    contentWrapper: {
       maxWidth: "1300px",
+      margin: "0 auto",
     },
     title: {
       ...sharedStyles.typography.h2,
       color: sharedStyles.colors.primary.dark,
       textAlign: "center",
-      marginBottom: "40px",
     },
     contentRow: {
       display: "flex",
       flexDirection: isMobile ? "column" : "row",
       gap: sharedStyles.spacing.component.gap,
       alignItems: "stretch",
+      marginBottom: "40px",
     },
     leftColumn: {
       flex: isMobile ? "0 0 auto" : "1",
@@ -94,10 +95,9 @@ const HowNammuWorksSection = () => {
       display: "flex",
       alignItems: isMobile ? "center" : "flex-start",
       justifyContent: "center",
-      paddingTop: isMobile ? "0" : "59px",
-      minHeight: isMobile ? "400px" : "480px",
+      minHeight: isMobile ? "200px" : "480px",
       transform: isMobile ? "rotate(90deg)" : "none",
-      margin: isMobile ? "80px 0" : "0",
+      margin: isMobile ? "40px 0" : "0",
       width: isMobile ? "100%" : "auto",
     },
     portrait: {
@@ -108,7 +108,6 @@ const HowNammuWorksSection = () => {
     },
     rightColumn: {
       flex: isMobile ? "0 0 auto" : "1",
-      paddingTop: isMobile ? "0" : "59px",
       display: "flex",
       flexDirection: "column",
       gap: "16px",
@@ -135,42 +134,31 @@ const HowNammuWorksSection = () => {
       lineHeight: 1.7,
       maxWidth: "280px",
     },
-    arrow: {
-      flexShrink: 0,
-      color: sharedStyles.colors.primary.medium,
-      fontSize: "3.3rem", // larger for prominence
-      fontWeight: "500", // slightly bolder
-      margin: "0 28px", // more space around
-      opacity: 0.92, // slightly more visible
-      lineHeight: 1.1,
-      textShadow: "0 2px 12px #c0dffa99", // subtle glow for prominence
-    },
     processCard: {
-      ...sharedStyles.elements.card,
       flex: "1 1 0",
       minWidth: isMobile ? "auto" : "200px",
-      padding: "24px",
+      maxWidth: "240px",
+      padding: "24px 32px",
       textAlign: "center",
-      backgroundColor: sharedStyles.colors.white,
-      border: `2px solid ${sharedStyles.colors.primary.light}`,
-      borderRadius: "24px",
+      backgroundColor: sharedStyles.colors.primary.light,
+      position: "relative",
+      clipPath: isMobile
+        ? "none"
+        : "polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%, 20px 50%)",
+      borderRadius: isMobile ? "24px" : "0",
+      border: isMobile
+        ? `2px solid ${sharedStyles.colors.primary.light}`
+        : "none",
+      boxShadow: sharedStyles.elements.card.boxShadow,
     },
     processCardsContainer: {
       display: "flex",
-      alignItems: "stretch",
+      alignItems: "center",
       justifyContent: "center",
-      gap: isMobile ? "30px" : "24px",
+      gap: isMobile ? "30px" : "0",
       flexDirection: isMobile ? "column" : "row",
-      maxWidth: "900px",
-      margin: isMobile ? "32px auto 0" : "48px auto 0",
-    },
-    processArrow: {
-      fontSize: "2.8rem",
-      color: sharedStyles.colors.primary.medium,
-      fontWeight: 700,
-      alignSelf: "center",
-      lineHeight: 1,
-      userSelect: "none",
+      maxWidth: "1100px",
+      margin: isMobile ? "32px auto" : "48px auto",
     },
     processCardText: {
       fontSize: "1rem",
@@ -249,7 +237,6 @@ const HowNammuWorksSection = () => {
     },
     paginationDotActive: {
       backgroundColor: sharedStyles.colors.primary.light,
-      border: `2px solid ${sharedStyles.colors.primary.dark}`,
       transform: "scale(1.2)",
     },
     // removed carousel label row and separators
@@ -286,14 +273,14 @@ const HowNammuWorksSection = () => {
       opacity: 0.7,
     },
     navButtonActive: {
-      backgroundColor: sharedStyles.colors.primary.light,
-      color: sharedStyles.colors.primary.dark,
+      backgroundColor: sharedStyles.colors.primary.dark,
+      color: sharedStyles.colors.white,
       fontWeight: 600,
       minWidth: "100px",
       opacity: 1,
     },
     navButtonHover: {
-      color: sharedStyles.colors.primary.medium,
+      color: sharedStyles.colors.primary.dark,
     },
     cardArrow: {
       position: "absolute",
@@ -352,115 +339,117 @@ const HowNammuWorksSection = () => {
 
   return (
     <section style={styles.section}>
-      <h2 style={styles.title}>Purpose-built for seafood sales workflows.</h2>
-      <div style={styles.processCardsContainer}>
-        <div style={styles.processCard}>
-          <p style={styles.processCardText}>
-            Seamlessly integrates with your existing ERP
-          </p>
+      <div style={styles.contentWrapper}>
+        <h2 style={styles.title}>Purpose-built for seafood sales workflows.</h2>
+        <div style={styles.processCardsContainer}>
+          <div style={styles.processCard}>
+            <p style={styles.processCardText}>
+              Seamlessly integrates with your existing ERP
+            </p>
+          </div>
+          <div style={styles.processCard}>
+            <p style={styles.processCardText}>
+              Transforms your data into intuitive insights
+            </p>
+          </div>
+          <div style={styles.processCard}>
+            <p style={styles.processCardText}>
+              Supports every stage of the sales process
+            </p>
+          </div>
         </div>
-        {!isMobile && <span style={styles.processArrow}>&rsaquo;</span>}
-        <div style={styles.processCard}>
-          <p style={styles.processCardText}>
-            Transforms your data into intuitive insights
-          </p>
-        </div>
-        {!isMobile && <span style={styles.processArrow}>&rsaquo;</span>}
-        <div style={styles.processCard}>
-          <p style={styles.processCardText}>
-            Supports every stage of the sales process
-          </p>
-        </div>
-      </div>
 
-      <div style={styles.contentRow}>
-        <div style={styles.leftColumn}>
-          <LeftGraphic isMobile={isMobile} />
-        </div>
-        <div style={styles.rightColumn}>
-          <div style={styles.navigationControls}>
-            {carouselItems.map((item, idx) => (
+        <div style={styles.contentRow}>
+          <div style={styles.leftColumn}>
+            <LeftGraphic isMobile={isMobile} />
+          </div>
+          <div style={styles.rightColumn}>
+            <div style={styles.navigationControls}>
+              {carouselItems.map((item, idx) => (
+                <button
+                  key={item.title}
+                  onClick={() => handleNavClick(idx)}
+                  style={{
+                    ...styles.navButton,
+                    ...(idx === currentIndex ? styles.navButtonActive : {}),
+                  }}
+                  onMouseEnter={(e) => {
+                    if (idx !== currentIndex) {
+                      e.currentTarget.style.color =
+                        sharedStyles.colors.primary.dark;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (idx !== currentIndex) {
+                      e.currentTarget.style.color =
+                        sharedStyles.colors.text.light;
+                    }
+                  }}
+                >
+                  {item.title}
+                </button>
+              ))}
+            </div>
+            <div style={styles.stageCard}>
               <button
-                key={item.title}
-                onClick={() => handleNavClick(idx)}
-                style={{
-                  ...styles.navButton,
-                  ...(idx === currentIndex ? styles.navButtonActive : {}),
-                }}
+                aria-label="Previous"
+                onClick={handlePrev}
+                style={{ ...styles.cardArrow, ...styles.cardArrowLeft }}
                 onMouseEnter={(e) => {
-                  if (idx !== currentIndex) {
-                    e.currentTarget.style.color =
-                      sharedStyles.colors.primary.medium;
-                  }
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.primary.light;
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) scale(1.1)";
                 }}
                 onMouseLeave={(e) => {
-                  if (idx !== currentIndex) {
-                    e.currentTarget.style.color =
-                      sharedStyles.colors.text.light;
-                  }
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.white;
+                  e.currentTarget.style.transform = "translateY(-50%)";
                 }}
               >
-                {item.title}
+                <span style={styles.cardArrowIcon}>‹</span>
               </button>
-            ))}
-          </div>
-          <div style={styles.stageCard}>
-            <button
-              aria-label="Previous"
-              onClick={handlePrev}
-              style={{ ...styles.cardArrow, ...styles.cardArrowLeft }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.primary.light;
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.white;
-                e.currentTarget.style.transform = "translateY(-50%)";
-              }}
-            >
-              <span style={styles.cardArrowIcon}>‹</span>
-            </button>
-            <button
-              aria-label="Next"
-              onClick={handleNext}
-              style={{ ...styles.cardArrow, ...styles.cardArrowRight }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.primary.light;
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.white;
-                e.currentTarget.style.transform = "translateY(-50%)";
-              }}
-            >
-              <span style={styles.cardArrowIcon}>›</span>
-            </button>
-            <div style={styles.cardContent}>
-              <div style={styles.cardImageWrapper}>
-                <img
-                  src={currentItem.image}
-                  alt={currentItem.title}
-                  style={styles.cardImage}
-                />
-              </div>
-              <div style={styles.carouselTextCaption}>{currentItem.text}</div>
-            </div>
-          </div>
-          <div style={styles.paginationDots}>
-            {carouselItems.map((item, idx) => (
-              <div
-                key={idx}
-                onClick={() => handleNavClick(idx)}
-                style={{
-                  ...styles.paginationDot,
-                  ...(idx === currentIndex ? styles.paginationDotActive : {}),
+              <button
+                aria-label="Next"
+                onClick={handleNext}
+                style={{ ...styles.cardArrow, ...styles.cardArrowRight }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.primary.light;
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) scale(1.1)";
                 }}
-              />
-            ))}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.white;
+                  e.currentTarget.style.transform = "translateY(-50%)";
+                }}
+              >
+                <span style={styles.cardArrowIcon}>›</span>
+              </button>
+              <div style={styles.cardContent}>
+                <div style={styles.cardImageWrapper}>
+                  <img
+                    src={currentItem.image}
+                    alt={currentItem.title}
+                    style={styles.cardImage}
+                  />
+                </div>
+                <div style={styles.carouselTextCaption}>{currentItem.text}</div>
+              </div>
+            </div>
+            <div style={styles.paginationDots}>
+              {carouselItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => handleNavClick(idx)}
+                  style={{
+                    ...styles.paginationDot,
+                    ...(idx === currentIndex ? styles.paginationDotActive : {}),
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,6 @@ import { Analytics } from "@vercel/analytics/react";
 import DemoRequestModal from "./components/DemoRequestModal";
 import Header from "./components/Header";
 import HowNammuWorksSection from "./components/HowNammuWorksSection";
-import BubbleBackground from "./components/BubbleBackground";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -35,15 +34,11 @@ const App = () => {
         <HeroSection onRequestDemo={openDemo} />
 
         <div style={{ position: "relative" }}>
-          <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-            <BubbleBackground />
-          </div>
-
           <div style={{ position: "relative", zIndex: 1 }}>
             <ImpactSection />
             <HowNammuWorksSection />
             <WhyNammuSection />
-            <TestimonialSection />
+            {/* <TestimonialSection /> */}
             <Footer onRequestDemo={openDemo} />
           </div>
         </div>

@@ -17,8 +17,10 @@ const WhyNammuSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
-      paddingTop: "30px",
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.white,
+    },
+    contentWrapper: {
+      maxWidth: "1300px",
       margin: "0 auto",
     },
     header: {
@@ -29,17 +31,17 @@ const WhyNammuSection = () => {
     title: {
       ...sharedStyles.typography.h2,
       color: sharedStyles.colors.primary.dark,
-      marginBottom: 12,
     },
     stepsWrap: {
       display: "flex",
       flexDirection: "column",
       gap: 16,
       maxWidth: 900,
-      margin: "0 auto",
+      margin: "0 auto 40px",
     },
     step: {
       backgroundColor: sharedStyles.colors.white,
+      border: `2px solid ${sharedStyles.colors.secondary.dark}`,
       borderRadius: sharedStyles.elements.card.borderRadius,
       boxShadow: sharedStyles.elements.card.boxShadow,
       padding: "0 30px 16px",
@@ -47,6 +49,7 @@ const WhyNammuSection = () => {
       display: "flex",
       gap: 32,
       alignItems: "flex-start",
+      marginBottom: 16,
     },
     badge: {
       minWidth: 40,
@@ -133,47 +136,49 @@ const WhyNammuSection = () => {
 
   return (
     <div id="why" style={styles.section}>
-      <div style={styles.header}>
-        <h2 style={styles.title}>Not just another fish in the sea.</h2>
-      </div>
+      <div style={styles.contentWrapper}>
+        <div style={styles.header}>
+          <h2 style={styles.title}>Not just another fish in the sea.</h2>
+        </div>
 
-      <div style={styles.stepsWrap}>
-        <div style={styles.step}>
-          <div style={styles.badge}>
-            <FishIcon />
+        <div style={styles.stepsWrap}>
+          <div style={styles.step}>
+            <div style={styles.badge}>
+              <FishIcon />
+            </div>
+            <div style={styles.stepContent}>
+              <h4 style={styles.stepTitle}>Seafood Specific</h4>
+              <p style={styles.stepText}>
+                Built exclusively for the seafood industry, Nammu brings
+                unmatched insight to the unique challenges and workflows that
+                define your business.
+              </p>
+            </div>
           </div>
-          <div style={styles.stepContent}>
-            <h4 style={styles.stepTitle}>Seafood Specific</h4>
-            <p style={styles.stepText}>
-              Built exclusively for the seafood industry, Nammu brings unmatched
-              insight to the unique challenges and workflows that define your
-              business.
-            </p>
+          <div style={styles.step}>
+            <div style={styles.badge}>
+              <LightningIcon />
+            </div>
+            <div style={styles.stepContent}>
+              <h4 style={styles.stepTitle}>Seamless Integration</h4>
+              <p style={styles.stepText}>
+                Nammu connects directly to your existing systems and delivers
+                immediate value without costly or disruptive ERP migrations.
+              </p>
+            </div>
           </div>
-        </div>
-        <div style={styles.step}>
-          <div style={styles.badge}>
-            <LightningIcon />
-          </div>
-          <div style={styles.stepContent}>
-            <h4 style={styles.stepTitle}>Seamless Integration</h4>
-            <p style={styles.stepText}>
-              Nammu connects directly to your existing systems and delivers
-              immediate value without costly or disruptive ERP migrations.
-            </p>
-          </div>
-        </div>
-        <div style={styles.step}>
-          <div style={styles.badge}>
-            <PeopleIcon />
-          </div>
-          <div style={styles.stepContent}>
-            <h4 style={styles.stepTitle}>User-Centric Design</h4>
-            <p style={styles.stepText}>
-              Nammu’s intuitive platform makes data easy to understand and act
-              on, empowering every salesperson regardless of technical
-              background.
-            </p>
+          <div style={styles.step}>
+            <div style={styles.badge}>
+              <PeopleIcon />
+            </div>
+            <div style={styles.stepContent}>
+              <h4 style={styles.stepTitle}>User-Centric Design</h4>
+              <p style={styles.stepText}>
+                Nammu’s intuitive platform makes data easy to understand and act
+                on, empowering every salesperson regardless of technical
+                background.
+              </p>
+            </div>
           </div>
         </div>
       </div>

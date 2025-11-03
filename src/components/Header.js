@@ -37,7 +37,7 @@ const Header = ({ onRequestDemo }) => {
       justifyContent: "space-between",
       padding: isMobile
         ? "10px 20px"
-        : `12px ${sharedStyles.spacing.section.horizontal}`,
+        : `20px ${sharedStyles.spacing.section.horizontal}`,
       maxWidth: "1400px",
       margin: "0 auto",
     },
@@ -79,7 +79,7 @@ const Header = ({ onRequestDemo }) => {
           onMouseLeave={() => setIsHover(false)}
           onClick={onRequestDemo}
         >
-          Request a demo
+          Request a Demo
         </button>
       </div>
     </div>

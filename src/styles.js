@@ -12,7 +12,7 @@ export const sharedStyles = {
       light: "#cbf2f7",
     },
     gray: {
-      light: "#e9ecef",
+      light: "#f5fafd",
     },
     white: "#ffffff",
     text: {
@@ -64,7 +64,7 @@ export const sharedStyles = {
   // Spacing
   spacing: {
     section: {
-      vertical: "80px",
+      vertical: "120px",
       horizontal: "160px",
     },
     component: {
@@ -77,7 +77,7 @@ export const sharedStyles = {
 
   elements: {
     card: {
-      borderRadius: "10px",
+      borderRadius: "20px",
       boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)",
       backgroundColor: "#ffffff",
     },
@@ -101,6 +101,6 @@ export const sharedStyles = {
 
   breakpoints: {
     mobile: "(max-width: 900px)",
-    widescreen: "(min-width: 1400px)",
+    widescreen: "(min-width: 1500px)",
   },
 };

@@ -283,7 +283,7 @@ const HeroSection = ({ onRequestDemo }) => {
           onMouseLeave={() => setCtaHover(false)}
           onClick={onRequestDemo}
         >
-          Request a demo
+          See Nammu in Action
         </button>
         <ProductCarousel />
       </div>

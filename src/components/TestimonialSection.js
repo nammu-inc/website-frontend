@@ -54,19 +54,21 @@ const TestimonialSection = () => {
       padding: `${sharedStyles.spacing.section.vertical} ${
         isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
-      backgroundColor: "transparent",
+      backgroundColor: sharedStyles.colors.gray.light,
       textAlign: "center",
+    },
+    contentWrapper: {
+      maxWidth: "1300px",
       margin: "0 auto",
     },
     title: {
       ...sharedStyles.typography.h2,
       color: sharedStyles.colors.primary.dark,
-      margin: "0 auto 40px",
     },
     carouselWrapper: {
       position: "relative",
       maxWidth: "900px",
-      margin: "0 auto",
+      margin: "0 auto 40px",
     },
     testimonialContainer: {
       backgroundColor: sharedStyles.colors.white,
@@ -164,7 +166,6 @@ const TestimonialSection = () => {
     },
     paginationDotActive: {
       backgroundColor: sharedStyles.colors.primary.light,
-      border: `2px solid ${sharedStyles.colors.primary.dark}`,
       transform: "scale(1.2)",
     },
   };
@@ -173,67 +174,71 @@ const TestimonialSection = () => {
 
   return (
     <div id="testimonials" style={styles.section}>
-      <h2 style={styles.title}>Fresh perspectives straight from the source.</h2>
-      <div style={styles.carouselWrapper}>
-        <div style={styles.testimonialContainer}>
-          <div style={styles.logoContainer}>
-            <div style={styles.logoPlaceholder}>LOGO</div>
-            <div style={styles.companyName}>{currentTestimonial.company}</div>
+      <div style={styles.contentWrapper}>
+        <h2 style={styles.title}>
+          Fresh perspectives straight from the source.
+        </h2>
+        <div style={styles.carouselWrapper}>
+          <div style={styles.testimonialContainer}>
+            <div style={styles.logoContainer}>
+              <div style={styles.logoPlaceholder}>LOGO</div>
+              <div style={styles.companyName}>{currentTestimonial.company}</div>
+            </div>
+            <blockquote style={styles.quote}>
+              "{currentTestimonial.quote}"
+            </blockquote>
+            <div style={styles.testimonialAuthor}>
+              {currentTestimonial.author}
+            </div>
           </div>
-          <blockquote style={styles.quote}>
-            "{currentTestimonial.quote}"
-          </blockquote>
-          <div style={styles.testimonialAuthor}>
-            {currentTestimonial.author}
+
+          {/* Navigation Arrows */}
+          <button
+            aria-label="Previous"
+            onClick={goToPrevious}
+            style={{ ...styles.arrow, ...styles.arrowLeft }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor =
+                sharedStyles.colors.primary.light;
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+              e.currentTarget.style.transform = "translateY(-50%)";
+            }}
+          >
+            <span style={styles.arrowIcon}>‹</span>
+          </button>
+          <button
+            aria-label="Next"
+            onClick={goToNext}
+            style={{ ...styles.arrow, ...styles.arrowRight }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor =
+                sharedStyles.colors.primary.light;
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+              e.currentTarget.style.transform = "translateY(-50%)";
+            }}
+          >
+            <span style={styles.arrowIcon}>›</span>
+          </button>
+
+          {/* Pagination Dots */}
+          <div style={styles.paginationDots}>
+            {testimonials.map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  ...styles.paginationDot,
+                  ...(index === currentIndex ? styles.paginationDotActive : {}),
+                }}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
           </div>
-        </div>
-
-        {/* Navigation Arrows */}
-        <button
-          aria-label="Previous"
-          onClick={goToPrevious}
-          style={{ ...styles.arrow, ...styles.arrowLeft }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
-              sharedStyles.colors.primary.light;
-            e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-            e.currentTarget.style.transform = "translateY(-50%)";
-          }}
-        >
-          <span style={styles.arrowIcon}>‹</span>
-        </button>
-        <button
-          aria-label="Next"
-          onClick={goToNext}
-          style={{ ...styles.arrow, ...styles.arrowRight }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
-              sharedStyles.colors.primary.light;
-            e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-            e.currentTarget.style.transform = "translateY(-50%)";
-          }}
-        >
-          <span style={styles.arrowIcon}>›</span>
-        </button>
-
-        {/* Pagination Dots */}
-        <div style={styles.paginationDots}>
-          {testimonials.map((_, index) => (
-            <div
-              key={index}
-              style={{
-                ...styles.paginationDot,
-                ...(index === currentIndex ? styles.paginationDotActive : {}),
-              }}
-              onClick={() => goToSlide(index)}
-            />
-          ))}
         </div>
       </div>
     </div>
