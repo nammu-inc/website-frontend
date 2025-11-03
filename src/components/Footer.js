@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from "react";
+import { sharedStyles } from "../styles";
+
+const Footer = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
+    setIsMobile(mq.matches);
+    const onChange = () => setIsMobile(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const currentYear = new Date().getFullYear();
+
+  const styles = {
+    section: {
+      padding: `40px ${
+        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
+      }`,
+      borderTop: `1px solid ${sharedStyles.colors.gray.light}`,
+      backgroundColor: sharedStyles.colors.white,
+    },
+    footerInner: {
+      maxWidth: "1400px",
+      margin: "0 auto",
+    },
+    copy: {
+      textAlign: "center",
+      color: sharedStyles.colors.text.light,
+      fontSize: "0.9rem",
+    },
+  };
+
+  return (
+    <div id="demo" style={styles.section}>
+      <div style={styles.footerInner}>
+        <div style={styles.copy}>© {currentYear} Nammu, Inc.</div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;

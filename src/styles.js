@@ -1,9 +1,19 @@
 export const sharedStyles = {
   // Color palette
   colors: {
-    primary: "#09142F",
-    secondary: "#1a2d5a",
-    light: "#f9f9f9",
+    primary: {
+      dark: "#09142f",
+      medium: "#209bdd",
+      light: "#c0dffa",
+    },
+    secondary: {
+      dark: "#024149",
+      medium: "#0d9aab",
+      light: "#cbf2f7",
+    },
+    gray: {
+      light: "#f5fafd",
+    },
     white: "#ffffff",
     text: {
       dark: "#333333",
@@ -54,7 +64,7 @@ export const sharedStyles = {
   // Spacing
   spacing: {
     section: {
-      vertical: "60px",
+      vertical: "120px",
       horizontal: "160px",
     },
     component: {
@@ -67,7 +77,7 @@ export const sharedStyles = {
 
   elements: {
     card: {
-      borderRadius: "10px",
+      borderRadius: "20px",
       boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)",
       backgroundColor: "#ffffff",
     },
@@ -85,10 +95,12 @@ export const sharedStyles = {
       borderRadius: "6px",
       border: "1px solid #ddd",
       fontSize: "1rem",
+      fontFamily: "inherit",
     },
   },
 
   breakpoints: {
-    mobile: "(max-width: 768px)",
+    mobile: "(max-width: 900px)",
+    widescreen: "(min-width: 1500px)",
   },
 };
