@@ -12,6 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import nfiLogo from "../assets/NFI Logo.jpg";
 import iPadImage from "../assets/iPad.jpg";
 import giftCardImage from "../assets/GiftCard.jpg";
+import { db } from "../firebase";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const GSMCSweepstakesPage = () => {
   const [formData, setFormData] = React.useState({
@@ -21,6 +23,8 @@ const GSMCSweepstakesPage = () => {
     title: "",
   });
   const [hasSubmitted, setHasSubmitted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
   const [activeSlide, setActiveSlide] = React.useState(0);
   const [textOpacity, setTextOpacity] = React.useState(1);
 
@@ -30,15 +34,51 @@ const GSMCSweepstakesPage = () => {
       ...prev,
       [name]: value,
     }));
-    if (hasSubmitted) {
+    if (hasSubmitted || error) {
       setHasSubmitted(false);
+      setError("");
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // No backend logic yet – just show a simple confirmation state.
-    setHasSubmitted(true);
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // Check if email already exists
+      const emailDocRef = doc(db, "gsmc", formData.email);
+      const emailDoc = await getDoc(emailDocRef);
+
+      if (emailDoc.exists()) {
+        setError(
+          "This email has already been entered. Each email can only enter once."
+        );
+        setIsLoading(false);
+        return;
+      }
+
+      // Write to Firestore
+      await setDoc(emailDocRef, {
+        name: formData.name,
+        title: formData.title,
+        company: formData.company,
+        submissionTime: serverTimestamp(),
+      });
+
+      setHasSubmitted(true);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        title: "",
+      });
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("An error occurred while submitting. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const { colors } = sharedStyles;
@@ -271,20 +311,6 @@ const GSMCSweepstakesPage = () => {
 
               <Form.Group className="mb-3">
                 <Form.Label style={{ color: colors.text.dark }}>
-                  Work email
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  placeholder="you@company.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: colors.text.dark }}>
                   Company
                 </Form.Label>
                 <Form.Control
@@ -297,15 +323,30 @@ const GSMCSweepstakesPage = () => {
                 />
               </Form.Group>
 
+              <Form.Group className="mb-3">
+                <Form.Label style={{ color: colors.text.dark }}>
+                  Work email
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="you@company.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
               <Button
                 type="submit"
                 className="w-100"
+                disabled={isLoading}
                 style={{
                   backgroundColor: colors.primary.medium,
                   borderColor: colors.primary.medium,
                 }}
               >
-                Enter sweepstakes
+                {isLoading ? "Submitting..." : "Enter sweepstakes"}
               </Button>
             </Form>
 
@@ -317,6 +358,16 @@ const GSMCSweepstakesPage = () => {
               contacted by Nammu regarding this giveaway and related updates.
             </Card.Text>
 
+            {error && (
+              <Alert
+                variant="danger"
+                className="mt-3"
+                onClose={() => setError("")}
+                dismissible
+              >
+                {error}
+              </Alert>
+            )}
             {hasSubmitted && (
               <Alert
                 className="mt-3"
@@ -326,8 +377,7 @@ const GSMCSweepstakesPage = () => {
                   borderColor: colors.accent.success,
                 }}
               >
-                Thank you for entering! This is a preview only—no data has been
-                collected.
+                Thank you for entering! Your submission has been received.
               </Alert>
             )}
           </Card.Body>
