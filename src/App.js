@@ -9,6 +9,8 @@ import DemoRequestModal from "./components/DemoRequestModal";
 import Header from "./components/Header";
 import HowNammuWorksSection from "./components/HowNammuWorksSection";
 import Hotjar from "./components/Hotjar";
+import { Route, Routes } from "react-router-dom";
+import GSMCSweepstakesPage from "./components/GSMCSweepstakesPage";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -16,7 +18,7 @@ const App = () => {
   const openDemo = () => setIsDemoOpen(true);
   const closeDemo = () => setIsDemoOpen(false);
 
-  return (
+  const LandingPage = () => (
     <div
       style={{
         fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
@@ -48,6 +50,13 @@ const App = () => {
 
       <DemoRequestModal isOpen={isDemoOpen} onClose={closeDemo} />
     </div>
+  );
+
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/gsmc" element={<GSMCSweepstakesPage />} />
+    </Routes>
   );
 };
 
