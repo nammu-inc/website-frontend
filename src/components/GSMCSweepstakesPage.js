@@ -7,15 +7,18 @@ import {
   Alert,
   Carousel,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { sharedStyles } from "../styles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import nfiLogo from "../assets/NFI Logo.jpg";
 import iPadImage from "../assets/iPad.jpg";
 import giftCardImage from "../assets/GiftCard.jpg";
-import { db } from "../firebase";
+import socksImage from "../assets/Socks.png";
+import { db } from "../firebase.js";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const GSMCSweepstakesPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -73,6 +76,11 @@ const GSMCSweepstakesPage = () => {
         company: "",
         title: "",
       });
+
+      // Redirect to home page after 2 seconds
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       console.error("Error submitting form:", err);
       setError("An error occurred while submitting. Please try again.");
@@ -159,13 +167,14 @@ const GSMCSweepstakesPage = () => {
               style={{ color: colors.text.medium }}
             >
               Nammu is the first sales platform purpose-built for the seafood
-              industry. Enter your details below for a chance to win.
+              industry. Enter for a chance to win an iPad, $100 Amazon gift
+              cards, and more!
             </Card.Text>
 
             <div
               className="mb-4 mx-auto"
               style={{
-                backgroundColor: colors.gray.light,
+                backgroundColor: colors.white,
                 borderRadius: "16px",
                 maxWidth: "90%",
                 padding: "1.5rem",
@@ -258,6 +267,33 @@ const GSMCSweepstakesPage = () => {
                       />
                     </div>
                   </Carousel.Item>
+                  <Carousel.Item>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "0.5rem",
+                        paddingBottom: "0",
+                        width: "100%",
+                        maxWidth: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <img
+                        src={socksImage}
+                        alt="Socks Prize"
+                        style={{
+                          maxHeight: "180px",
+                          maxWidth: "100%",
+                          width: "auto",
+                          height: "auto",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </div>
+                  </Carousel.Item>
                 </Carousel>
                 <div
                   style={{
@@ -270,15 +306,6 @@ const GSMCSweepstakesPage = () => {
                 >
                   {activeSlide === 0 ? (
                     <div style={{ fontSize: "1.1rem" }}>
-                      <strong
-                        style={{
-                          color: colors.primary.medium,
-                          fontSize: "1.15rem",
-                          letterSpacing: "0.5px",
-                        }}
-                      >
-                        Grand Prize:
-                      </strong>{" "}
                       <span
                         style={{
                           color: colors.text.dark,
@@ -286,13 +313,19 @@ const GSMCSweepstakesPage = () => {
                           fontSize: "1.1rem",
                         }}
                       >
-                        iPad
+                        Grand Prize iPad
+                      </span>
+                    </div>
+                  ) : activeSlide === 1 ? (
+                    <div>
+                      <span style={{ color: colors.text.dark }}>
+                        $100 Amazon gift cards
                       </span>
                     </div>
                   ) : (
                     <div>
                       <span style={{ color: colors.text.dark }}>
-                        $100 gift cards and more
+                        Nammu socks
                       </span>
                     </div>
                   )}
