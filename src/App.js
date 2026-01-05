@@ -12,6 +12,8 @@ import Hotjar from "./components/Hotjar";
 import { Route, Routes } from "react-router-dom";
 import GSMCSweepstakesPage from "./components/GSMCSweepstakesPage";
 import GSMCSlide from "./components/GSMCSlide";
+import SweepstakesBanner from "./components/SweepstakesBanner";
+import MintsCard from "./components/MintsCard";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -27,6 +29,7 @@ const App = () => {
     >
       <Analytics />
       <Hotjar />
+      <SweepstakesBanner />
       <Header onRequestDemo={openDemo} />
 
       <div
@@ -58,6 +61,7 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/gsmc" element={<GSMCSweepstakesPage />} />
       <Route path="/slide" element={<GSMCSlide />} />
+      <Route path="/mints_card" element={<MintsCard />} />
     </Routes>
   );
 };
