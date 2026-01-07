@@ -14,7 +14,7 @@ import nfiLogo from "../assets/NFI Logo.jpg";
 import iPadImage from "../assets/iPad.jpg";
 import giftCardImage from "../assets/GiftCard.jpg";
 import socksImage from "../assets/Socks.png";
-import { db } from "../firebase.js";
+import { db } from "../firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const GSMCSweepstakesPage = () => {

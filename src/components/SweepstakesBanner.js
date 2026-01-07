@@ -72,6 +72,3 @@ const SweepstakesBanner = () => {
 };
 
 export default SweepstakesBanner;
-
-
-
