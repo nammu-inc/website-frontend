@@ -69,6 +69,26 @@ const GSMCSweepstakesPage = () => {
         submissionTime: serverTimestamp(),
       });
 
+      // Send confirmation email
+      try {
+        await fetch(
+          "https://website-backend-blush.vercel.app/send-sweepstakes-confirmation-email",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              to: formData.email,
+              name: formData.name,
+            }),
+          }
+        );
+      } catch (emailError) {
+        // Log email error but don't fail the submission
+        console.error("Error sending confirmation email:", emailError);
+      }
+
       setHasSubmitted(true);
       setFormData({
         name: "",
