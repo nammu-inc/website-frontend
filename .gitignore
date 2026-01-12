@@ -10,7 +10,6 @@
 
 # production
 /build
-.firebase/
 
 # misc
 .DS_Store
@@ -20,9 +19,6 @@
 .env.test.local
 .env.production
 .env.production.local
-
-# Firebase config (contains sensitive keys)
-src/firebase.js
 
 npm-debug.log*
 yarn-debug.log*
