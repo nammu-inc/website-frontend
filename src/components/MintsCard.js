@@ -54,43 +54,61 @@ const MintsCard = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
               border: "1px solid #e0e0e0",
-              gap: "2rem",
+              position: "relative",
             }}
           >
-            <img
-              src="/logo.png"
-              alt="Nammu"
+            <div
               style={{
-                height: "120px",
-                width: "auto",
-              }}
-            />
-            <p
-              style={{
-                fontSize: "1.5rem",
-                color: colors.text.dark,
-                margin: "0",
-                fontWeight: "500",
-                letterSpacing: "0.3px",
-                textAlign: "center",
+                flex: "1",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "2rem",
               }}
             >
-              Sell Seafood Confidently
-            </p>
-            <p
+              <img
+                src="/logo.png"
+                alt="Nammu"
+                style={{
+                  height: "120px",
+                  width: "auto",
+                }}
+              />
+            </div>
+            <div
               style={{
-                fontSize: "1.05rem",
-                color: colors.text.medium,
-                margin: "0",
-                fontWeight: "400",
-                letterSpacing: "0.3px",
-                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1.5rem",
               }}
             >
-              www.nammu.ai
-            </p>
+              <p
+                style={{
+                  fontSize: "1.5rem",
+                  color: colors.text.dark,
+                  margin: "0",
+                  fontWeight: "500",
+                  letterSpacing: "0.3px",
+                  textAlign: "center",
+                }}
+              >
+                Reimagining Seafood Sales
+              </p>
+              <p
+                style={{
+                  fontSize: "1.3rem",
+                  color: colors.text.medium,
+                  margin: "0",
+                  fontWeight: "400",
+                  letterSpacing: "0.3px",
+                  textAlign: "center",
+                }}
+              >
+                www.nammu.ai
+              </p>
+            </div>
           </div>
 
           {/* Back of Card */}
@@ -106,159 +124,153 @@ const MintsCard = () => {
               padding: "2.5rem",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               border: "1px solid #e0e0e0",
             }}
           >
             <div
               style={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
+                flex: "1",
                 justifyContent: "space-between",
-                alignItems: "center",
-                gap: "2.5rem",
               }}
             >
-              {/* Left Section: Logo and Title */}
+              {/* Top: Enter to Win! */}
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  gap: "2rem",
-                  flex: "1",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
-                  <img
-                    src="/logo.png"
-                    alt="Nammu"
-                    style={{
-                      height: "35px",
-                      width: "auto",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontSize: "24px",
-                      color: colors.text.medium,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ×
-                  </span>
-                  <img
-                    src={nfiLogo}
-                    alt="NFI"
-                    style={{
-                      height: "48px",
-                      width: "auto",
-                    }}
-                  />
-                </div>
-                <div>
-                  <h1
-                    style={{
-                      fontSize: "2.1rem",
-                      fontWeight: "600",
-                      color: colors.primary.dark,
-                      margin: "0",
-                      lineHeight: "1.2",
-                      letterSpacing: "-0.3px",
-                      textTransform: "none",
-                    }}
-                  >
-                    GSMC 2026 Sweepstakes
-                  </h1>
-                  <p
-                    style={{
-                      fontSize: "1rem",
-                      color: colors.text.dark,
-                      margin: "1rem 0 0 0",
-                      fontWeight: "500",
-                      letterSpacing: "0.2px",
-                      lineHeight: "1.4",
-                    }}
-                  >
-                    Win an iPad, $100 Gift Cards, and more!
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Section: QR Code */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
                   justifyContent: "center",
-                  flexShrink: 0,
+                  alignItems: "flex-start",
+                  paddingTop: "0.5rem",
                 }}
               >
-                <p
+                <h1
                   style={{
-                    fontSize: "0.9rem",
-                    color: colors.text.medium,
-                    margin: "0 0 0.75rem 0",
-                    fontWeight: "400",
-                    letterSpacing: "0.3px",
+                    fontSize: "1.9rem",
+                    fontWeight: "600",
+                    color: colors.primary.dark,
+                    margin: "0",
+                    lineHeight: "1.2",
+                    letterSpacing: "-0.3px",
+                    textTransform: "none",
                     textAlign: "center",
                   }}
                 >
-                  Scan to enter
-                </p>
-                <div
-                  style={{
-                    width: "170px",
-                    height: "170px",
-                    backgroundColor: colors.white,
-                    borderRadius: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "10px",
-                    border: "2px solid #000000",
-                  }}
-                >
-                  <img
-                    src={qrCodeImage}
-                    alt="QR Code"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "contain",
-                    }}
-                  />
-                </div>
+                  Enter the GSMC 2026 Sweepstakes!
+                </h1>
               </div>
-            </div>
 
-            {/* Website Footer */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "1.5rem",
-                paddingTop: "1.5rem",
-                borderTop: "1px solid #e0e0e0",
-              }}
-            >
-              <p
+              {/* Middle: Prize Info, Logos, and QR Code */}
+              <div
                 style={{
-                  fontSize: "1.05rem",
-                  color: colors.text.medium,
-                  margin: "0",
-                  fontWeight: "400",
-                  letterSpacing: "0.3px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flex: "1",
+                  gap: "1.5rem",
                 }}
               >
-                www.nammu.ai
-              </p>
+                {/* Prize Info - Centered */}
+                <p
+                  style={{
+                    fontSize: "1rem",
+                    color: colors.text.dark,
+                    margin: "0",
+                    fontWeight: "500",
+                    letterSpacing: "0.2px",
+                    lineHeight: "1.4",
+                    textAlign: "center",
+                  }}
+                >
+                  Win an iPad, $100 Gift Cards, and more!
+                </p>
+
+                {/* Logos and QR Code Row */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "1rem",
+                  }}
+                >
+                  {/* Left: Nammu Logo */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      flex: "1",
+                    }}
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="Nammu"
+                      style={{
+                        height: "35px",
+                        width: "auto",
+                      }}
+                    />
+                  </div>
+
+                  {/* Center: QR Code */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "170px",
+                        height: "170px",
+                        backgroundColor: colors.white,
+                        borderRadius: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "10px",
+                        border: "2px solid #000000",
+                      }}
+                    >
+                      <img
+                        src={qrCodeImage}
+                        alt="QR Code"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right: NFI Logo */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      flex: "1",
+                    }}
+                  >
+                    <img
+                      src={nfiLogo}
+                      alt="NFI"
+                      style={{
+                        height: "56px",
+                        width: "auto",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
