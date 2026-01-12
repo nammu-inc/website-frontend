@@ -194,7 +194,7 @@ const ImpactSection = () => {
               >
                 <span style={{ fontWeight: "700" }}>Win back hours</span>{" "}
                 <span style={{ fontWeight: "400" }}>
-                  with streamlined data reporting and order entry
+                  with streamlined data reporting and order creation
                 </span>
               </h3>
             </div>

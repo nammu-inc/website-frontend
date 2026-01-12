@@ -16,7 +16,7 @@ const Footer = () => {
 
   const styles = {
     section: {
-      padding: `60px ${
+      padding: `28px ${
         isMobile ? "30px" : sharedStyles.spacing.section.horizontal
       }`,
       borderTop: `2px solid ${sharedStyles.colors.primary.dark}`,
@@ -37,7 +37,7 @@ const Footer = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
-      gap: "16px",
+      gap: "10px",
     },
     logo: {
       height: isMobile ? "32px" : "40px",
@@ -71,7 +71,7 @@ const Footer = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-end",
-      gap: "12px",
+      gap: "6px",
     },
     emailContainer: {
       display: "flex",

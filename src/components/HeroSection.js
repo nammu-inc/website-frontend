@@ -282,7 +282,7 @@ const HeroSection = ({ onRequestDemo }) => {
           >
             first sales platform
           </span>{" "}
-          built for the{" "}
+          built specifically for the{" "}
           <span
             style={{
               fontWeight: "600",

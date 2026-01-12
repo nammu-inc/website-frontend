@@ -47,7 +47,7 @@ export const sharedStyles = {
       marginBottom: "20px",
     },
     subtitle: {
-      fontSize: "1.2rem",
+      fontSize: "1.15rem",
       lineHeight: "1.6",
       marginBottom: "30px",
     },
