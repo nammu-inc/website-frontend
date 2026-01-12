@@ -192,9 +192,9 @@ const ImpactSection = () => {
                   fontWeight: "400",
                 }}
               >
-                <span style={{ fontWeight: "700" }}>Save hours</span>{" "}
+                <span style={{ fontWeight: "700" }}>Win back hours</span>{" "}
                 <span style={{ fontWeight: "400" }}>
-                  on manual reporting, spreadsheets, and order entry
+                  with streamlined data reporting and order entry
                 </span>
               </h3>
             </div>
@@ -219,7 +219,7 @@ const ImpactSection = () => {
                 <span style={{ fontWeight: "400" }}>and </span>
                 <span style={{ fontWeight: "700" }}>order frequency</span>{" "}
                 <span style={{ fontWeight: "400" }}>
-                  with smart recommendations
+                  with smart sales guidance
                 </span>
               </h3>
             </div>
