@@ -79,7 +79,7 @@ const HeroSection = ({ onRequestDemo }) => {
       ...sharedStyles.typography.subtitle,
       color: sharedStyles.colors.primary.dark,
       opacity: 0.9,
-      maxWidth: "600px",
+      maxWidth: "800px",
       margin: "16px auto 0",
     },
     ctaButton: {
@@ -268,11 +268,39 @@ const HeroSection = ({ onRequestDemo }) => {
             lineHeight: isMobile ? "1.2" : "1.15",
           }}
         >
-          Where Seafood Meets Smart Software
+          Reimagining
+          <br />
+          Seafood Sales
         </h1>
         <p style={styles.subtitle}>
-          With intuitive visuals and clear insights, Nammu gives teams the
-          confidence to sell swiftly and decisively.
+          Nammu is the{" "}
+          <span
+            style={{
+              fontWeight: "600",
+              color: sharedStyles.colors.primary.dark,
+            }}
+          >
+            first sales platform
+          </span>{" "}
+          built specifically for the{" "}
+          <span
+            style={{
+              fontWeight: "600",
+              color: sharedStyles.colors.primary.dark,
+            }}
+          >
+            seafood industry
+          </span>
+          . It connects with your existing systems to{" "}
+          <span
+            style={{
+              fontWeight: "600",
+              color: sharedStyles.colors.primary.dark,
+            }}
+          >
+            streamline the entire sales process
+          </span>
+          , from planning through execution.
         </p>
         <button
           style={{

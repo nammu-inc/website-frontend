@@ -179,7 +179,13 @@ const GSMCSweepstakesPage = () => {
                   100 Total Winners
                 </h4>
               </div>
-              <div style={{ position: "relative", overflow: "hidden" }}>
+              <div
+                style={{
+                  position: "relative",
+                  overflow: "hidden",
+                  width: "100%",
+                }}
+              >
                 <Carousel
                   fade
                   interval={3000}
@@ -192,7 +198,11 @@ const GSMCSweepstakesPage = () => {
                       setTextOpacity(1);
                     }, 150);
                   }}
-                  style={{ marginBottom: "0", paddingBottom: "0" }}
+                  style={{
+                    marginBottom: "0",
+                    paddingBottom: "0",
+                    width: "100%",
+                  }}
                 >
                   <Carousel.Item>
                     <div
@@ -203,6 +213,9 @@ const GSMCSweepstakesPage = () => {
                         justifyContent: "center",
                         padding: "0.5rem",
                         paddingBottom: "0",
+                        width: "100%",
+                        maxWidth: "100%",
+                        overflow: "hidden",
                       }}
                     >
                       <img
@@ -210,7 +223,9 @@ const GSMCSweepstakesPage = () => {
                         alt="iPad Grand Prize"
                         style={{
                           maxHeight: "180px",
+                          maxWidth: "100%",
                           width: "auto",
+                          height: "auto",
                           objectFit: "contain",
                         }}
                       />
@@ -225,6 +240,9 @@ const GSMCSweepstakesPage = () => {
                         justifyContent: "center",
                         padding: "0.5rem",
                         paddingBottom: "0",
+                        width: "100%",
+                        maxWidth: "100%",
+                        overflow: "hidden",
                       }}
                     >
                       <img
@@ -232,7 +250,9 @@ const GSMCSweepstakesPage = () => {
                         alt="Gift Card Prize"
                         style={{
                           maxHeight: "180px",
+                          maxWidth: "100%",
                           width: "auto",
+                          height: "auto",
                           objectFit: "contain",
                         }}
                       />
@@ -272,7 +292,7 @@ const GSMCSweepstakesPage = () => {
                   ) : (
                     <div>
                       <span style={{ color: colors.text.dark }}>
-                        $100 Amazon gift cards and more
+                        $100 gift cards and more
                       </span>
                     </div>
                   )}
