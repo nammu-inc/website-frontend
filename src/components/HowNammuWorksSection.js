@@ -45,10 +45,7 @@ const HowNammuWorksSection = () => {
     {
       title: "Execution",
       text: (
-        <>
-          Sell confidently with live inventory and smart product
-          recommendations.
-        </>
+        <>Sell confidently with live inventory and smart recommendations.</>
       ),
       image: Product4,
     },
