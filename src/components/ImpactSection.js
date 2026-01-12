@@ -185,11 +185,17 @@ const ImpactSection = () => {
               <ClockIcon color={sharedStyles.colors.white} />
             </div>
             <div style={styles.cardContent}>
-              <div style={{ ...styles.resultMetric, ...styles.metricLight }}>
-                26%
-              </div>
-              <h3 style={{ ...styles.resultTitle, ...styles.metricLight }}>
-                Time Saved per Week
+              <h3
+                style={{
+                  ...styles.resultTitle,
+                  ...styles.metricLight,
+                  fontWeight: "400",
+                }}
+              >
+                <span style={{ fontWeight: "700" }}>Save hours</span>{" "}
+                <span style={{ fontWeight: "400" }}>
+                  on manual reporting, spreadsheets, and order entry
+                </span>
               </h3>
             </div>
           </div>
@@ -201,11 +207,20 @@ const ImpactSection = () => {
               <TrendingUpIcon color={sharedStyles.colors.white} />
             </div>
             <div style={styles.cardContent}>
-              <div style={{ ...styles.resultMetric, ...styles.metricMedium }}>
-                +1.2
-              </div>
-              <h3 style={{ ...styles.resultTitle, ...styles.metricMedium }}>
-                Cross-Sells per Order
+              <h3
+                style={{
+                  ...styles.resultTitle,
+                  ...styles.metricMedium,
+                  fontWeight: "400",
+                }}
+              >
+                <span style={{ fontWeight: "400" }}>Increase </span>
+                <span style={{ fontWeight: "700" }}>basket size</span>{" "}
+                <span style={{ fontWeight: "400" }}>and </span>
+                <span style={{ fontWeight: "700" }}>order frequency</span>{" "}
+                <span style={{ fontWeight: "400" }}>
+                  with smart recommendations
+                </span>
               </h3>
             </div>
           </div>
@@ -217,11 +232,18 @@ const ImpactSection = () => {
               <RocketIcon color={sharedStyles.colors.white} />
             </div>
             <div style={styles.cardContent}>
-              <div style={{ ...styles.resultMetric, ...styles.metricDark }}>
-                &lt;1
-              </div>
-              <h3 style={{ ...styles.resultTitle, ...styles.metricDark }}>
-                Month to Go Live
+              <h3
+                style={{
+                  ...styles.resultTitle,
+                  ...styles.metricDark,
+                  fontWeight: "400",
+                }}
+              >
+                <span style={{ fontWeight: "400" }}>Go live in </span>
+                <span style={{ fontWeight: "700" }}>&lt;1 month</span>{" "}
+                <span style={{ fontWeight: "400" }}>
+                  and see real value without a painful integration
+                </span>
               </h3>
             </div>
           </div>
