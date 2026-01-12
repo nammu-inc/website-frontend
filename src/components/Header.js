@@ -47,13 +47,15 @@ const Header = ({ onRequestDemo }) => {
       gap: "12px",
     },
     logo: {
-      height: "36px",
+      height: isMobile ? "28px" : "36px",
     },
     button: {
       ...sharedStyles.elements.button,
       backgroundColor: sharedStyles.colors.primary.dark,
       color: sharedStyles.colors.white,
       textDecoration: "none",
+      fontSize: isMobile ? "0.875rem" : "1rem",
+      padding: isMobile ? "8px 16px" : "14px 24px",
     },
     buttonHover: {
       backgroundColor: sharedStyles.colors.primary.medium,

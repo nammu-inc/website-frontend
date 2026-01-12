@@ -54,12 +54,7 @@ const HowNammuWorksSection = () => {
     },
     {
       title: "Automation",
-      text: (
-        <>
-          Enable customers to order autonomously, freeing up time for
-          higher-value tasks.
-        </>
-      ),
+      text: <>Free up time by enabling customers to order autonomously.</>,
       image: Product2,
     },
   ];
