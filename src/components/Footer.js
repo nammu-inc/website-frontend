@@ -28,25 +28,18 @@ const Footer = () => {
     },
     content: {
       display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+    },
+    row: {
+      display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "flex-end",
-      gap: isMobile ? "20px" : "40px",
-    },
-    logoSection: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      gap: "10px",
+      alignItems: "center",
     },
     logo: {
       height: isMobile ? "32px" : "40px",
       width: "auto",
-    },
-    socialLinks: {
-      display: "flex",
-      alignItems: "center",
-      gap: "12px",
     },
     linkedinLink: {
       display: "flex",
@@ -66,17 +59,6 @@ const Footer = () => {
       color: sharedStyles.colors.white,
       transform: "translateY(-2px)",
       boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-    },
-    rightSection: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-end",
-      gap: "6px",
-    },
-    emailContainer: {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
     },
     email: {
       color: sharedStyles.colors.white,
@@ -141,26 +123,9 @@ const Footer = () => {
     <div id="demo" style={styles.section}>
       <div style={styles.footerInner}>
         <div style={styles.content}>
-          <div style={styles.logoSection}>
+          {/* Row 1: Logo and Email */}
+          <div style={styles.row}>
             <img src="invertedlogo.png" alt="Nammu" style={styles.logo} />
-            <div style={styles.socialLinks}>
-              <a
-                href="https://www.linkedin.com/company/nammu-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Nammu LinkedIn"
-                style={{
-                  ...styles.linkedinLink,
-                  ...(linkedinHover ? styles.linkedinLinkHover : {}),
-                }}
-                onMouseEnter={() => setLinkedinHover(true)}
-                onMouseLeave={() => setLinkedinHover(false)}
-              >
-                <LinkedInIcon />
-              </a>
-            </div>
-          </div>
-          <div style={styles.rightSection}>
             <a
               href="mailto:hello@nammu.ai"
               style={{
@@ -172,6 +137,23 @@ const Footer = () => {
             >
               <MailIcon />
               hello@nammu.ai
+            </a>
+          </div>
+          {/* Row 2: LinkedIn and Copyright */}
+          <div style={styles.row}>
+            <a
+              href="https://www.linkedin.com/company/nammu-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Nammu LinkedIn"
+              style={{
+                ...styles.linkedinLink,
+                ...(linkedinHover ? styles.linkedinLinkHover : {}),
+              }}
+              onMouseEnter={() => setLinkedinHover(true)}
+              onMouseLeave={() => setLinkedinHover(false)}
+            >
+              <LinkedInIcon />
             </a>
             <div style={styles.copy}>© {currentYear} Nammu, Inc.</div>
           </div>
