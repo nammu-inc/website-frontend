@@ -12,6 +12,7 @@ import Hotjar from "./components/Hotjar";
 import { Route, Routes } from "react-router-dom";
 import GSMCSweepstakesPage from "./components/GSMCSweepstakesPage";
 import GSMCSlide from "./components/GSMCSlide";
+import LinkedInHero from "./components/LinkedInHero";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -58,6 +59,7 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/gsmc" element={<GSMCSweepstakesPage />} />
       <Route path="/slide" element={<GSMCSlide />} />
+      <Route path="/hero" element={<LinkedInHero />} />
     </Routes>
   );
 };
