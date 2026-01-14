@@ -144,7 +144,6 @@ const GSMCSweepstakesPage = () => {
                 color: colors.primary.dark,
                 fontWeight: "700",
                 letterSpacing: "1px",
-                textTransform: "uppercase",
                 fontSize: "2rem",
               }}
             >

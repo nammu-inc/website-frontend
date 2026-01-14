@@ -2,10 +2,12 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { sharedStyles } from "../styles";
 import "bootstrap/dist/css/bootstrap.min.css";
-import nfiLogo from "../assets/NFI Logo.jpg";
 import iPadImage from "../assets/iPad.jpg";
 import giftCardImage from "../assets/GiftCard.jpg";
 import qrCodeImage from "../assets/QRCode.png";
+import gsmcLogo from "../assets/GSMC Logo.png";
+import gsmcWave from "../assets/GSMC Wave.png";
+import socksImage from "../assets/Socks.png";
 
 const GSMCSlide = () => {
   const { colors } = sharedStyles;
@@ -32,11 +34,28 @@ const GSMCSlide = () => {
           height: "auto",
           minHeight: "700px",
           overflow: "hidden",
-          border: "8px solid #000000",
+          border: "3px solid #000000",
           boxSizing: "border-box",
           borderRadius: "8px",
+          position: "relative",
         }}
       >
+        {/* GSMC Wave Background */}
+        <img
+          src={gsmcWave}
+          alt=""
+          style={{
+            position: "absolute",
+            bottom: "-10%",
+            left: 0,
+            width: "100%",
+            height: "auto",
+            opacity: 0.3,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+          aria-hidden="true"
+        />
         <div
           style={{
             width: "100%",
@@ -44,6 +63,8 @@ const GSMCSlide = () => {
             display: "flex",
             gap: "3rem",
             alignItems: "stretch",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           {/* Left Column: Logos and Text Content */}
@@ -63,6 +84,7 @@ const GSMCSlide = () => {
               style={{
                 justifyContent: "flex-start",
                 marginBottom: "2rem",
+                flexWrap: "wrap",
               }}
             >
               <img
@@ -80,9 +102,9 @@ const GSMCSlide = () => {
                 ×
               </span>
               <img
-                src={nfiLogo}
-                alt="NFI Logo"
-                style={{ maxHeight: "70px", width: "auto" }}
+                src={gsmcLogo}
+                alt="GSMC Logo"
+                style={{ maxHeight: "140px", width: "auto" }}
               />
             </div>
 
@@ -107,65 +129,102 @@ const GSMCSlide = () => {
                   lineHeight: "1.1",
                 }}
               >
-                SWEEPSTAKES
+                Sweepstakes
               </h1>
 
-              {/* Subtitle */}
+              {/* Prize Images */}
               <div
+                className="d-flex align-items-center justify-content-center"
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.25rem",
+                  gap: "2rem",
+                  marginTop: "1.5rem",
+                  marginBottom: "1.5rem",
                 }}
               >
-                <p
-                  style={{
-                    color: colors.text.medium,
-                    fontSize: "2.8rem",
-                    fontWeight: "600",
-                    marginBottom: "0",
-                    lineHeight: "1.3",
-                  }}
-                >
-                  100 Winners
-                </p>
-                <p
-                  style={{
-                    color: colors.text.medium,
-                    fontSize: "2.8rem",
-                    fontWeight: "600",
-                    marginBottom: "0",
-                    lineHeight: "1.3",
-                  }}
-                >
-                  Win an iPad & More!
-                </p>
+                <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.6rem",
+                      fontWeight: "600",
+                      color: colors.primary.dark,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    iPad Air
+                  </div>
+                  <img
+                    src={iPadImage}
+                    alt="iPad"
+                    style={{
+                      maxHeight: "120px",
+                      width: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.6rem",
+                      fontWeight: "600",
+                      color: colors.primary.dark,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    $100 Gift Cards
+                  </div>
+                  <img
+                    src={giftCardImage}
+                    alt="Gift Card"
+                    style={{
+                      maxHeight: "120px",
+                      width: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.6rem",
+                      fontWeight: "600",
+                      color: colors.primary.dark,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Branded Merch
+                  </div>
+                  <img
+                    src={socksImage}
+                    alt="Socks"
+                    style={{
+                      maxHeight: "120px",
+                      width: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Link - Bottom */}
+            {/* 100 Guaranteed Winners - Bottom aligned */}
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                marginTop: "2rem",
               }}
             >
-              <a
-                href="https://www.nammu.ai/gsmc"
-                target="_blank"
-                rel="noopener noreferrer"
+              <p
                 style={{
+                  color: colors.primary.dark,
                   fontSize: "3rem",
-                  color: colors.primary.medium,
-                  textDecoration: "none",
                   fontWeight: "600",
-                  transition: "all 0.3s ease",
+                  margin: "0",
                 }}
               >
-                www.nammu.ai/gsmc
-              </a>
+                100 Guaranteed Winners
+              </p>
             </div>
           </div>
 
@@ -178,83 +237,56 @@ const GSMCSlide = () => {
             }}
           />
 
-          {/* Right Column: Prize Images and QR Code */}
+          {/* Right Column: Enter to win, QR Code, and Link */}
           <div
             style={{
               flex: "1",
               display: "flex",
               flexDirection: "column",
-              gap: "2rem",
-              alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              paddingTop: "1rem",
+              paddingBottom: "1rem",
             }}
           >
-            {/* Prize Images */}
+            {/* Top Section: Enter to win! */}
             <div
-              className="d-flex align-items-center justify-content-center"
               style={{
-                gap: "3rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              <div style={{ textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "2.2rem",
-                    fontWeight: "600",
-                    color: colors.primary.dark,
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  iPad Air
-                </div>
-                <img
-                  src={iPadImage}
-                  alt="iPad"
-                  style={{
-                    maxHeight: "200px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
-                />
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "2.2rem",
-                    fontWeight: "600",
-                    color: colors.primary.dark,
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  $100 Gift Cards
-                </div>
-                <img
-                  src={giftCardImage}
-                  alt="Gift Card"
-                  style={{
-                    maxHeight: "200px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
-                />
-              </div>
+              <p
+                style={{
+                  fontSize: "2.5rem",
+                  color: colors.primary.dark,
+                  fontWeight: "700",
+                  margin: "0",
+                  textAlign: "center",
+                }}
+              >
+                Enter to win!
+              </p>
             </div>
 
-            {/* QR Code */}
+            {/* Middle Section: QR Code */}
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "1rem",
                 alignItems: "center",
+                justifyContent: "center",
+                flex: "1",
               }}
             >
               <div
                 style={{
-                  width: "360px",
-                  height: "360px",
+                  width: "380px",
+                  height: "380px",
                   backgroundColor: colors.white,
                   borderRadius: "16px",
+                  border: "2px solid #000000",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -271,6 +303,30 @@ const GSMCSlide = () => {
                   }}
                 />
               </div>
+            </div>
+
+            {/* Bottom Section: Link */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <a
+                href="https://www.nammu.ai/gsmc"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: "3rem",
+                  color: colors.primary.dark,
+                  textDecoration: "none",
+                  fontWeight: "600",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                www.nammu.ai/gsmc
+              </a>
             </div>
           </div>
         </div>
