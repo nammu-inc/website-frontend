@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { sharedStyles } from "../styles";
+import stavisLogo from "../assets/Stavis.png";
 
 const TestimonialSection = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -9,13 +10,14 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote:
-        "Nammu helps our sales reps find opportunities we would have missed and turn insights into orders in minutes.",
+        "We rely heavily on data to make decisions, and <strong>Nammu has made our team more efficient and productive</strong>. The platform provides clear visibility into customer behavior and ordering patterns while streamlining ordering and reducing manual work, so our sales team to focus on selling. What stands out most is the team's <strong>understanding of the fast-paced seafood business</strong> and a clean, intuitive interface with little to no learning curve. <strong>Nammu has helped bring our 98-year-old company into the future</strong>.",
+
       author: "Todd Rushing — VP Sales",
       company: "Stavis Seafoods",
     },
     {
       quote:
-        "With Nammu, our team moves faster and spends more time selling. The recommendations feel tailor‑made for each customer.",
+        "Working with the Nammu team has been a great experience. They took the time to <strong>understand our day-to-day sales needs</strong> and delivered a platform we use daily, with <strong>data that's easy to navigate and act on</strong>. We're grateful for the partnership and look forward to continuing to work together.",
       author: "Tiffany Walker - Sales Manager",
       company: "Stavis Seafoods",
     },
@@ -92,16 +94,12 @@ const TestimonialSection = () => {
       flexDirection: "column",
       alignItems: "center",
     },
-    logoPlaceholder: {
-      width: "100px",
-      height: "100px",
-      backgroundColor: "#e0e0e0",
-      borderRadius: "8px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: "#888",
-      fontWeight: "bold",
+    logo: {
+      maxWidth: "150px",
+      maxHeight: "100px",
+      width: "auto",
+      height: "auto",
+      objectFit: "contain",
     },
     companyName: {
       fontWeight: "600",
@@ -179,6 +177,14 @@ const TestimonialSection = () => {
 
   return (
     <div id="testimonials" style={styles.section}>
+      <style>
+        {`
+          #testimonials blockquote strong {
+            font-weight: 700;
+            color: ${sharedStyles.colors.text.dark};
+          }
+        `}
+      </style>
       <div style={styles.contentWrapper}>
         <h2 style={styles.title}>
           Fresh perspectives straight from the source.
@@ -186,12 +192,19 @@ const TestimonialSection = () => {
         <div style={styles.carouselWrapper}>
           <div style={styles.testimonialContainer}>
             <div style={styles.logoContainer}>
-              <div style={styles.logoPlaceholder}>LOGO</div>
+              <img
+                src={stavisLogo}
+                alt={currentTestimonial.company}
+                style={styles.logo}
+              />
               <div style={styles.companyName}>{currentTestimonial.company}</div>
             </div>
-            <blockquote style={styles.quote}>
-              "{currentTestimonial.quote}"
-            </blockquote>
+            <blockquote
+              style={styles.quote}
+              dangerouslySetInnerHTML={{
+                __html: `"${currentTestimonial.quote}"`,
+              }}
+            />
             <div style={styles.testimonialAuthor}>
               {currentTestimonial.author}
             </div>
