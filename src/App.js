@@ -43,7 +43,7 @@ const App = () => {
             <ImpactSection />
             <HowNammuWorksSection />
             <WhyNammuSection />
-            {/* <TestimonialSection /> */}
+            <TestimonialSection />
             <Footer onRequestDemo={openDemo} />
           </div>
         </div>
