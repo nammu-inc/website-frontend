@@ -10,7 +10,7 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote:
-        "We rely heavily on data to make decisions, and <strong>Nammu has made our team more efficient and productive</strong>. The platform provides clear visibility into customer behavior and ordering patterns while streamlining ordering and reducing manual work, so our sales team to focus on selling. What stands out most is the team's <strong>understanding of the fast-paced seafood business</strong> and a clean, intuitive interface with little to no learning curve. <strong>Nammu has helped bring our 98-year-old company into the future</strong>.",
+        "We rely heavily on data to make decisions, and <strong>Nammu has made our team more efficient and productive</strong>. The platform gives clear visibility into customer behavior and ordering patterns while streamlining ordering and reducing manual work, so our sales team can focus on selling. What stands out most is the team's <strong>understanding of the fast-paced seafood business</strong> and a clean, intuitive interface with little to no learning curve. <strong>Nammu has helped bring our 98-year-old company into the future</strong>.",
 
       author: "Todd Rushing — VP Sales",
       company: "Stavis Seafoods",

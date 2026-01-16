@@ -14,23 +14,6 @@ const HowNammuWorksSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [resetKey, setResetKey] = useState(0);
 
-  useEffect(() => {
-    const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
-    setIsMobile(mq.matches);
-    const handle = () => setIsMobile(mq.matches);
-    mq.addEventListener("change", handle);
-    return () => mq.removeEventListener("change", handle);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev === carouselItems.length - 1 ? 0 : prev + 1
-      );
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [resetKey]);
-
   const carouselItems = [
     {
       title: "Planning",
@@ -55,6 +38,23 @@ const HowNammuWorksSection = () => {
       image: Product2,
     },
   ];
+
+  useEffect(() => {
+    const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
+    setIsMobile(mq.matches);
+    const handle = () => setIsMobile(mq.matches);
+    mq.addEventListener("change", handle);
+    return () => mq.removeEventListener("change", handle);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) =>
+        prev === carouselItems.length - 1 ? 0 : prev + 1
+      );
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [resetKey, carouselItems.length]);
 
   const styles = {
     section: {
