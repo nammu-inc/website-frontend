@@ -12,6 +12,7 @@ import Hotjar from "./components/Hotjar";
 import { Route, Routes } from "react-router-dom";
 import GSMCSweepstakesPage from "./components/GSMCSweepstakesPage";
 import GSMCSlide from "./components/GSMCSlide";
+import SweepstakesBanner from "./components/SweepstakesBanner";
 
 const App = () => {
   const [isDemoOpen, setIsDemoOpen] = React.useState(false);
@@ -27,6 +28,7 @@ const App = () => {
     >
       <Analytics />
       <Hotjar />
+      <SweepstakesBanner />
       <Header onRequestDemo={openDemo} />
 
       <div
