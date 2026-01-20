@@ -72,10 +72,9 @@ const TestimonialSection = () => {
       color: sharedStyles.colors.primary.dark,
     },
     carouselWrapper: {
-      marginTop: "40px",
       position: "relative",
       maxWidth: "900px",
-      margin: "0 auto 40px",
+      margin: "45px auto 40px",
     },
     testimonialContainer: {
       backgroundColor: sharedStyles.colors.white,
