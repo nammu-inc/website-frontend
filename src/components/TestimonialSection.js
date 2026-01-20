@@ -80,14 +80,16 @@ const TestimonialSection = () => {
     testimonialContainer: {
       backgroundColor: sharedStyles.colors.white,
       borderRadius: sharedStyles.elements.card.borderRadius,
-      padding: isMobile ? "30px" : "50px",
+      padding: isMobile ? "30px 60px" : "50px",
       boxShadow: sharedStyles.elements.card.boxShadow,
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: "center",
       gap: "30px",
       textAlign: "center",
-      minHeight: isMobile ? "300px" : "350px",
+      minHeight: isMobile ? "350px" : "400px",
+      position: "relative",
     },
     logoContainer: {
       display: "flex",
@@ -116,14 +118,13 @@ const TestimonialSection = () => {
       maxWidth: "700px",
     },
     testimonialAuthor: {
-      marginTop: "20px",
       fontWeight: "600",
       color: sharedStyles.colors.text.dark,
       fontSize: "1rem",
     },
     arrow: {
       position: "absolute",
-      top: "50%",
+      top: isMobile ? "175px" : "200px",
       transform: "translateY(-50%)",
       background: sharedStyles.colors.white,
       border: `2px solid ${sharedStyles.colors.gray.light}`,
@@ -141,10 +142,10 @@ const TestimonialSection = () => {
       opacity: 0.95,
     },
     arrowLeft: {
-      left: isMobile ? "16px" : "-8px",
+      left: isMobile ? "-8px" : "-22px",
     },
     arrowRight: {
-      right: isMobile ? "16px" : "-8px",
+      right: isMobile ? "-8px" : "-22px",
     },
     arrowIcon: {
       fontSize: "1.5rem",
@@ -191,6 +192,40 @@ const TestimonialSection = () => {
         </h2>
         <div style={styles.carouselWrapper}>
           <div style={styles.testimonialContainer}>
+            {/* Navigation Arrows */}
+            <button
+              aria-label="Previous"
+              onClick={goToPrevious}
+              style={{ ...styles.arrow, ...styles.arrowLeft }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.primary.light;
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.transform = "translateY(-50%)";
+              }}
+            >
+              <span style={styles.arrowIcon}>‹</span>
+            </button>
+            <button
+              aria-label="Next"
+              onClick={goToNext}
+              style={{ ...styles.arrow, ...styles.arrowRight }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  sharedStyles.colors.primary.light;
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
+                e.currentTarget.style.transform = "translateY(-50%)";
+              }}
+            >
+              <span style={styles.arrowIcon}>›</span>
+            </button>
+
             <div style={styles.logoContainer}>
               <img
                 src={stavisLogo}
@@ -209,40 +244,6 @@ const TestimonialSection = () => {
               {currentTestimonial.author}
             </div>
           </div>
-
-          {/* Navigation Arrows */}
-          <button
-            aria-label="Previous"
-            onClick={goToPrevious}
-            style={{ ...styles.arrow, ...styles.arrowLeft }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                sharedStyles.colors.primary.light;
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-              e.currentTarget.style.transform = "translateY(-50%)";
-            }}
-          >
-            <span style={styles.arrowIcon}>‹</span>
-          </button>
-          <button
-            aria-label="Next"
-            onClick={goToNext}
-            style={{ ...styles.arrow, ...styles.arrowRight }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                sharedStyles.colors.primary.light;
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-              e.currentTarget.style.transform = "translateY(-50%)";
-            }}
-          >
-            <span style={styles.arrowIcon}>›</span>
-          </button>
 
           {/* Pagination Dots */}
           <div style={styles.paginationDots}>
