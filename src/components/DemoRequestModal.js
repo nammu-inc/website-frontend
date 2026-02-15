@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { sharedStyles } from "../styles";
 
+// Replace with your booking page link (e.g. Calendly, Cal.com, etc.)
+const BOOKING_PAGE_URL = "https://calendar.app.google/P1xJno1jrQUsy5nW7";
+
 const DemoRequestModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
     message: "",
   });
@@ -31,14 +35,14 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
             subject: `Demo Request from ${formData.name}`,
             data: formData,
           }),
-        }
+        },
       );
       const result = await response.json();
       if (!response.ok) {
         throw new Error(result.error || "Network response was not ok");
       }
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", company: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
       setTimeout(() => setSubmitStatus(null), 5000);
     } catch (err) {
       setSubmitStatus("error");
@@ -96,6 +100,14 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
       gap: "6px",
       textAlign: "left",
     },
+    row: {
+      display: "flex",
+      gap: "12px",
+    },
+    rowGroup: {
+      flex: 1,
+      minWidth: 0,
+    },
     label: {
       fontWeight: 500,
       fontSize: sharedStyles.typography.small.fontSize,
@@ -106,13 +118,14 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
     },
     textarea: {
       ...sharedStyles.elements.input,
-      minHeight: "100px",
+      minHeight: "72px",
       resize: "vertical",
     },
     submit: {
       ...sharedStyles.elements.button,
-      backgroundColor: sharedStyles.colors.primary.dark,
-      color: sharedStyles.colors.white,
+      backgroundColor: "transparent",
+      color: sharedStyles.colors.primary.dark,
+      border: `2px solid ${sharedStyles.colors.primary.light}`,
       marginTop: "6px",
     },
     success: {
@@ -131,6 +144,44 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
       textAlign: "center",
       fontWeight: 500,
     },
+    optionLabel: {
+      fontSize: sharedStyles.typography.small.fontSize,
+      fontWeight: 600,
+      color: sharedStyles.colors.text.dark,
+      marginBottom: "8px",
+      textAlign: "center",
+    },
+    dividerWrap: {
+      display: "flex",
+      alignItems: "center",
+      gap: "12px",
+      margin: "20px 0",
+    },
+    dividerLine: {
+      flex: 1,
+      height: "2px",
+      backgroundColor: "rgba(0,0,0,0.12)",
+    },
+    dividerText: {
+      fontSize: "0.9rem",
+      fontWeight: 600,
+      color: sharedStyles.colors.text.medium,
+    },
+    bookLink: {
+      display: "block",
+      textAlign: "center",
+      padding: "14px 20px",
+      borderRadius: "999px",
+      border: "none",
+      backgroundColor: sharedStyles.colors.primary.dark,
+      color: sharedStyles.colors.white,
+      fontWeight: 700,
+      fontSize: "1rem",
+      textDecoration: "none",
+      cursor: "pointer",
+      transition: "opacity 0.2s",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    },
   };
 
   return (
@@ -146,84 +197,124 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
             ×
           </button>
         </div>
-        <form style={styles.form} onSubmit={handleSubmit}>
-          <div style={styles.group}>
-            <label style={styles.label} htmlFor="name">
-              Full Name*
-            </label>
-            <input
-              style={styles.input}
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div style={styles.group}>
-            <label style={styles.label} htmlFor="email">
-              Email Address*
-            </label>
-            <input
-              style={styles.input}
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div style={styles.group}>
-            <label style={styles.label} htmlFor="company">
-              Company Name*
-            </label>
-            <input
-              style={styles.input}
-              type="text"
-              id="company"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div style={styles.group}>
-            <label style={styles.label} htmlFor="message">
-              Tell us about your business
-            </label>
-            <textarea
-              style={styles.textarea}
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-            />
-          </div>
-          <button
-            style={{
-              ...styles.submit,
-              ...(isSubmitting ? { opacity: 0.7, cursor: "not-allowed" } : {}),
-            }}
-            type="submit"
-            disabled={isSubmitting}
+        <div style={styles.form}>
+          <a
+            href={BOOKING_PAGE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.bookLink}
           >
-            {isSubmitting ? "Submitting..." : "Send request"}
-          </button>
-          {submitStatus === "success" && (
-            <div style={styles.success}>
-              Thank you! Your request has been sent. We'll contact you within 1
-              business day.
+            Book a meeting directly
+          </a>
+          <div style={styles.dividerWrap}>
+            <div style={styles.dividerLine} />
+            <span style={styles.dividerText}>or</span>
+            <div style={styles.dividerLine} />
+          </div>
+          <div style={styles.optionLabel}>
+            Answer a few questions and we'll reach out
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+          >
+            <div style={styles.row}>
+              <div style={{ ...styles.group, ...styles.rowGroup }}>
+                <label style={styles.label} htmlFor="name">
+                  Full Name*
+                </label>
+                <input
+                  style={styles.input}
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div style={{ ...styles.group, ...styles.rowGroup }}>
+                <label style={styles.label} htmlFor="company">
+                  Company Name*
+                </label>
+                <input
+                  style={styles.input}
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
-          )}
-          {submitStatus === "error" && (
-            <div style={styles.error}>
-              There was an error sending your request. Please try again or
-              contact us at hello@nammu.ai.
+            <div style={styles.row}>
+              <div style={{ ...styles.group, ...styles.rowGroup }}>
+                <label style={styles.label} htmlFor="email">
+                  Email Address*
+                </label>
+                <input
+                  style={styles.input}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div style={{ ...styles.group, ...styles.rowGroup }}>
+                <label style={styles.label} htmlFor="phone">
+                  Phone Number
+                </label>
+                <input
+                  style={styles.input}
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          )}
-        </form>
+            <div style={styles.group}>
+              <label style={styles.label} htmlFor="message">
+                What problems are you hoping to solve?
+              </label>
+              <textarea
+                style={styles.textarea}
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              style={{
+                ...styles.submit,
+                ...(isSubmitting
+                  ? { opacity: 0.7, cursor: "not-allowed" }
+                  : {}),
+              }}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Send request"}
+            </button>
+            {submitStatus === "success" && (
+              <div style={styles.success}>
+                Thank you! Your request has been sent. We'll contact you within
+                1 business day.
+              </div>
+            )}
+            {submitStatus === "error" && (
+              <div style={styles.error}>
+                There was an error sending your request. Please try again or
+                contact us at hello@nammu.ai.
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );
