@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { sharedStyles } from "../styles";
 
 // Replace with your booking page link (e.g. Calendly, Cal.com, etc.)
-const BOOKING_PAGE_URL = "https://calendar.app.google/P1xJno1jrQUsy5nW7";
+const BOOKING_PAGE_URL = "https://calendar.app.google/7euKD4X9tD61rPTf9";
 
 const DemoRequestModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
