@@ -9,7 +9,7 @@ const HeroSection = ({ onRequestDemo }) => {
   useEffect(() => {
     const mobileQuery = window.matchMedia(sharedStyles.breakpoints.mobile);
     const widescreenQuery = window.matchMedia(
-      sharedStyles.breakpoints.widescreen
+      sharedStyles.breakpoints.widescreen,
     );
 
     setIsMobile(mobileQuery.matches);
@@ -270,7 +270,7 @@ const HeroSection = ({ onRequestDemo }) => {
         >
           Reimagining
           <br />
-          Seafood Sales
+          Seafood Software
         </h1>
         <p style={styles.subtitle}>
           Nammu is the{" "}
@@ -280,7 +280,7 @@ const HeroSection = ({ onRequestDemo }) => {
               color: sharedStyles.colors.primary.dark,
             }}
           >
-            first sales platform
+            first AI platform
           </span>{" "}
           built specifically for the{" "}
           <span
@@ -291,16 +291,17 @@ const HeroSection = ({ onRequestDemo }) => {
           >
             seafood industry
           </span>
-          . It connects with your existing systems to{" "}
+          . We empower{" "}
           <span
             style={{
               fontWeight: "600",
               color: sharedStyles.colors.primary.dark,
             }}
           >
-            streamline the entire sales process
+            sales and purchasing teams{" "}
           </span>
-          , from planning through execution.
+          to perform at their best by delivering real-time insights, automating
+          workflows, and enabling smarter decisions.
         </p>
         <button
           style={{
