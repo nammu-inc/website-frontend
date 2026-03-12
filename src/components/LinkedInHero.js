@@ -91,7 +91,7 @@ const LinkedInHero = () => {
           zIndex: 2,
         }}
       >
-        Reimagining Seafood Sales
+        Reimagining Seafood Software
       </h1>
     </div>
   );
