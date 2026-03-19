@@ -58,7 +58,7 @@ const TestimonialSection = () => {
   const styles = {
     section: {
       padding: `${sharedStyles.spacing.section.vertical} ${
-        isMobile ? "30px" : sharedStyles.spacing.section.horizontal
+        isMobile ? "20px" : sharedStyles.spacing.section.horizontal
       }`,
       backgroundColor: sharedStyles.colors.gray.light,
       textAlign: "center",
@@ -74,12 +74,14 @@ const TestimonialSection = () => {
     carouselWrapper: {
       position: "relative",
       maxWidth: "900px",
+      width: "100%",
       margin: "45px auto 40px",
+      boxSizing: "border-box",
     },
     testimonialContainer: {
       backgroundColor: sharedStyles.colors.white,
       borderRadius: sharedStyles.elements.card.borderRadius,
-      padding: isMobile ? "30px 60px" : "50px",
+      padding: isMobile ? "24px 20px" : "50px",
       boxShadow: sharedStyles.elements.card.boxShadow,
       display: "flex",
       flexDirection: "column",
@@ -114,17 +116,38 @@ const TestimonialSection = () => {
       lineHeight: "1.6",
       fontStyle: "italic",
       color: sharedStyles.colors.text.medium,
-      maxWidth: "700px",
+      maxWidth: isMobile ? "100%" : "700px",
+      width: "100%",
+      margin: 0,
+      boxSizing: "border-box",
     },
     testimonialAuthor: {
       fontWeight: "600",
       color: sharedStyles.colors.text.dark,
       fontSize: "1rem",
     },
+    arrowNav: isMobile
+      ? {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "40px",
+          marginTop: "20px",
+          flexShrink: 0,
+        }
+      : {
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0 8px",
+          pointerEvents: "none",
+          zIndex: 10,
+        },
     arrow: {
-      position: "absolute",
-      top: isMobile ? "175px" : "200px",
-      transform: "translateY(-50%)",
+      position: isMobile ? "static" : "relative",
+      transform: "none",
       background: sharedStyles.colors.white,
       border: `2px solid ${sharedStyles.colors.gray.light}`,
       width: "44px",
@@ -137,14 +160,15 @@ const TestimonialSection = () => {
       boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
       userSelect: "none",
       transition: "all 0.2s ease",
-      zIndex: 10,
+      pointerEvents: "auto",
       opacity: 0.95,
+      flexShrink: 0,
     },
-    arrowLeft: {
-      left: isMobile ? "-8px" : "-22px",
+    arrowDesktopLeft: {
+      marginLeft: "-14px",
     },
-    arrowRight: {
-      right: isMobile ? "-8px" : "-22px",
+    arrowDesktopRight: {
+      marginRight: "-14px",
     },
     arrowIcon: {
       fontSize: "1.5rem",
@@ -191,40 +215,6 @@ const TestimonialSection = () => {
         </h2>
         <div style={styles.carouselWrapper}>
           <div style={styles.testimonialContainer}>
-            {/* Navigation Arrows */}
-            <button
-              aria-label="Previous"
-              onClick={goToPrevious}
-              style={{ ...styles.arrow, ...styles.arrowLeft }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.primary.light;
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-                e.currentTarget.style.transform = "translateY(-50%)";
-              }}
-            >
-              <span style={styles.arrowIcon}>‹</span>
-            </button>
-            <button
-              aria-label="Next"
-              onClick={goToNext}
-              style={{ ...styles.arrow, ...styles.arrowRight }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  sharedStyles.colors.primary.light;
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = sharedStyles.colors.white;
-                e.currentTarget.style.transform = "translateY(-50%)";
-              }}
-            >
-              <span style={styles.arrowIcon}>›</span>
-            </button>
-
             <div style={styles.logoContainer}>
               <img
                 src={stavisLogo}
@@ -241,6 +231,49 @@ const TestimonialSection = () => {
             />
             <div style={styles.testimonialAuthor}>
               {currentTestimonial.author}
+            </div>
+
+            <div style={styles.arrowNav}>
+              <button
+                aria-label="Previous"
+                onClick={goToPrevious}
+                style={{
+                  ...styles.arrow,
+                  ...(!isMobile ? styles.arrowDesktopLeft : {}),
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.primary.light;
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.white;
+                  e.currentTarget.style.transform = "none";
+                }}
+              >
+                <span style={styles.arrowIcon}>‹</span>
+              </button>
+              <button
+                aria-label="Next"
+                onClick={goToNext}
+                style={{
+                  ...styles.arrow,
+                  ...(!isMobile ? styles.arrowDesktopRight : {}),
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.primary.light;
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    sharedStyles.colors.white;
+                  e.currentTarget.style.transform = "none";
+                }}
+              >
+                <span style={styles.arrowIcon}>›</span>
+              </button>
             </div>
           </div>
 
