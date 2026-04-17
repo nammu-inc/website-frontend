@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { sharedStyles } from "../styles";
 
 const Footer = () => {
@@ -155,7 +156,20 @@ const Footer = () => {
             >
               <LinkedInIcon />
             </a>
-            <div style={styles.copy}>© {currentYear} Nammu, Inc.</div>
+            <div style={{ ...styles.copy, gap: "16px" }}>
+              <Link
+                to="/privacy"
+                style={{
+                  color: sharedStyles.colors.white,
+                  fontSize: "0.85rem",
+                  opacity: 0.7,
+                  textDecoration: "none",
+                }}
+              >
+                Privacy Policy
+              </Link>
+              <span>© {currentYear} Nammu, Inc.</span>
+            </div>
           </div>
         </div>
       </div>
