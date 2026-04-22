@@ -73,14 +73,34 @@ const Footer = () => {
     emailHover: {
       color: sharedStyles.colors.primary.light,
     },
+    legal: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-end",
+      gap: "4px",
+      minHeight: "32px",
+      justifyContent: "center",
+    },
+    legalLinks: {
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      color: sharedStyles.colors.white,
+      fontSize: "0.85rem",
+      opacity: 0.85,
+    },
+    legalLink: {
+      color: sharedStyles.colors.white,
+      textDecoration: "none",
+    },
+    legalDivider: {
+      opacity: 0.5,
+    },
     copy: {
       textAlign: "right",
       color: sharedStyles.colors.white,
-      fontSize: "0.9rem",
-      opacity: 0.8,
-      display: "flex",
-      alignItems: "center",
-      height: "32px",
+      fontSize: "0.8rem",
+      opacity: 0.6,
     },
   };
 
@@ -156,19 +176,17 @@ const Footer = () => {
             >
               <LinkedInIcon />
             </a>
-            <div style={{ ...styles.copy, gap: "16px" }}>
-              <Link
-                to="/privacy"
-                style={{
-                  color: sharedStyles.colors.white,
-                  fontSize: "0.85rem",
-                  opacity: 0.7,
-                  textDecoration: "none",
-                }}
-              >
-                Privacy Policy
-              </Link>
-              <span>© {currentYear} Nammu, Inc.</span>
+            <div style={styles.legal}>
+              <div style={styles.legalLinks}>
+                <Link to="/privacy" style={styles.legalLink}>
+                  Privacy Policy
+                </Link>
+                <span style={styles.legalDivider}>·</span>
+                <Link to="/terms" style={styles.legalLink}>
+                  Terms of Service
+                </Link>
+              </div>
+              <span style={styles.copy}>© {currentYear} Nammu, Inc.</span>
             </div>
           </div>
         </div>

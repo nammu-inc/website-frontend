@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import HowNammuWorksSection from "./components/HowNammuWorksSection";
 import Hotjar from "./components/Hotjar";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermsOfService";
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsOfService />} />
     </Routes>
   );
 };
