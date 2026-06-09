@@ -1,65 +1,32 @@
 import React from "react";
-import HeroSection from "./components/HeroSection";
-import WhyNammuSection from "./components/WhyNammuSection";
-import TestimonialSection from "./components/TestimonialSection";
-import ImpactSection from "./components/ImpactSection";
-import Footer from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import DemoRequestModal from "./components/DemoRequestModal";
-import Header from "./components/Header";
-import HowNammuWorksSection from "./components/HowNammuWorksSection";
+import { DemoProvider } from "./components/DemoContext";
+import Layout from "./components/Layout";
+import ScrollToTop from "./components/ScrollToTop";
 import Hotjar from "./components/Hotjar";
+import Home from "./pages/Home";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
-import { Route, Routes } from "react-router-dom";
 
-const App = () => {
-  const [isDemoOpen, setIsDemoOpen] = React.useState(false);
-
-  const openDemo = () => setIsDemoOpen(true);
-  const closeDemo = () => setIsDemoOpen(false);
-
-  const LandingPage = () => (
-    <div
-      style={{
-        fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
-      }}
-    >
-      <Analytics />
-      <Hotjar />
-      <Header onRequestDemo={openDemo} />
-
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "100vw",
-          overflowX: "hidden",
-        }}
-      >
-        <HeroSection onRequestDemo={openDemo} />
-
-        <div style={{ position: "relative" }}>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <ImpactSection />
-            <HowNammuWorksSection />
-            <WhyNammuSection />
-            <TestimonialSection />
-            <Footer onRequestDemo={openDemo} />
-          </div>
-        </div>
-      </div>
-
-      <DemoRequestModal isOpen={isDemoOpen} onClose={closeDemo} />
-    </div>
-  );
-
-  return (
+const App = () => (
+  <DemoProvider>
+    <ScrollToTop />
+    <Analytics />
+    <Hotjar />
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Home />
+          </Layout>
+        }
+      />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<TermsOfService />} />
     </Routes>
-  );
-};
+  </DemoProvider>
+);
 
 export default App;

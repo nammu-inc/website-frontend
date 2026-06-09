@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { sharedStyles } from "../styles";
+import { useIsMobile } from "../hooks";
+import { Button } from "./ui";
+
+const C = sharedStyles.colors;
 
 // Replace with your booking page link (e.g. Calendly, Cal.com, etc.)
 const BOOKING_PAGE_URL = "https://calendar.app.google/7euKD4X9tD61rPTf9";
 
 const DemoRequestModal = ({ isOpen, onClose }) => {
+  const isMobile = useIsMobile();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,265 +60,255 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
     overlay: {
       position: "fixed",
       inset: 0,
-      background: "rgba(0,0,0,0.5)",
+      background: "rgba(9,20,47,0.55)",
+      backdropFilter: "blur(5px)",
+      WebkitBackdropFilter: "blur(5px)",
       display: isOpen ? "flex" : "none",
       alignItems: "center",
       justifyContent: "center",
-      zIndex: 1000,
+      zIndex: 2000,
+      padding: "20px",
     },
     content: {
-      width: "90%",
-      maxWidth: "560px",
-      background: sharedStyles.colors.white,
-      borderRadius: sharedStyles.elements.card.borderRadius,
-      boxShadow: sharedStyles.elements.card.boxShadow,
-      overflow: "hidden",
+      position: "relative",
+      width: "100%",
+      maxWidth: "480px",
+      maxHeight: "92vh",
+      overflowY: "auto",
+      background: C.white,
+      borderRadius: "20px",
+      boxShadow: "0 40px 90px rgba(9,20,47,0.4)",
+      padding: isMobile ? "30px 24px 28px" : "36px 36px 32px",
+      animation: "nm-modal-in 0.26s cubic-bezier(.2,.7,.2,1) both",
     },
-    header: {
-      padding: "16px 20px",
-      borderBottom: "1px solid #eee",
+    closeBtn: {
+      position: "absolute",
+      top: "16px",
+      right: "16px",
+      width: "34px",
+      height: "34px",
+      borderRadius: "50%",
+      background: C.surface,
+      border: `1px solid ${C.line}`,
+      color: C.slate,
+      fontSize: "1.25rem",
+      lineHeight: 1,
+      cursor: "pointer",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "center",
+      transition: "all 0.2s ease",
     },
     title: {
       ...sharedStyles.typography.h3,
-      margin: 0,
-      color: sharedStyles.colors.primary.dark,
+      color: C.navy,
+      fontSize: "1.6rem",
+      margin: "0 0 4px",
     },
-    closeBtn: {
-      background: "transparent",
-      border: "none",
-      fontSize: "1.4rem",
-      cursor: "pointer",
-      lineHeight: 1,
+    sub: {
+      ...sharedStyles.typography.small,
+      color: C.slate,
+      margin: "0 0 24px",
     },
-    form: {
+    form: { display: "flex", flexDirection: "column", gap: "14px" },
+    row: {
       display: "flex",
-      flexDirection: "column",
       gap: "12px",
-      padding: "20px",
+      flexDirection: isMobile ? "column" : "row",
     },
     group: {
       display: "flex",
       flexDirection: "column",
       gap: "6px",
       textAlign: "left",
-    },
-    row: {
-      display: "flex",
-      gap: "12px",
-    },
-    rowGroup: {
       flex: 1,
       minWidth: 0,
     },
-    label: {
-      fontWeight: 500,
-      fontSize: sharedStyles.typography.small.fontSize,
-      color: sharedStyles.colors.text.medium,
+    label: { fontWeight: 600, fontSize: "0.82rem", color: C.ink },
+    bookRow: {
+      marginTop: "18px",
+      paddingTop: "18px",
+      borderTop: `1px solid ${C.line}`,
+      textAlign: "center",
+      fontSize: "0.92rem",
+      color: C.slate,
     },
-    input: {
-      ...sharedStyles.elements.input,
-    },
-    textarea: {
-      ...sharedStyles.elements.input,
-      minHeight: "72px",
-      resize: "vertical",
-    },
-    submit: {
-      ...sharedStyles.elements.button,
-      backgroundColor: "transparent",
-      color: sharedStyles.colors.primary.dark,
-      border: `2px solid ${sharedStyles.colors.primary.light}`,
-      marginTop: "6px",
+    bookLink: {
+      color: C.accent,
+      fontWeight: 600,
+      textDecoration: "none",
+      whiteSpace: "nowrap",
     },
     success: {
-      backgroundColor: sharedStyles.colors.accent.successBg,
-      color: sharedStyles.colors.accent.success,
-      padding: "12px",
-      borderRadius: "6px",
+      backgroundColor: C.accentColors.successBg,
+      color: C.accentColors.success,
+      padding: "14px",
+      borderRadius: "10px",
       textAlign: "center",
       fontWeight: 500,
     },
     error: {
-      backgroundColor: "#FFEBEE",
-      color: "#D32F2F",
-      padding: "12px",
-      borderRadius: "6px",
+      backgroundColor: "#FDECEC",
+      color: "#C0392B",
+      padding: "14px",
+      borderRadius: "10px",
       textAlign: "center",
       fontWeight: 500,
-    },
-    optionLabel: {
-      fontSize: sharedStyles.typography.small.fontSize,
-      fontWeight: 600,
-      color: sharedStyles.colors.text.dark,
-      marginBottom: "8px",
-      textAlign: "center",
-    },
-    dividerWrap: {
-      display: "flex",
-      alignItems: "center",
-      gap: "12px",
-      margin: "20px 0",
-    },
-    dividerLine: {
-      flex: 1,
-      height: "2px",
-      backgroundColor: "rgba(0,0,0,0.12)",
-    },
-    dividerText: {
-      fontSize: "0.9rem",
-      fontWeight: 600,
-      color: sharedStyles.colors.text.medium,
-    },
-    bookLink: {
-      display: "block",
-      textAlign: "center",
-      padding: "14px 20px",
-      borderRadius: "999px",
-      border: "none",
-      backgroundColor: sharedStyles.colors.primary.dark,
-      color: sharedStyles.colors.white,
-      fontWeight: 700,
-      fontSize: "1rem",
-      textDecoration: "none",
-      cursor: "pointer",
-      transition: "opacity 0.2s",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
     },
   };
 
   return (
     <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.content} onClick={(e) => e.stopPropagation()}>
-        <div style={styles.header}>
-          <h3 style={styles.title}>Request a Demo</h3>
-          <button
-            style={styles.closeBtn}
-            onClick={onClose}
-            aria-label="Close modal"
+      <style>{`
+        @keyframes nm-modal-in {
+          from { opacity: 0; transform: translateY(14px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .nm-modal input, .nm-modal textarea {
+          padding: 12px 14px;
+          border-radius: 10px;
+          border: 1px solid ${C.line};
+          font-size: 1rem;
+          font-family: inherit;
+          color: ${C.ink};
+          background: ${C.white};
+          transition: border-color 0.18s ease, box-shadow 0.18s ease;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        .nm-modal textarea { min-height: 80px; resize: vertical; }
+        .nm-modal input:focus, .nm-modal textarea:focus {
+          outline: none;
+          border-color: ${C.accent};
+          box-shadow: 0 0 0 3px rgba(31,127,194,0.16);
+        }
+        .nm-modal input::placeholder, .nm-modal textarea::placeholder { color: #9aa4b1; }
+        @media (prefers-reduced-motion: reduce) { .nm-modal { animation: none !important; } }
+      `}</style>
+
+      <div
+        className="nm-modal"
+        style={styles.content}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          style={styles.closeBtn}
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          ×
+        </button>
+
+        <h3 style={styles.title}>Request a demo</h3>
+        <p style={styles.sub}>
+          We'll be in touch within one business day.
+        </p>
+
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.row}>
+            <div style={styles.group}>
+              <label style={styles.label} htmlFor="name">
+                Full Name*
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div style={styles.group}>
+              <label style={styles.label} htmlFor="company">
+                Company Name*
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div style={styles.row}>
+            <div style={styles.group}>
+              <label style={styles.label} htmlFor="email">
+                Email Address*
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div style={styles.group}>
+              <label style={styles.label} htmlFor="phone">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div style={styles.group}>
+            <label style={styles.label} htmlFor="message">
+              What problems are you hoping to solve?
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+            />
+          </div>
+          <Button
+            variant="accent"
+            type="submit"
+            disabled={isSubmitting}
+            style={{
+              width: "100%",
+              marginTop: "4px",
+              opacity: isSubmitting ? 0.7 : 1,
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+            }}
           >
-            ×
-          </button>
-        </div>
-        <div style={styles.form}>
+            {isSubmitting ? "Sending..." : "Request demo"}
+          </Button>
+
+          {submitStatus === "success" && (
+            <div style={styles.success}>
+              Thank you! Your request has been sent. We'll contact you within 1
+              business day.
+            </div>
+          )}
+          {submitStatus === "error" && (
+            <div style={styles.error}>
+              There was an error sending your request. Please try again or
+              contact us at hello@nammu.ai.
+            </div>
+          )}
+        </form>
+
+        <div style={styles.bookRow}>
+          Prefer to pick a time?{" "}
           <a
             href={BOOKING_PAGE_URL}
             target="_blank"
             rel="noopener noreferrer"
             style={styles.bookLink}
           >
-            Book a meeting directly
+            Book a meeting →
           </a>
-          <div style={styles.dividerWrap}>
-            <div style={styles.dividerLine} />
-            <span style={styles.dividerText}>or</span>
-            <div style={styles.dividerLine} />
-          </div>
-          <div style={styles.optionLabel}>
-            Answer a few questions and we'll reach out
-          </div>
-          <form
-            onSubmit={handleSubmit}
-            style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-          >
-            <div style={styles.row}>
-              <div style={{ ...styles.group, ...styles.rowGroup }}>
-                <label style={styles.label} htmlFor="name">
-                  Full Name*
-                </label>
-                <input
-                  style={styles.input}
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div style={{ ...styles.group, ...styles.rowGroup }}>
-                <label style={styles.label} htmlFor="company">
-                  Company Name*
-                </label>
-                <input
-                  style={styles.input}
-                  type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div style={styles.row}>
-              <div style={{ ...styles.group, ...styles.rowGroup }}>
-                <label style={styles.label} htmlFor="email">
-                  Email Address*
-                </label>
-                <input
-                  style={styles.input}
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div style={{ ...styles.group, ...styles.rowGroup }}>
-                <label style={styles.label} htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  style={styles.input}
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div style={styles.group}>
-              <label style={styles.label} htmlFor="message">
-                What problems are you hoping to solve?
-              </label>
-              <textarea
-                style={styles.textarea}
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-              />
-            </div>
-            <button
-              style={{
-                ...styles.submit,
-                ...(isSubmitting
-                  ? { opacity: 0.7, cursor: "not-allowed" }
-                  : {}),
-              }}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Send request"}
-            </button>
-            {submitStatus === "success" && (
-              <div style={styles.success}>
-                Thank you! Your request has been sent. We'll contact you within
-                1 business day.
-              </div>
-            )}
-            {submitStatus === "error" && (
-              <div style={styles.error}>
-                There was an error sending your request. Please try again or
-                contact us at hello@nammu.ai.
-              </div>
-            )}
-          </form>
         </div>
       </div>
     </div>
