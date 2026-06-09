@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { sharedStyles } from "../styles";
+import { useDemo } from "./DemoContext";
 
-const Header = ({ onRequestDemo }) => {
+const C = sharedStyles.colors;
+
+const Header = () => {
+  const openDemo = useDemo();
+  const location = useLocation();
   const [isMobile, setIsMobile] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Transparent over the light hero on the home page; solid white otherwise.
+  const overHero = location.pathname === "/";
+  const showSolid = scrolled || !overHero;
 
   useEffect(() => {
     const mq = window.matchMedia(sharedStyles.breakpoints.mobile);
@@ -26,62 +36,63 @@ const Header = ({ onRequestDemo }) => {
       position: "sticky",
       top: 0,
       zIndex: 1000,
-      backgroundColor: scrolled
-        ? sharedStyles.colors.white
-        : sharedStyles.colors.secondary.light,
-      borderBottom: scrolled ? "1px solid #eee" : "none",
+      backgroundColor: showSolid ? C.white : "transparent",
+      borderBottom: showSolid ? `1px solid ${C.line}` : "1px solid transparent",
+      transition: "background-color 0.25s ease, border-color 0.25s ease",
     },
     inner: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       padding: isMobile
-        ? "10px 20px"
-        : `20px ${sharedStyles.spacing.section.horizontal}`,
+        ? "12px 20px"
+        : `18px ${sharedStyles.spacing.section.horizontal}`,
       maxWidth: "1400px",
       margin: "0 auto",
     },
-    left: {
-      display: "flex",
-      alignItems: "center",
-      gap: "12px",
-    },
     logo: {
-      height: isMobile ? "28px" : "36px",
+      height: isMobile ? "26px" : "32px",
+      display: "block",
     },
     button: {
       ...sharedStyles.elements.button,
-      backgroundColor: sharedStyles.colors.primary.dark,
-      color: sharedStyles.colors.white,
-      textDecoration: "none",
-      fontSize: isMobile ? "0.875rem" : "1rem",
-      padding: isMobile ? "8px 16px" : "14px 24px",
+      display: "inline-flex",
+      alignItems: "center",
+      backgroundColor: C.accent,
+      color: C.white,
+      fontSize: isMobile ? "0.875rem" : "0.98rem",
+      padding: isMobile ? "9px 18px" : "12px 24px",
     },
     buttonHover: {
-      backgroundColor: sharedStyles.colors.primary.medium,
+      backgroundColor: "#1a6ea8",
+      color: C.white,
       transform: "translateY(-1px)",
-      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+      boxShadow: "0 8px 20px rgba(31,127,194,0.32)",
+    },
+    buttonArrow: {
+      display: "inline-block",
+      marginLeft: "8px",
+      transform: isHover ? "translateX(3px)" : "none",
+      transition: "transform 0.2s ease",
     },
   };
 
   return (
     <div style={styles.bar}>
       <div style={styles.inner}>
-        <div style={styles.left}>
-          <a href="#hero" aria-label="Nammu Home">
-            <img src="logo.png" alt="Nammu" style={styles.logo} />
-          </a>
-        </div>
+        <Link to="/" aria-label="Nammu Home">
+          <img src="/logo.png" alt="Nammu" style={styles.logo} />
+        </Link>
         <button
-          style={{
-            ...styles.button,
-            ...(isHover ? styles.buttonHover : {}),
-          }}
+          style={{ ...styles.button, ...(isHover ? styles.buttonHover : {}) }}
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
-          onClick={onRequestDemo}
+          onClick={openDemo}
         >
           Request a Demo
+          <span aria-hidden="true" style={styles.buttonArrow}>
+            →
+          </span>
         </button>
       </div>
     </div>
