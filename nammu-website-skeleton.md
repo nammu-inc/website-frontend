@@ -95,6 +95,8 @@ geometric sans. Professional and sleek; deliberately _not_ playful.
 | `/` | **Home** | Single-scroll pitch — carries the whole story. |
 | `/privacy` | Privacy Policy | Legal (existing). |
 | `/terms` | Terms of Service | Legal (existing). |
+| `/hero` | LinkedIn banner | Utility: standalone LinkedIn cover (1128 × 191) to screenshot. Not in nav (`LinkedInBanner.js`). |
+| `/old` | Previous site | The pre-overhaul site (recovered from commit `c04ea18` into an isolated `src/old/` namespace) for side-by-side comparison. Not in nav. |
 
 > **Single-page site.** No dedicated Product or About pages. The home page carries everything, and the way to go deeper is to book a demo. The header is just the logo + a single Request a Demo CTA (no nav links, no hamburger), and every secondary CTA ("Learn more", "Book a demo") opens the demo modal. Only the legal pages are separate routes.
 
