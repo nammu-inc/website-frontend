@@ -6,24 +6,20 @@ const C = sharedStyles.colors;
 
 const FAQS = [
   {
-    q: "Do we have to replace our ERP?",
-    a: "No. Nammu layers on top of your existing ERP and delivers value without a migration.",
-  },
-  {
     q: "What if we're not ready for a full platform?",
-    a: "That's common in this industry. We also do custom builds that automate manual workflows without committing to a platform.",
+    a: "That's common in this industry. We also do workflow automation and custom builds without committing to a full platform.",
   },
   {
     q: "Which systems does Nammu integrate with?",
-    a: "Microsoft, SeaSoft, SAP, NetSuite, NetYield, QuickBooks, and more.",
+    a: "The systems seafood teams already run, including Microsoft Business Central, SAP, NetSuite, SeaSoft, NetYield, and QuickBooks, plus cold-storage partners like Lineage and AmeriCold. Using something else? We'll connect to it.",
   },
   {
     q: "How long does it take to get started?",
     a: "We move quickly. Where a typical ERP transition takes 9 to 12 months, most teams are up and running on Nammu in 1 month.",
   },
   {
-    q: "Is Nammu a CRM?",
-    a: "CRM is just one part of the Nammu platform, among many other sales and procurement tools.",
+    q: "Do we have to replace our ERP?",
+    a: "No. Nammu layers on top of your existing ERP and delivers value without a migration.",
   },
   {
     q: "What makes Nammu seafood specific?",

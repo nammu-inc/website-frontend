@@ -7,7 +7,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Hotjar from "./components/Hotjar";
 import Home from "./pages/Home";
 import LinkedInBanner from "./pages/LinkedInBanner";
-import OldSite from "./old/OldSite";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 
@@ -26,7 +25,6 @@ const App = () => (
         }
       />
       <Route path="/hero" element={<LinkedInBanner />} />
-      <Route path="/old" element={<OldSite />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<TermsOfService />} />
     </Routes>

@@ -148,8 +148,8 @@ const Footer = () => {
       height: "38px",
       borderRadius: "50%",
       border: "none",
-      backgroundColor: C.accentSoft,
-      color: C.navy,
+      backgroundColor: "rgba(255,255,255,0.1)",
+      color: C.white,
       transition: "all 0.2s ease",
     },
     formCard: {
@@ -253,7 +253,6 @@ const Footer = () => {
         <div style={styles.top}>
           <div style={styles.brand}>
             <img src="/invertedlogo.png" alt="Nammu" style={styles.logo} />
-            <p style={styles.slogan}>We speak seafood.</p>
             <div style={styles.contactRow}>
               <a
                 href="mailto:hello@nammu.ai"
@@ -274,7 +273,7 @@ const Footer = () => {
                 aria-label="Nammu on LinkedIn"
                 style={{
                   ...styles.social,
-                  backgroundColor: hover === "li" ? "#aed2f5" : C.accentSoft,
+                  backgroundColor: hover === "li" ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.1)",
                 }}
                 onMouseEnter={() => setHover("li")}
                 onMouseLeave={() => setHover(null)}
