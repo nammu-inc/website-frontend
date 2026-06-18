@@ -1,20 +1,18 @@
 import React from "react";
 import Hero from "./sections/Hero";
+import Capabilities from "./sections/Capabilities";
 import Testimonials from "./sections/Testimonials";
-import SeafoodProblem from "./sections/SeafoodProblem";
-import ProductOverview from "./sections/ProductOverview";
-import Impact from "./sections/Impact";
-import Founders from "./sections/Founders";
+import Team from "./sections/Team";
 import FAQ from "./sections/FAQ";
+import Press from "./sections/Press";
 
 const Home = () => (
   <>
     <Hero />
     <Testimonials />
-    <SeafoodProblem />
-    <ProductOverview />
-    <Impact />
-    <Founders />
+    <Capabilities />
+    <Team />
+    <Press />
     <FAQ />
   </>
 );

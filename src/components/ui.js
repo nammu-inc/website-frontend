@@ -67,6 +67,7 @@ export const SectionHeading = ({
     <h2
       style={{
         ...sharedStyles.typography.h2,
+        fontSize: "clamp(1.65rem, 4.2vw, 2.1rem)",
         color: light ? C.white : C.navy,
         margin: 0,
       }}
@@ -88,6 +89,57 @@ export const SectionHeading = ({
     )}
   </div>
 );
+
+// PageHero: the top band of a dedicated (non-home) page — eyebrow + big title +
+// subtitle over the same restrained light gradient as the home hero.
+export const PageHero = ({ eyebrow, title, subtitle, children }) => {
+  const isMobile = useIsMobile();
+  return (
+    <section
+      style={{
+        background: `linear-gradient(160deg, ${C.accentSoft} 0%, ${C.surface} 52%, ${C.white} 100%)`,
+        padding: isMobile
+          ? "clamp(56px, 11vw, 76px) 24px clamp(48px, 9vw, 64px)"
+          : "clamp(88px, 9vw, 120px) 40px clamp(72px, 8vw, 96px)",
+        textAlign: "center",
+      }}
+    >
+      <div style={{ maxWidth: "820px", margin: "0 auto" }}>
+        {eyebrow && (
+          <Eyebrow style={{ marginBottom: "16px" }}>{eyebrow}</Eyebrow>
+        )}
+        <h1
+          style={{
+            ...sharedStyles.typography.display,
+            fontSize: isMobile
+              ? "clamp(2.1rem, 9vw, 2.9rem)"
+              : "clamp(2.6rem, 4.4vw, 3.5rem)",
+            color: C.navy,
+            margin: 0,
+            textWrap: "balance",
+          }}
+        >
+          {title}
+        </h1>
+        {subtitle && (
+          <p
+            style={{
+              ...sharedStyles.typography.subtitle,
+              fontSize: "clamp(1.05rem, 1.5vw, 1.2rem)",
+              color: C.slate,
+              margin: "20px auto 0",
+              maxWidth: "640px",
+              textWrap: "pretty",
+            }}
+          >
+            {subtitle}
+          </p>
+        )}
+        {children && <div style={{ marginTop: "32px" }}>{children}</div>}
+      </div>
+    </section>
+  );
+};
 
 // Button: crisp primary / secondary actions.
 export const Button = ({

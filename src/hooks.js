@@ -3,7 +3,14 @@ import { sharedStyles } from "./styles";
 
 // Tracks whether the viewport matches a media query (default: mobile breakpoint).
 export const useMediaQuery = (query = sharedStyles.breakpoints.mobile) => {
-  const [matches, setMatches] = useState(false);
+  // Initialize from matchMedia so the first paint is already correct (no flash of
+  // the desktop layout on mobile).
+  const [matches, setMatches] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia(query).matches,
+  );
   useEffect(() => {
     const mq = window.matchMedia(query);
     setMatches(mq.matches);
@@ -15,6 +22,27 @@ export const useMediaQuery = (query = sharedStyles.breakpoints.mobile) => {
 };
 
 export const useIsMobile = () => useMediaQuery(sharedStyles.breakpoints.mobile);
+
+// Measures an element's content width (live, via ResizeObserver). Used to scale
+// fixed-design graphics down to fit their container so they never clip on mobile.
+export const useElementWidth = () => {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => setWidth(el.clientWidth);
+    update();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", update);
+      return () => window.removeEventListener("resize", update);
+    }
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return [ref, width];
+};
 
 // Fades/slides an element in the first time it scrolls into view.
 // Returns [ref, style] — spread the style onto the target element.

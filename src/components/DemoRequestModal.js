@@ -199,7 +199,7 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
           ×
         </button>
 
-        <h3 style={styles.title}>Request a demo</h3>
+        <h3 style={styles.title}>Book a demo</h3>
         <p style={styles.sub}>
           We'll be in touch within one business day.
         </p>

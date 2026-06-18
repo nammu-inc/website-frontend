@@ -4,19 +4,24 @@ This document is the **single source of truth** for the Nammu marketing site: it
 architecture, design system, and **all copy**. When code changes, this file changes
 with it, and vice versa. Anything not yet decided is marked `[[PLACEHOLDER: …]]`.
 
-A lean, three-page site. Social proof leans on named industry testimonials; seafood
-specialization runs throughout.
+A **single-page** marketing site: everything lives on **Home** (capabilities, team, press), plus legal pages. Social proof leans
+on named industry testimonials; seafood specialization runs throughout.
 
-> **Implementation status (2026-06-08):** New architecture, design system, and all
-> three pages are built. Home (`/`), About (`/about`), and Product (`/product`) are
-> live in code; legal pages unchanged. Copy below is what ships today; `[[PLACEHOLDER]]`
-> markers are still open and rendered visibly on the site until filled.
+> **Implementation status (2026-06-17):** New architecture, design system, and all
+> pages are built. Home (`/`) and About (`/about`) are live in
+> code; legal pages unchanged. **There is no longer a dedicated Product page** —
+> product capabilities now live on the home page as a series of horizontal
+> "jobs-to-be-done" sections (§3.5). **Press is no longer its own page/tab** — its
+> coverage is folded into a home-page section (§3.6). The header carries real nav (About +
+> Book a Demo) with a mobile hamburger. Copy below is
+> what ships today; `[[PLACEHOLDER]]` markers are still open and rendered visibly on
+> the site until filled.
 
 ---
 
 ## Positioning & Brand
 
-**Slogan:** "We speak seafood."
+**Tagline:** "AI for Seafood" (was "Reimagining seafood software.")
 
 **Who we are:** Nammu builds AI-powered software for seafood companies.
 
@@ -69,6 +74,7 @@ geometric sans. Professional and sleek; deliberately _not_ playful.
 
 **Components**
 
+- Global reset: `*, *::before, *::after { box-sizing: border-box; }` in `index.css` so `width: 100%` + padding never overflows the viewport. — **in code**
 - Buttons: primary (filled accent/navy), secondary (outline). Rounded `8px`, not pill-shaped, for a crisper feel.
 - Cards: `white` bg, `1px solid line`, `12–16px` radius, soft shadow `0 4px 16px rgba(9,20,47,0.06)`.
 - Hairline rules to divide content instead of heavy borders.
@@ -92,13 +98,12 @@ geometric sans. Professional and sleek; deliberately _not_ playful.
 **Pages / Routes**
 | Route | Page | Purpose |
 |---|---|---|
-| `/` | **Home** | Single-scroll pitch — carries the whole story. |
+| `/` | **Home** | The whole story on one scroll — hero, testimonials, capabilities, team, press, and FAQ. |
 | `/privacy` | Privacy Policy | Legal (existing). |
 | `/terms` | Terms of Service | Legal (existing). |
 | `/hero` | LinkedIn banner | Utility: standalone LinkedIn cover (1128 × 191) to screenshot. Not in nav (`LinkedInBanner.js`). |
-| `/old` | Previous site | The pre-overhaul site (recovered from commit `c04ea18` into an isolated `src/old/` namespace) for side-by-side comparison. Not in nav. |
 
-> **Single-page site.** No dedicated Product or About pages. The home page carries everything, and the way to go deeper is to book a demo. The header is just the logo + a single Request a Demo CTA (no nav links, no hamburger), and every secondary CTA ("Learn more", "Book a demo") opens the demo modal. Only the legal pages are separate routes.
+> **Single-page site.** The header has **no nav links** now — just the logo + a **Book a Demo** button (opens the demo modal). The home page carries everything: capabilities (§3.2), the **Our Team** section (§3.4) and **Press** (§3.6). `Book a Demo` everywhere opens the modal (the conversion action); the footer message form is unchanged. The previous `/old`, `/product`, `/press`, and `/about` routes were all removed.
 
 **Global elements** (every page): Header / nav, Footer, Demo Request modal. Routing scrolls to the top of the page on every navigation (`ScrollToTop.js`).
 
@@ -108,26 +113,28 @@ geometric sans. Professional and sleek; deliberately _not_ playful.
 
 ### 2.1 Header / Nav
 
-Sticky. Transparent over the hero on home → solid white on scroll. Just the logo + a single CTA (no nav links, no hamburger — single-page site).
+Sticky. Transparent over the hero on home → solid white on scroll (and solid white on all other routes). Logo + nav links + primary CTA. — **in code (`Header.js`)**
 
 - **Logo** (links Home)
-- **Primary CTA:** `Request a Demo` (opens demo modal) — accent-filled with a nudging arrow, the clear focal action. — **in code**
+- **Nav links (anchor tabs, in page order):** `Product` (→ `#capabilities`), `Team` (→ `#team`), `Press` (→ `#press`), `FAQ` (→ `#faq`). On the home page they **smooth-scroll** to the section; from a legal page they navigate to `/#id` and `ScrollToTop` scrolls there once it renders. Navy, accent on hover. On mobile they live in the hamburger dropdown (with the CTA).
+- **Primary CTA:** `Book a Demo` (opens demo modal) — accent-filled with a nudging arrow, the clear focal action.
+- **Mobile:** the links collapse into a **hamburger → dropdown** (links + Book a Demo); the bar goes solid white while open.
 
 ### 2.2 Footer
 
 The whole bottom of the site, consolidated into one clean navy footer. **No marketing copy** — just the ability to send a message plus the essentials. — **in code (`Footer.js`)**
 
 - **Top row** (two columns):
-  - Left (brand): inverted logo + slogan `We speak seafood.` + email `hello@nammu.ai` (mailto, mail icon) + LinkedIn icon button → `https://www.linkedin.com/company/nammu-ai`
+  - Left (brand): inverted logo + email `hello@nammu.ai` (mailto, mail icon) + a **white** LinkedIn icon button (translucent-white circle, was light-blue) → `https://www.linkedin.com/company/nammu-ai`. **No text slogan** (the "AI for Seafood" line was removed).
   - Right: a compact **message form** in a light (white) card on the navy footer. Fields: Name*, Email*, Company, Phone, Message → `Send message`. Posts to `https://website-backend-blush.vercel.app/send-email` (to `hello@nammu.ai`); success/error inline.
 - Single hairline rule, then **bottom row:** `© {year} Nammu, Inc. All rights reserved.` (left) · `Privacy Policy` · `Terms of Service` (right).
 - White text, dimmed secondary elements, accent hover states. The page ends FAQ (white) → this footer (navy).
 
 ### 2.3 Demo Request Modal
 
-Triggered by any "Request a Demo" CTA. **Single clean column** with one clear primary path (the form). Blurred backdrop, gentle entrance animation, accent focus rings; honors reduced-motion. Intentionally light on text.
+Triggered by any "Book a Demo" CTA. **Single clean column** with one clear primary path (the form). Blurred backdrop, gentle entrance animation, accent focus rings; honors reduced-motion. Intentionally light on text.
 
-- Heading: "Request a demo"
+- Heading: "Book a demo"
 - Subtitle: "We'll be in touch within one business day."
 - Fields: Full Name*, Company Name*, Email Address\*, Phone Number, "What problems are you hoping to solve?"
 - Submit: **Request demo** (accent button, full width); shows "Sending..." while submitting
@@ -140,136 +147,98 @@ Triggered by any "Request a Demo" CTA. **Single clean column** with one clear pr
 
 ## 3. Home (single scroll)
 
-Section order: **Hero → Testimonials → The Seafood Problem (why we exist) → Product Overview (what we build) → Business Impact → Founders → FAQ.** The contact/message form lives in the footer (there's no separate Final CTA band). (Testimonials lead high since trust is the currency in seafood; "what we build" is immediately followed by the business impact it delivers; the founders block bridges into Why Nammu.) Section backgrounds alternate surface/white for rhythm.
+Section order: **Hero → Testimonials (scrollable trust cards) → Capabilities (5 jobs-to-be-done) → Our Team → Press (carousel) → FAQ.** Everything lives on the home page — **there is no longer an `/about` page** (the team was folded in, §3.4) and the **"Nammu in the wild" photo gallery was removed**. **Testimonials sit immediately under the hero** so trust lands right away (the hero's wave divider dissolves into them); the hero leads into the **product story** (capabilities), then the **Our Team** credential cards (who's building it), then **Press** coverage, then FAQ. No "Why we exist" / Seafood Problem essay and no mission statement (the capability panels already show those problems being solved). The contact/message form lives in the footer (no separate Final CTA band). Section backgrounds alternate for rhythm: Testimonials `surface` (the hero's wave divider fills `surface` to match) · Capabilities intro `white`, rows alternate `surface`/`white` (ending `surface`) · Our Team `white` · Press `surface` · FAQ `white` (then the navy footer).
 
 ### 3.1 Hero
 
-Contained two-column hero, consistent with the rest of the site (sleek, not full-bleed): headline / subhead / single CTA on the left over a restrained light gradient; a single real seafood photo in a clean rounded frame on the right. Header is transparent-over-light (navy) on the home page, solid white on scroll. No em dashes in body copy (brand preference). Keep seafood-specificity to the slogan + one subhead mention; don't over-repeat.
+**Single, centered, above-the-fold band** (`min-height ~86vh`), built in `Hero.js`. Its job: situate what Nammu is, feel alive (seafood + AI/software, no UI), drive a demo, and segue into the capabilities without feeling abrupt. **No product screenshots, no two-column layout** — both were removed. Header is transparent-over-light (navy) on the home page, solid white on scroll. No em dashes in body copy (brand preference). Fully fluid via `clamp()`. **The hero (and the §3.2 product intro) deliberately lead on _positioning_, not "software/platform":** Nammu is framed as a partner that does things _for_ seafood teams (capabilities that resonate), not a platform they must adopt — the viewer's mental image is intentionally looser than "a product." The footer tagline is `AI for Seafood` (§2.2).
 
-- **No eyebrow.**
-- **Headline:** `We speak seafood.` — **in code** (the brand slogan)
-- **Subhead:** Nammu is the **seafood industry's trusted software partner**, offering a holistic AI sales and procurement platform, custom builds, and workflow automation. — **in code** *("seafood industry's trusted software partner" is highlighted navy/bold and kept on one line on desktop; "AI" used once)*
-- **CTA:** `Request a Demo` (opens demo modal) — single, accent-filled, large, with a nudging arrow. The home page's primary job is to drive demo requests, so this is the clear focal action. — **in code**
-- **Capability chips:** under the CTA, a row of small summative chips with icons — `AI-powered`, `Sales & procurement`, `ERP-integrated` — high-altitude positioning (the tech, the breadth, the fit), not a feature list. Signals that Nammu is software/AI since the imagery already covers the industry half. Adds density. — **in code**
-- **Visual:** **No product screenshots, no carousel.** A sleek layered editorial mosaic of real seafood-industry photos on the right, spanning the whole supply chain (boats → docks → aquaculture → processing): one large focal card with a stacked column of smaller cards, white borders, soft shadows, gentle floating motion, and subtle pointer-parallax depth. Contained (not full-bleed). Honors reduced-motion. Built in `HeroCollage.js` from five images in `src/assets/`: `hero1.jpg` (salmon line), `hero2.jpg` (aquaculture tanks), `hero3.jpeg` (processing floor), `hero4.jpg` (unloading at the dock), `hero5.jpg` (boat at the harbor). `[[PLACEHOLDER: hero1–5 are client stand-ins — swap for final licensed/retouched shots]]`
+- **No logo up top** (the standalone hero logo, its glow, and rising bubbles were removed — the brand presence now comes from the swimming logo-fish in the backdrop and the bubble device below).
+- **Headline:** `Bringing AI to Seafood` — **in code** (title case, no period — a brand-tagline treatment; `AI` is rendered with a **teal→accent gradient** for a pop of brand color). Kept to **one line** via `white-space: nowrap` + a `clamp()` font that scales down on narrow screens. (Iterated: `Seafood's first AI partner.` → `AI built for seafood.` → `Seafood's trusted AI partner.` → `Bringing AI to seafood.` → `Seafood's Trusted AI Partner` → `Bringing AI to Seafood`.)
+- **Rotating capability line (the key device):** `Helping your team ` + a cycling phrase that **rides inside a glassy "bubble"** (a pill with a soft top sheen, a small catch-light, and a frosted `backdrop-filter`). The bubble is a **fixed width = the longest phrase**: invisible sizers (one per phrase) overlap in a single inline-grid cell to set the slot width, and the pills are **absolutely positioned to fill that box** (so the pills take no part in sizing — only the sizers do). The phrase is **centered inside** the constant-width pill, so it never resizes and **`Helping your team` never shifts**. Each new bubble **floats up from below to carry the words into place** (`nm-bub-in`) while the outgoing one **pops away quickly in place** (`nm-bub-out`, slightly delayed so phrases never overlap at a readable opacity; the outgoing bubble is dropped after ~420ms). Phrases are **outcome-focused** (what a decision-maker cares about, not literal product features), kept ~15–18 chars so each looks balanced in the fixed pill (6 total): `grow your business` · `win new accounts` · `boost your margins` · `move more product` · `forecast demand` · `automate busywork`. Reduced-motion shows the first phrase statically (no bubble). — **in code (`BubblePhrase`)**
+- **CTA:** a single `Book a Demo` (accent, arrow, opens demo modal — the focal action) with a **soft pulsing glow** to draw the eye. (The label is `Book a Demo` everywhere now — hero, header nav, About, and the modal heading.) Earlier tries that were removed as not-belonging/ugly: a secondary `See what we do` button, an `AI for seafood sales & procurement` eyebrow chip, an `As featured in` press-logo strip, and an "Up and running in weeks…" reassurance line. The hero's substance/life now comes from the headline, the bubble line, and the animated backdrop rather than extra rows. — **in code**
+- **Segue into testimonials:** no scroll-cue chevron and no secondary button — the §3.3 testimonial cards sit tight under the hero and **peek above the fold**, so the hand-off into the trust strip happens organically as the viewer scrolls.
+- **Backdrop (seafood + AI/software, no UI):** a drifting **aurora** of three blurred brand blobs (accent + teal + a soft accent-soft glow low-center), three layers of **flowing current/wave lines** (tiling wave strokes scrolling horizontally) in the lower third, a handful of faint **Nammu logo-marks swimming** across the lower "water" like little fish, and ~10 small glassy **bubbles drifting up** through the whole hero (varied size/speed/drift) for underwater life. The base gradient keeps a light-blue tint at the bottom (not pure white) so the divider reads. Brand colors only; the fish/bubbles render only when motion is allowed (reduced-motion shows a calm static scene). — **in code**
+- **De-sparsing (kept):** the rotating bubble line is **enlarged** for prominence, a soft **radial spotlight** sits behind the content so the text reads off the busy backdrop, and the **vertical spacing between the three lines (headline · bubble line · CTA) was loosened** for more breathing room (then dialed back to a middle once it read too airy). (Pointer parallax was tried and **cut**.) — **in code**
+- **Wave divider (the seamless hand-off):** a two-layer SVG **wave** (accent-soft behind, `surface` in front) along the hero's bottom edge that dissolves the hero into the `surface` **Testimonials** strip (§3.3) directly below, so the transition is continuous rather than a hard cut. — **in code**
+- *(Removed: the product-screenshot collage `HeroCollage.js` and the logo-orbit `HeroVisual.js`; the `hero1–5.png` screenshots are no longer used by the hero, only referenced as style cues in the capability graphics' comments. The earlier static subhead and the faint grid were dropped in favor of the chips + current/wave visuals.)*
 
-### 3.2 Testimonials
+### 3.2 Capabilities (jobs-to-be-done)
 
-Leads high since trust is the currency in seafood: credible names before the pitch. A featured quote (industry-association endorsement) + two supporting cards. Each **leads with the source** — company logo, then name and role — with the quote as secondary supporting text, since who is vouching matters more than the exact wording. Reveal-on-scroll animation. — **in code (`Testimonials.js`)**
+The product story, told on the home page as a series of **horizontal sections — one per job to be done**, right after the hero. Each row is two-column (copy + an animated, code-built graphic), alternating which side the graphic sits on. **Responsive behavior:** on desktop the copy hugs the outer edge of its column (left on normal rows, **right-aligned on the reversed/animation-left rows**) so both row types fill the width symmetrically; on **mobile/tablet** (≤900px) the row stacks text-then-graphic and the copy is **centered** (so the full-width graphic doesn't strand it against the left edge). Graphics are built at a fixed 16:10 design size and **scaled to fit their frame** (via a measured-width wrapper), so they keep exact proportions and never clip/distort at any width. Each graphic is a first-pass, refinable animation; all honor `prefers-reduced-motion`. — **in code (`Capabilities.js`, graphics in `CapabilityGraphics.js` + reused `CustomBuildsAnimation.js`)**
 
-- **Eyebrow:** `Trusted in the industry`
-- **Section header:** `Built with the people who move seafood.`
+- **Intro (two clear parts — the ways we work, then a hand-off to example capabilities):** eyebrow `What we do`, header `We meet you where you are.`, subtitle `Whether it's fixing one nagging process or revamping your tech stack.` Then **three "ways we work" cards** in a row (icon in a rounded-square tile + title + a concise one-line description). Each card's icon has its **own color** on a matching soft tile so they read as distinct:
+  - ⚡ **Workflow automation** (blue `accent`) — *Tedious manual work, like reconciling inventory, automated.*
+  - `</>` **Custom software** (teal) — *Built to fit how you work, like a bespoke forecasting system.* (the "fits your existing operation" spirit + a concrete example, ~same length as the other two)
+  - ▦ **AI platform** (indigo `#5b62e0`) — *A full sales and purchasing suite, use only what you need.* (modular / pick-what-you-need, without saying "à la carte")
+  Then a **transition cue** into the rows — the label `A few examples` with a **bouncing down-chevron** — which, with the background flip to the first `surface` row, reads clearly as "the example capabilities are below." (Replaced the earlier floating icon+label chips, which didn't read as a unit.)
+- Capability copy is **scannable bullets, not prose** (a few-seconds read; clear key takeaways). The **AI assistant leads**.
+- **The five jobs** (copy is first-pass; refine freely):
+  1. **AI assistant** — "Ask for any report." Bullets: *Build complex reports in plain language · Answers that took days, back in seconds.* *Graphic (`AssistantGraphic`):* a full Nemo chat — the header shows the **Nammu logo mark (`/logo512.png`)** next to "Nemo / AI assistant" in the top-left — where **the user is shown typing the request into the input bar** (character-by-character with a blinking caret; the text fills the bar and scrolls like a real input), then it sends — a complex plain-language request ("Build a Q2 margin report by SKU, compare to last year, and flag accounts trending down"), a multi-step "working" pass (pulled orders → joined 2025 → computed margin by SKU), then the built report (a margin-by-SKU table of realistic items like "20/30 Skin-On Salmon Filet" with vs-LY deltas + a "3 accounts trending down" flag, which **stays on screen** through the export turn), then the user **types** "Export this to Excel" → a downloadable `q2-margin-by-sku.xlsx`. (The separate "Real-time dashboards" row was removed.)
+  2. **Lead tracking** — "Win new accounts." (headline framed on the decision-maker outcome, not IC-level lead hygiene). Bullets (short, framed on what the software delivers — oversight + a pipeline — not on the leader having to prioritize): *See exactly who your team is pursuing · A steady pipeline of new business.* *Graphic (`LeadsGraphic`):* a looped, choreographed interaction with a Board/Map toggle. **Board** — a **Kanban pipeline** (New → Contacted → Qualified → Converted, search field, "4 converted / 2026 target 8" progress bar) where a **visible cursor moves to the "Harbor Tide Co." card in Contacted and clicks it** to open a **compact lead-detail card** (mirrors `LeadCard.png`: name + status pill, `SENA` tag, fields — Location / Products of interest / Est. annual revenue / Primary contact — and a "Call Tim" task). The cursor then **checks off the "Call Tim" task** (checkbox fills, title strikes through), the **card closes**, and it **toggles to the Map** — a recognizable lower-48 silhouette (traced from real lat/lon landmarks) of accounts by location with pins popping in (echoing `hero4.png`). Then it loops. (No drag-and-drop.)
+  3. **Live inventory** — "Always know where you stand." Bullets lead with the two takeaways (time savings + accuracy, without over-claiming): *Save hours of manual reconciliation · Inventory you can actually trust.* *Graphic (`InventoryGraphic`):* a two-view, looped interaction. **List** — `Live inventory` + a pulsing `● LIVE` badge, a **sync strip** (`Auto-synced from` + the **Microsoft Business Central** and **Lineage** logos, with **dots flowing** along a connector) feeding a live table (SKU · On hand · Available · **Incoming** — quantity on the row baseline with its **ETA date below**) whose cells tick/flash automatically. A **cursor clicks the "16/20 White Shrimp" row** → the **Detail** for that SKU: On hand / Available / Committed KPIs; a **Stored at** section badged with the **Lineage** logo (Boston 9,400 lb · Newark 4,660 lb); and a **Recent activity ledger** badged with the **Business Central** logo (Date · Activity · **Change** · **Balance**) showing how on-hand progressed to today — `Jul 5 Sold to Ocean Crest −1,200 → 14,060` · `Jul 2 Received shipment +3,000 → 15,260` · `Jul 1 Opening balance → 12,260` (top balance ties to the On-hand KPI). Then it loops.
+  4. **AI outreach** — "Grow every account." (business impact = growing revenue from existing accounts). Bullets (AI surfaces the opportunity an overwhelmed rep misses → bigger/more frequent orders; **no "Nemo" in marketing copy** — not formally introduced on the site): *AI spots the opportunities you'd miss · Bigger, more frequent orders.* *Graphic (`OutreachGraphic`, modeled on the app's "Next action" column in `nammu-frontend/SalespersonBottomContent.js`):* a two-view, looped flow. **List** — `My accounts` + a `Nemo insights` pill; an Account / **Next action** table where each next action is a **Nemo insight cell** (Nemo logo + actionable text with a bolded count + chevron; **teal** = opportunity, **yellow/amber** = lapse risk): `2 SKUs due to reorder` · `3 new SKUs they'll likely buy` · `1 go-to item is slipping` (yellow) · `No order in 3 weeks` (yellow). A **cursor clicks the lapse insight** ("No order in 3 weeks" → Coastal Catch Co.) → the **Detail**: the account + an amber `At risk` tag; an **Order cadence** timeline (evenly-spaced past-order ticks, then a long **red overdue stretch** to a red "Today" marker — the gap is visibly far wider than the usual `~weekly` cadence, ≈ 21 days); and the re-engagement email **being drafted by the AI** — a prominent `[Nemo logo] Nemo is drafting …` header (pulsing logo + animated dots) while the **body types in** (caret), the **Send button stays muted/disabled until the draft finishes**, then a `Drafted by Nemo` state with a **channel toggle** (email/text/call, email active). **Only after the draft is done** does the cursor **click Send → "Sending…" → "Sent ✓"** (the full execute flow). Then it loops.
+  5. **Demand forecasting** — "Optimize every purchase." (CEO-level framing: today every buyer keeps a custom Excel sheet; Nammu automates the forecasting and unifies purchasing). Bullets (key takeaways only, detail lives in the graphic): *Automated forecasting, no spreadsheets · Avoid stockouts and overbuying.* *Graphic (`ForecastGraphic`):* a two-view, looped interaction. **List** — a **shrimp SKU purchasing table** (SKU · On hand · Price · Margin · **Position**), where Position is a long/short key pill (Long = amber overstocked · Healthy = green · Short = red, needs purchase). A **cursor moves to the short "21/25 Black Tiger Shrimp" row and clicks it**, opening the **Detail** — that SKU's 4wk/13wk toggle, KPI tiles (Avg burn rate 1,800 lb/wk · On hand 2,400 lb · ~1.3 weeks of cover), a **static** inventory **draw-down chart** (solid on-hand history hands off at "Now" to a dashed projection that crosses the **red dashed reorder line**, marked "Jul 8" — no "Reorder point" text label, no chart animation), and a **Recommended order** banner with quantity + date (`9,000 lb · by Jul 8`). Then it loops.
+- `[[PLACEHOLDER: graphics + copy are a starting point — refine per capability.]]`
 
-**Featured testimonial (NFI Sushi Council — association endorsement leads):**
+### 3.3 Testimonials (scrollable trust strip, right under the hero)
 
-> "Nammu gives the NFI Sushi Council the infrastructure to organize, engage, and activate our membership in a far more meaningful way. As we grow the council, the platform helps us turn individual companies into a connected network with a stronger collective voice, greater visibility, and more impact across the sushi and seafood industry."
-> — **Dick Jones**, Executive Director, **NFI Sushi Council** (logo: `NFI Logo.jpg`)
+Social proof placed **immediately under the hero, with no heading**, so it reads as **part of the hero** rather than a separate section (a heading there broke the flow). The hero's wave divider dissolves into it (`surface` bg) and the top padding is tight so the cards sit right under the hero. **Full cards, always visible** — on desktop a **3-up grid** (all three at once); on mobile they **swipe** horizontally (scroll-snap, hidden scrollbar). **No edge-fade mask.** Each card = a decorative quote mark, a **short punchy pull**, then logo + name + role. Leads with NFI (association endorsement). — **in code (`Testimonials.js`)**
 
-**Supporting testimonials (Stavis Seafoods, logo `Stavis.png`):**
-
-> "Nammu has made our team more efficient and productive, with clear visibility into customer behavior and ordering patterns so our sales team can focus on selling. What stands out most is the team's understanding of the fast-paced seafood business. Nammu has helped bring our 98-year-old company into the future."
-> — **Todd Rushing**, VP Sales, **Stavis Seafoods**
-
-> "Working with the Nammu team has been a great experience. They took the time to understand our day-to-day sales needs and delivered a platform we use daily, with data that's easy to navigate and act on. We're grateful for the partnership and look forward to continuing to work together."
-> — **Tiffany Walker**, Sales Manager, **Stavis Seafoods**
-
+- **Light framing** above the cards: just the eyebrow `Trusted in the industry` (the lead line was dropped). The displayed quotes are **shortened pulls** (the full quotes were too long for cards):
+  - **Dick Jones**, Executive Director, **NFI Sushi Council** (`NFI Logo.jpg`) — *"Nammu gives the NFI Sushi Council the infrastructure to organize and activate our membership, turning individual companies into a connected network with greater visibility and impact."*
+  - **Todd Rushing**, VP Sales, **Stavis Seafoods** (`Stavis.png`) — *"Nammu made our team more efficient and productive, with clear visibility into ordering patterns so our sales team can focus on selling. They get the fast-paced seafood business."*
+  - **Tiffany Walker**, Sales Manager, **Stavis Seafoods** — *"They took the time to understand our day-to-day sales needs and delivered a platform we use daily, with data that's easy to navigate and act on."*
 - `[[PLACEHOLDER: additional testimonials from other companies to broaden beyond Stavis + NFI]]`
 
-### 3.3 The Seafood Problem
+### 3.4 Our Team (credibility through people)
 
-Why generic food software breaks; the "why we exist" argument, placed under the founders/social-proof block. Eyebrow + title only (consistent with sections above). Four concise cards, each with an **icon**, then an optimistic closing panel that reframes the problem as an opportunity.
+The old `/about` page was **folded into the home page**. Instead of a "why seafood" essay or a mission statement (the capability panels already demonstrate those problems being solved), we establish credibility through **people and presence** — show, don't tell. — **in code (`Team.js`)**
 
-- **Eyebrow:** `Why we exist`
-- **Section header:** `Generic software wasn't built for seafood.`
-- **Problem points** (icon + copy each):
-  1. **Volatile supply and pricing** (trend icon) — Supply and price shift constantly. Meeting that pace requires real-time information, accurate forecasts, and intuitive workflows.
-  2. **Expansive product catalogs** (layers icon) — Seafood has its own vernacular, from container building to product transformations. It needs software built for it.
-  3. **Relationship-driven sales** (people icon) — Deals close through trust built over years. Software should support those relationships, not interrupt them.
-  4. **Data trapped in legacy ERPs** (database icon) — Legacy ERPs were built for accounting, not sales or purchasing. The data is there, but teams can't reach it in time.
-- **Closing band** (sleek two-column: copy on a plain white left, a real seafood photo on the right; restrained, not a heavy block). Currently uses `public/heroimage.jpg`. `[[PLACEHOLDER: swap for a more appetizing "best protein" hero shot if available]]`
-  - Title: `The world's best protein deserves better software.`
-  - Line: "Among the healthiest and most sustainable proteins on earth, yet one of the most underserved by technology. That's why Nammu exists."
+- **Our Team** (`white`, `id="team"`): eyebrow `Our team`, header `The people building Nammu.` A grid of **brief credential cards** — headshot, name, role, one or two **accolades** (small bulleted list), and a **relevant logo**. Then an **Advisors** sub-block (eyebrow `Advisors`, header `Guided by industry leaders.`) with the same card style.
+  - Each card: **real headshot** + name + a single accolade line + one or more logos (**no role/title**). Founders: **Ethan Huang** (`Brown University, Applied Math`, **Brown** logo), **Bert Vandereydt** (`MIT, NFI Future Leader '26`, **MIT** + **NFI** logos), **Griffin McCauley** (`Brown University, Applied Math`, **Brown** logo). Advisor: **Derek Figueroa** — `Former CEO, Seattle Fish Company` · `Former Chair, National Fisheries Institute` (**Seattle Fish Co.** + **NFI** logos). Cards support **multiple logos in a row**, with per-card heights so the differently-proportioned marks read evenly. Visual treatment: a soft tinted-gradient card background with a blurred accent **glow** behind a **gradient ring** around each (enlarged ~112px) headshot, and a subtle **hover lift**. Headshots are web-optimized portraits (~700px wide, downscaled from the originals so they don't render grainy in the small avatar), cropped/zoomed per-person via CSS `background-size` + `background-position` so faces are centered and matched in size.
+- The **"Nammu in the wild" photo gallery was removed** (along with `Founders.js` and the six founder photos). FAQ is now the last section before the footer.
+- *(Removed: the `AboutTeaser.js` home teaser, `About.js`, and the `/about` route. `SeafoodProblem.js` is now unused.)*
 
-### 3.4 Product Overview ("What we build")
-
-The "what we build" overview: two ways to work with Nammu (the platform, or a custom build), linking to the Product page. **Two equal-size light cards**, each with a visual at the top: Platform (with a capability checklist) + Custom Builds, then the CTA. — **in code (`ProductOverview.js`)**
-
-- **Platform card visual:** a live **app-window showcase** that auto-cross-fades through 5 real product screenshots (`Platform1`–`Platform5.png`), each labeled — Business intelligence, Sales dashboard, AI Chatbot, Automated outreach, CRM — with clickable dots. Doubles as a tour of the platform's breadth. (`PlatformShowcase.js`)
-- **Custom Builds card visual:** a simple, flashy **animation** that fills the card — a spreadsheet (`inventory.xlsx`) auto-populating its cells in a cascading, glowing wave, with a pulsing "⚡ Populating" badge — conveys "we automate the manual work." Loops; honors reduced-motion. (`CustomBuildsAnimation.js`)
-
-- **Eyebrow:** `What we build`
-- **Section header:** `Two ways to work with Nammu.`
-- **Supporting line:** Whether you're ready for a full platform or just need one manual workflow automated, we meet you where you are.
-
-**Path 1 — The Platform** (card, equal height):
-- Title: "Sales and procurement, in one place"
-- Blurb: Modular by design, so you use just the modules you need.
-- Capabilities (checklist): Demand forecasting · CRM · Live inventory · Automated outreach · Direct order portal · Business intelligence · Order entry · Nemo (AI chatbot)
-
-**Path 2 — Custom Builds** (card, equal height):
-- Title: "We'll build what you need"
-- Blurb: Tailored to the job, so you skip the manual work.
-- Build list (8, arrow markers, parallel to the Platform checklist, no label): Inventory reconciliation · Order entry · Data pipeline · Spreadsheet automation · Custom reports & exports · Price list updates · ERP integrations · Invoice processing
-
-- **CTA:** `Learn more` (prominent navy primary button, large, with arrow — consistent with the Founders "Meet the team" button) → **opens the demo modal** (no product page; the way to learn more is to book a demo).
-
-(Business impact is its own section, §3.5.)
-
-### 3.5 Business Impact
-
-Business impact, pulled out of the product overview into its own section so it isn't lumped in with "what we build." Three stat cards (icon + big number + line) covering time savings, sales, and purchasing. — **in code (`Impact.js`)**
-
-- **Eyebrow:** `Business impact`
-- **Section header:** `What changes when you run on Nammu.` *(general framing; the figures below are illustrative, not claimed as measured)*
-- Stat cards (large number + line, content vertically centered) `[[PLACEHOLDER: figures are illustrative — replace with verified metrics]]`:
-  - **40%** (clock icon) — less time spent on manual work
-  - **20%** (trend icon) — lift in profitability across the business
-  - **99.9%** (check icon) — accuracy across AI and automation
-
-### 3.6 Founders
-
-The "founders in the field" block — embedded-in-the-industry proof, placed after "what we build" so it bridges into Why Nammu. Its own standalone section (white background). — **in code (`Founders.js`)**
-
-- **Eyebrow:** `In the field`
-- **Section header:** `We're part of the seafood community.` *(about being embedded, not posturing expertise)*
-- **Subtitle:** We meet you where you are. Book a demo at the next event, or we'll come to you. *(conveys we'll meet clients at events/conferences or visit them)*
-- A **flush photo collage** of all 6 real founder photos from across the industry (Seafood Expo Global, the show floor, with industry leaders, the NFI Global Seafood Market Conference where Nammu sponsored). `founders4.jpeg` is a tall full-body shot, so it anchors the collage as a **vertical** image on the left, with three across the top and two equal-width landscape shots across the bottom (8-col grid), all flush with no bad crops. Rounded with soft shadow. Source: `src/assets/founders1.jpeg`–`founders6.jpeg`. — **in code**
-- **CTA:** `Book a demo` (prominent navy primary button, large, with arrow) → **opens the demo modal** (no About page). — **in code**
-
-### 3.7 FAQ
+### 3.5 FAQ
 
 A plain FAQ accordion (the "Why Nammu" differentiators block was removed). Eyebrow + title, then expandable questions. — **in code (`FAQ.js`)**
 
 - **Eyebrow:** `FAQ`
 - **Section header:** `Your common questions, answered.`
-- **Questions:**
-  - **Do we have to replace our ERP?** No. Nammu layers on top of your existing ERP and delivers value without a migration.
-  - **What if we're not ready for a full platform?** That's common in this industry. We also do custom builds that automate manual workflows without committing to a platform.
-  - **Which systems does Nammu integrate with?** Microsoft, SeaSoft, SAP, NetSuite, NetYield, QuickBooks, and more.
+- **Questions** (answers grounded in the rest of the site; "Is Nammu a CRM?", "What is Nammu?", and "How does Nammu use AI?" were removed), in order:
+  - **What if we're not ready for a full platform?** That's common in this industry. We also do workflow automation and custom builds without committing to a full platform.
+  - **Which systems does Nammu integrate with?** The systems seafood teams already run, including Microsoft Business Central, SAP, NetSuite, SeaSoft, NetYield, and QuickBooks, plus cold-storage partners like Lineage and AmeriCold. Using something else? We'll connect to it.
   - **How long does it take to get started?** We move quickly. Where a typical ERP transition takes 9 to 12 months, most teams are up and running on Nammu in 1 month.
-  - **Is Nammu a CRM?** CRM is just one part of the Nammu platform, among many other sales and procurement tools.
+  - **Do we have to replace our ERP?** No. Nammu layers on top of your existing ERP and delivers value without a migration.
   - **What makes Nammu seafood specific?** Our focus on seafood goes beyond the companies we serve. The product handles the seafood-specific nuances generic software ignores, like catch weight, product transformations, and container building.
 
 (No separate Final CTA section — the message form lives in the footer; see §2.2.)
 
+### 3.6 Press (in the news)
+
+Real coverage of Nammu, **folded into the home page** as the closing credibility section before the footer (it used to be a standalone `/press` page). — **in code (`pages/sections/Press.js`)**
+
+- **Centered, single-column layout** (`surface`): heading, then the logo strip, then the article carousel.
+- **Heading:** centered `SectionHeading` — eyebrow `Press`, title `Nammu in the news.`
+- **"As seen in" strip:** the label `As seen in` on its **own row**, then a centered row of **seven outlet logos in white chips** (full color, per-logo heights tuned so the mixed wordmarks/marks read evenly): **Perishable News · Seafood News · SeafoodSource · Yahoo · IntraFish · Undercurrent News · Expana**. (Conveys breadth of coverage beyond the few featured articles.)
+- **Carousel:** **three** articles (the duplicate Stavis story is deduped to the Expana/SeafoodNews version), one at a time in a large centered card, with prev/next arrows + dots and auto-advance (paused under `prefers-reduced-motion`; crossfade on change). Each card = **outlet logo** · date · headline · excerpt · `Read article →` (the whole card links out in a new tab). SeafoodNews carries the **Expana** logo (its parent publisher), which ships on a dark background (`Expana Logo.png`) and gets rounded corners. Newest first:
+  1. **IntraFish** — "'It's not like chicken': The AI startup betting on seafood's messiest data problem" (June 15, 2026).
+  2. **IntraFish** — "AI seafood platform Nammu taps Derek Figueroa as strategic advisor" (April 15, 2026).
+  3. **SeafoodNews** (Expana) — "Nammu Announces Full-Team Rollout at Stavis Seafoods…" (March 13, 2026).
+- **Press inquiries:** `hello@nammu.ai` (centered, below the carousel).
+
 ---
 
-## 4. About Us — no dedicated page
+## 4. About
 
-**Decision:** there is no `/about` route. The founder/community story is carried on the home page by the **Founders / "In the field"** section (§3.6) — real photos of the team across the industry, plus the "we meet you where you are" message. The CTA there opens the demo modal rather than linking to an About page.
-
-Held for later if an About page is ever revived: founder bios, origin story / founder-market-fit, why-seafood-why-now, advisors. `[[PLACEHOLDER: not built]]`
+**There is no longer an `/about` page.** Who-we-are now lives on the home page as the **Our Team** section — see **§3.4**. The standalone `About.js`, the `AboutTeaser.js` home teaser, and the `/about` route were removed; the "Why we exist" / Seafood Problem essay and the mission statement were dropped entirely (`SeafoodProblem.js` was deleted).
 
 ---
 
-## 5. Product — no dedicated page
+## 5. Press
 
-**Decision:** there is no `/product` route. The home page carries the product story (the Platform showcase in §3.4 + Custom Builds + Business Impact), and the path to learn more is to book a demo. All "Learn more" CTAs open the demo modal.
-
-Reference detail that lives on the home page or is held for the demo:
-- **Platform capabilities:** Demand forecasting · CRM · Live inventory · Automated outreach · Direct order portal · Business intelligence · Order entry · Nemo (AI chatbot)
-- **Custom Builds examples:** Inventory reconciliation · Order entry · Data pipeline · Spreadsheet automation · Custom reports & exports · Price list updates · ERP integrations · Invoice processing
-- **Integrations:** Microsoft, SeaSoft, SAP, NetSuite, NetYield, QuickBooks, and more (surfaced as the hero "ERP-integrated" chip; no standalone integrations section on the site).
+**Press is no longer its own page.** Its coverage now lives as a section on the home page — see **§3.6**. The standalone `/press` route and `pages/Press.js` were removed.
 
 ---
 
@@ -286,17 +255,18 @@ Running list of everything still needed. Update as we fill in.
 
 **Copy**
 
-- Confirm hero headlines (Home now `We speak seafood.`; About; Product)
+- Confirm hero headlines (Home now `Reimagining seafood software.`; About) + the 7 capability section titles/copy
 - The Seafood Problem — finalized problem points
 - FAQ answers (implementation time, security, pricing)
 - About: full story, why-now, founder bios, advisor list
-- Product: capability deep-dive detail copy (per platform feature)
+- Capability sections (§3.5): refine the animated graphics + copy per job to be done
 - Custom Builds: real examples / mini case studies
+- Press: **populated** with 4 real articles (IntraFish ×2, Perishable News, SeafoodNews) and outlet logos in full color (`Intrafish Logo.png`, `Perishable News Logo.png`, `Expana Logo.png` — Expana = SeafoodNews's publisher; ships on a dark background, shown with rounded corners)
 - Additional testimonials beyond Stavis
 
 **Images / Visuals**
 
-- Hero product screenshot(s) — Home & Product (existing: `Product1–5.png`, `iPad.jpg`)
+- Product screenshots for the hero / capability graphics (existing: `Product1–5.png`, `Platform1–5.png`, `iPad.jpg`)
 - Team headshots (About)
 - Advisor headshots (About)
 - Integration/customer logos cleared for display (existing assets: `BC.png`, `SeaSoft.png`, `SAP.png`, `NetSuite.png`, `NetYield.png`, `Stavis.png`, `NFI Logo.jpg`, `GSMC*`)
@@ -308,12 +278,13 @@ Running list of everything still needed. Update as we fill in.
 - Final accent color & gradient — _currently `#1f7fc2` accent; hero & CTA gradients in code, confirm_
 - Mobile nav pattern — **decided: hamburger → dropdown menu (in code)**
 - Footer nav columns y/n — _not added; footer kept minimal_
-- Hero: single screenshot vs. carousel — **decided: single screenshot (in code)**
+- Hero — **decided: a single centered above-the-fold band (`Hero.js`): small logo mark, the `Seafood's first AI partner.` headline, a typewriter that cycles "what Nammu does for you" capability phrases, Book a Demo + See what we do CTAs, a scroll cue, over a drifting aurora + faint grid backdrop. No product screenshots, no two-column layout.** Supersedes (in order): the logo-orbit visual `HeroVisual.js`, the product-screenshot collage `HeroCollage.js`, the single-screenshot, the seafood-photo mosaic, and the all-five-at-once mosaic. Rationale: the above-the-fold should situate Nammu, feel sleek/AI/software without literal UI, drive a demo, and segue into the capabilities; Nammu is framed as a partner that does things for teams, not a platform to adopt.
+- Site structure — **decided: a single-page site (Home), plus legal pages. Header nav is anchor tabs that jump to home sections (What we do · Team · FAQ · Press) + the Book a Demo CTA. Everything (capabilities §3.2, team §3.4, press §3.6) is a section on the home page; About and Press are no longer separate pages.** Supersedes the single-page, four-page (`/product`), three-page (`/press`), and two-page (`/about`) structures.
 - Trust/logo strip placement & which logos — _placeholder strip rendered under hero; logos TBD_
 
 **Known facts (confirmed)**
 
-- Slogan: **"We speak seafood."**
+- Footer: **no text slogan** (the "AI for Seafood" line was removed); the LinkedIn icon is **white** on a translucent-white circle (was light blue). Browser title tag remains "AI for seafood".
 - Seafood-only B2B (companies, distributors, wholesalers); never non-seafood
 - Two offerings: the Platform + Custom Builds
 - Platform capabilities: demand forecasting, CRM, live inventory, automated outreach, direct order portal, business intelligence, order entry, Nemo (AI assistant)
