@@ -241,7 +241,9 @@ const Hero = () => {
       fontSize: "clamp(1.4rem, 3.1vw, 1.95rem)",
       color: C.slate,
       fontWeight: 500,
-      lineHeight: 1.3,
+      // Roomier leading on mobile so the wrapped bubble row isn't cramped under
+      // "Helping your team"; tighter on desktop where it stays one line.
+      lineHeight: isMobile ? 1.95 : 1.3,
       margin: "clamp(22px, 3.4vh, 32px) auto 0",
       marginBottom: 0,
       maxWidth: "800px",
