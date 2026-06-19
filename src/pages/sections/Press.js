@@ -25,13 +25,13 @@ const LOGO = {
 // articles featured in the carousel). Per-logo heights even out apparent size;
 // each sits in a white chip so the mixed wordmarks / marks read consistently.
 const STRIP_LOGOS = [
+  { name: "IntraFish", src: intrafishLogo, h: 18 },
+  { name: "SeafoodSource", src: seafoodSourceLogo, h: 26 },
+  { name: "Expana", src: expanaLogo, h: 20 },
+  { name: "Undercurrent News", src: undercurrentLogo, h: 30 },
   { name: "Perishable News", src: perishableLogo, h: 20 },
   { name: "Seafood News", src: seafoodNewsLogo, h: 27 },
-  { name: "SeafoodSource", src: seafoodSourceLogo, h: 26 },
   { name: "Yahoo", src: yahooLogo, h: 34 },
-  { name: "IntraFish", src: intrafishLogo, h: 18 },
-  { name: "Undercurrent News", src: undercurrentLogo, h: 30 },
-  { name: "Expana", src: expanaLogo, h: 20 },
 ];
 
 // Real coverage, newest first.

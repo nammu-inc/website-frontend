@@ -23,19 +23,21 @@ const FOUNDERS = [
     accolades: ["Brown University, Applied Math"],
     logos: [{ src: brownLogo, h: 30 }],
     photo: ethanPhoto,
-    photoSize: "200%",
-    photoPos: "40% 16%",
+    photoSize: "215%",
+    photoPos: "40% 12%",
+    linkedin: "https://www.linkedin.com/in/ethanhuang218/",
   },
   {
     name: "Bert Vandereydt",
-    accolades: ["MIT, NFI Future Leader '26"],
+    accolades: ["MIT PhD, NFI Future Leader '26"],
     logos: [
       { src: mitLogo, h: 38 },
       { src: nfiLogo, h: 30 },
     ],
     photo: bertPhoto,
-    photoSize: "175%",
-    photoPos: "54% 24%",
+    photoSize: "195%",
+    photoPos: "54% 20%",
+    linkedin: "https://www.linkedin.com/in/bertvandereydt/",
   },
   {
     name: "Griffin McCauley",
@@ -44,6 +46,7 @@ const FOUNDERS = [
     photo: griffinPhoto,
     photoSize: "185%",
     photoPos: "52% 16%",
+    linkedin: "https://www.linkedin.com/in/griffin-mccauley-187b6423a/",
   },
 ];
 
@@ -60,7 +63,8 @@ const ADVISORS = [
     ],
     photo: derekPhoto,
     photoSize: "115%",
-    photoPos: "62% 32%",
+    photoPos: "62% 23%",
+    linkedin: "https://www.linkedin.com/in/derekfigueroa/",
   },
 ];
 
@@ -94,11 +98,17 @@ const PersonAvatar = ({ size = 88 }) => (
   </div>
 );
 
+const LinkedInIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.94H5.56v8.4h2.78zM6.95 8.7a1.61 1.61 0 1 0 0-3.22 1.61 1.61 0 0 0 0 3.22zm11.39 9.64v-4.6c0-2.46-1.31-3.6-3.06-3.6a2.64 2.64 0 0 0-2.4 1.32v-1.13H10.1c.04.78 0 8.4 0 8.4h2.78v-4.69c0-.25.02-.5.09-.68.2-.5.66-1.01 1.42-1.01 1 0 1.4.76 1.4 1.88v4.5h2.55z" />
+  </svg>
+);
+
 const PersonCard = ({ p, styles }) => (
   <div className="nm-team-card" style={styles.card}>
     <div style={styles.glow} aria-hidden="true" />
-    <div style={styles.ring}>
-      {p.photo ? (
+    {(() => {
+      const photoEl = p.photo ? (
         <div
           role="img"
           aria-label={p.name}
@@ -106,9 +116,40 @@ const PersonCard = ({ p, styles }) => (
         />
       ) : (
         <PersonAvatar size={112} />
+      );
+      return (
+        <div style={styles.ring}>
+          {p.linkedin ? (
+            <a
+              href={p.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${p.name} on LinkedIn`}
+              style={{ display: "block", borderRadius: "50%" }}
+            >
+              {photoEl}
+            </a>
+          ) : (
+            photoEl
+          )}
+        </div>
+      );
+    })()}
+    <div style={styles.nameRow}>
+      <h3 style={styles.name}>{p.name}</h3>
+      {p.linkedin && (
+        <a
+          href={p.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${p.name} on LinkedIn`}
+          className="nm-team-linkedin"
+          style={styles.linkedin}
+        >
+          <LinkedInIcon size={17} />
+        </a>
       )}
     </div>
-    <h3 style={styles.name}>{p.name}</h3>
     {p.role && <div style={styles.role}>{p.role}</div>}
     <ul style={styles.accolades}>
       {p.accolades.map((a) => (
@@ -182,8 +223,9 @@ const Team = () => {
     name: {
       ...sharedStyles.typography.h3,
       fontSize: "1.22rem",
+      lineHeight: 1.1,
       color: C.navy,
-      margin: "18px 0 0",
+      margin: 0,
       position: "relative",
     },
     role: {
@@ -222,6 +264,21 @@ const Team = () => {
       marginTop: "18px",
       position: "relative",
     },
+    nameRow: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "8px",
+      marginTop: "18px",
+    },
+    linkedin: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: C.slate,
+      transition: "color 0.2s ease",
+      position: "relative",
+    },
     foundersGrid: {
       display: "grid",
       gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
@@ -244,6 +301,7 @@ const Team = () => {
     <Section background={C.white} id="team">
       <style>{`
         .nm-team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(9,20,47,0.11); }
+        .nm-team-linkedin:hover { color: ${C.accent}; }
         @media (prefers-reduced-motion: reduce){ .nm-team-card:hover { transform: none; } }
       `}</style>
       <SectionHeading eyebrow="Our team" title="The people building Nammu." />
