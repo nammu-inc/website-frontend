@@ -113,7 +113,6 @@ const PersonCard = ({ p, styles }) => (
     <ul style={styles.accolades}>
       {p.accolades.map((a) => (
         <li key={a} style={styles.accolade}>
-          <span style={styles.accoladeDot} />
           {a}
         </li>
       ))}
@@ -203,19 +202,9 @@ const Team = () => {
       position: "relative",
     },
     accolade: {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "8px",
       fontSize: "0.95rem",
       color: C.ink,
       fontWeight: 500,
-    },
-    accoladeDot: {
-      width: "5px",
-      height: "5px",
-      borderRadius: "50%",
-      backgroundColor: C.accent,
-      flexShrink: 0,
     },
     logo: {
       height: "24px",
