@@ -7,7 +7,8 @@ const C = sharedStyles.colors;
 
 export const NEWSLETTER_NAME = "Between Tides";
 const NOTIFY_EMAIL = "hello@nammu.ai";
-const SEND_EMAIL_URL = "https://website-backend-blush.vercel.app/send-email";
+const SUBSCRIBE_URL =
+  "https://website-backend-blush.vercel.app/newsletter-signup";
 
 // Decorative drift of the Nammu mark across the band. The mark is a fish, which
 // suits a newsletter called Between Tides, so it's scattered like a loose school
@@ -25,23 +26,21 @@ const MARKS = [
   { top: "40%", left: "3%", size: 40, opacity: 0.07, rotate: 22, mobileHide: true },
 ];
 
-// Signup is a single email to the team, which for v1 is also the only record of
-// it, so a failed send has to reach the subscriber rather than be swallowed:
-// telling someone they're on the list when nothing was recorded is the one
-// outcome worth avoiding.
+// Posts to the backend's dedicated /newsletter-signup route. /send-email is the
+// demo-request route: it requires name + company and renders a "New Demo
+// Request" template, so a one-field subscribe 400s there.
+//
+// For v1 this email is the only record of the signup, so a failed send has to
+// reach the subscriber rather than be swallowed: telling someone they're on the
+// list when nothing was recorded is the one outcome worth avoiding.
 const subscribe = async (email) => {
-  const response = await fetch(SEND_EMAIL_URL, {
+  const response = await fetch(SUBSCRIBE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      to: NOTIFY_EMAIL,
-      subject: `${NEWSLETTER_NAME} signup: ${email}`,
-      data: {
-        email,
-        newsletter: NEWSLETTER_NAME,
-        source: "nammu.ai website",
-        signedUpAt: new Date().toISOString(),
-      },
+      email,
+      newsletter: NEWSLETTER_NAME,
+      source: "nammu.ai website",
     }),
   });
   const result = await response.json().catch(() => ({}));
