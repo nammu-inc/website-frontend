@@ -141,6 +141,13 @@ export const PageHero = ({ eyebrow, title, subtitle, children }) => {
   );
 };
 
+// Chevron: the prev/next arrow used by the carousels.
+export const Chevron = ({ dir }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: dir === "prev" ? "rotate(180deg)" : "none" }}>
+    <polyline points="9 6 15 12 9 18" />
+  </svg>
+);
+
 // Button: crisp primary / secondary actions.
 export const Button = ({
   children,

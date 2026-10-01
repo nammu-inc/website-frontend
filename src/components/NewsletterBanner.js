@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { sharedStyles } from "../styles";
 import { useIsMobile } from "../hooks";
-import { NEWSLETTER_NAME } from "../pages/sections/Newsletter";
+import { NEWSLETTER_NAME } from "../data/posts";
 
 const C = sharedStyles.colors;
 
@@ -39,10 +39,13 @@ const NewsletterBanner = () => {
   };
 
   const goToSignup = () => {
-    const el = document.getElementById("newsletter");
+    const el = document.getElementById("insights");
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    // Center the form rather than the section's top: on home the signup sits
+    // below the post cards, so the top can leave it off-screen.
+    const form = el.querySelector("form") || el;
+    form.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
     const input = el.querySelector("#newsletter-email");
     if (input) window.setTimeout(() => input.focus({ preventScroll: true }), reduced ? 0 : 600);
   };

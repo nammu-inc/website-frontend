@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { sharedStyles } from "../../styles";
 import { useIsMobile } from "../../hooks";
-import { Section, SectionHeading, Reveal } from "../../components/ui";
+import { Section, SectionHeading, Reveal, Chevron } from "../../components/ui";
 import intrafishLogo from "../../assets/Intrafish Logo.png";
 import perishableLogo from "../../assets/Perishable News Logo.png";
 import expanaLogo from "../../assets/Expana Logo.png";
@@ -18,6 +18,7 @@ const C = sharedStyles.colors;
 // dark background, so it gets rounded corners (`tile`) to read intentionally.
 const LOGO = {
   IntraFish: { src: intrafishLogo, height: 20 },
+  SeafoodSource: { src: seafoodSourceLogo, height: 44 },
   SeafoodNews: { src: expanaLogo, height: 30, tile: true },
 };
 
@@ -38,6 +39,15 @@ const STRIP_LOGOS = [
 const ARTICLES = [
   {
     outlet: "IntraFish",
+    date: "September 14, 2026",
+    headline:
+      "'Let the machines do the robot jobs': AI is quietly changing how seafood companies operate",
+    excerpt:
+      "A follow-up feature on Nammu's founders, who describe how the industry has moved from asking chatbots simple questions to building AI tools on top of decades-old ERP systems.",
+    url: "https://www.intrafish.com/technology/let-the-machines-do-the-robot-jobs-ai-is-quietly-changing-how-seafood-companies-operate/2-1-2042948",
+  },
+  {
+    outlet: "IntraFish",
     date: "June 15, 2026",
     headline:
       "'It's not like chicken': The AI startup betting on seafood's messiest data problem",
@@ -46,12 +56,13 @@ const ARTICLES = [
     url: "https://www.intrafish.com/markets/its-not-like-chicken-the-ai-startup-betting-on-seafoods-messiest-data-problem/2-1-1981623",
   },
   {
-    outlet: "IntraFish",
-    date: "April 15, 2026",
-    headline: "AI seafood platform Nammu taps Derek Figueroa as strategic advisor",
+    outlet: "SeafoodSource",
+    date: "April 17, 2026",
+    headline:
+      "Nammu hires new strategic advisor; Global Seafood Alliance adds two to board of directors",
     excerpt:
       "Nammu names Derek Figueroa, former Seattle Fish Company CEO and National Fisheries Institute chair, as a strategic advisor, deepening its roots across the seafood industry.",
-    url: "https://www.intrafish.com/people/ai-seafood-platform-nammu-taps-derek-figueroa-as-strategic-advisor/2-1-1974846",
+    url: "https://www.seafoodsource.com/news/business-finance/nammu-hires-new-strategic-advisor-global-seafood-alliance-adds-two-to-board-of-directors",
   },
   {
     outlet: "SeafoodNews",
@@ -65,12 +76,6 @@ const ARTICLES = [
 ];
 
 const ROTATE_MS = 7000;
-
-const Chevron = ({ dir }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: dir === "prev" ? "rotate(180deg)" : "none" }}>
-    <polyline points="9 6 15 12 9 18" />
-  </svg>
-);
 
 // Press, folded into the home page as a section (no longer its own /press page),
 // shown as a carousel (one article at a time, auto-advancing).
