@@ -1,7 +1,7 @@
 // Everything Nammu writes itself: Between Tides issues and blog posts. The full
-// posts live on LinkedIn; the site only indexes them in the Insights section on
-// home. Outside coverage belongs in
-// Press, not here.
+// posts live off-site (newsletter issues on LinkedIn, blog posts on Substack);
+// the site only indexes them in the Insights section on home. Outside coverage
+// belongs in Press, not here.
 //
 // Add new entries at the top (newest first). `type` picks the tag:
 //   "newsletter" -> Between Tides,  "blog" -> Blog
@@ -14,6 +14,22 @@
 //   url: "https://www.linkedin.com/pulse/...",
 // },
 export const POSTS = [
+  {
+    type: "newsletter",
+    date: "October 7, 2026",
+    title: "Between Tides #4: Scottish salmon, Meta's Muse, and why \"Nammu\"",
+    excerpt:
+      "Scotland's farmed salmon harvest climbs 3% as more fish survive to harvest, how that survival rate compares with Norway, Chile, and land-based livestock, and what early users are getting from Meta's new Muse agent (and where it's gone wrong).",
+    url: "https://www.linkedin.com/pulse/between-tides-4-scottish-salmon-metas-muse-why-nammu-nammu-ai-2vrbc",
+  },
+  {
+    type: "blog",
+    date: "October 6, 2026",
+    title: "Why we're called Nammu",
+    excerpt:
+      "How a ChatGPT brainstorm and a Sumerian sea goddess gave us our name.",
+    url: "https://nammuai.substack.com/p/why-were-called-nammu",
+  },
   {
     type: "newsletter",
     date: "September 24, 2026",
