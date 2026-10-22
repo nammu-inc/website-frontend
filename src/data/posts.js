@@ -16,6 +16,14 @@
 export const POSTS = [
   {
     type: "newsletter",
+    date: "October 21, 2026",
+    title: "Between Tides #5: AI is changing mathematics. What's next?",
+    excerpt:
+      "What OpenAI's proposed Navier-Stokes solution and 700+ new papers mean for mathematics, why the same shift is coming for seafood buyers, and what a study of 1,000 students says about learning when AI does the work.",
+    url: "https://www.linkedin.com/pulse/between-tides-5-ai-changing-mathematics-whats-next-nammu-ai-lmrhe",
+  },
+  {
+    type: "newsletter",
     date: "October 7, 2026",
     title: "Between Tides #4: Scottish salmon, Meta's Muse, and why \"Nammu\"",
     excerpt:
