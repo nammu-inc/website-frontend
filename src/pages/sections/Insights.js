@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { sharedStyles } from "../../styles";
 import { useIsMobile } from "../../hooks";
 import { Section, SectionHeading, Reveal, Button, Chevron } from "../../components/ui";
@@ -58,7 +58,18 @@ const Insights = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
-  const [start, setStart] = useState(0);
+  // Carousel position in the tripled LOOP track; starts on the middle copy.
+  const [index, setIndex] = useState(POSTS.length);
+  const [animate, setAnimate] = useState(true);
+  const slidingRef = useRef(false);
+
+  // Re-enable the transition on the frame after a silent recenter.
+  useEffect(() => {
+    if (!animate) {
+      const id = requestAnimationFrame(() => setAnimate(true));
+      return () => cancelAnimationFrame(id);
+    }
+  }, [animate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,11 +96,28 @@ const Insights = () => {
   const hasPreviews = previews.length >= MIN_POSTS;
   const isCarousel = previews.length > PER_VIEW;
   const perView = isMobile ? 1 : PER_VIEW;
-  // The carousel slides one card per step; `start` is the first visible card.
-  // Clamped so a resize from mobile to desktop can't leave empty slots.
-  const maxStart = Math.max(previews.length - perView, 0);
-  const first = Math.min(start, maxStart);
-  const step = (d) => setStart(Math.min(Math.max(first + d, 0), maxStart));
+  // Endless carousel, same approach as Testimonials: the posts render three
+  // times and the track slides one card per step. After each slide it silently
+  // recenters into the middle copy, so the arrows keep going round in either
+  // direction and there is always a card waiting on both sides.
+  const N = previews.length;
+  const loop = [...previews, ...previews, ...previews];
+  const active = ((index % N) + N) % N;
+  const goTo = (next) => {
+    if (slidingRef.current || !animate || next === index) return;
+    slidingRef.current = true;
+    setIndex(next);
+  };
+  const step = (d) => goTo(index + d);
+  const handleTransitionEnd = (e) => {
+    // Ignore the cards' own hover transitions bubbling up from inside.
+    if (e.target !== e.currentTarget) return;
+    slidingRef.current = false;
+    if (index >= 2 * N || index < N) {
+      setAnimate(false);
+      setIndex(N + active);
+    }
+  };
   const rowCount = Math.min(previews.length, PER_VIEW);
 
   const styles = {
@@ -174,8 +202,8 @@ const Insights = () => {
     track: {
       display: "flex",
       gap: `${GAP}px`,
-      transform: `translateX(calc(${-first} * ((100% - ${(perView - 1) * GAP}px) / ${perView} + ${GAP}px)))`,
-      transition: "transform 0.45s ease",
+      transform: `translateX(calc(${-index} * ((100% - ${(perView - 1) * GAP}px) / ${perView} + ${GAP}px)))`,
+      transition: animate ? "transform 0.45s ease" : "none",
     },
     slide: {
       flex: `0 0 calc((100% - ${(perView - 1) * GAP}px) / ${perView})`,
@@ -188,7 +216,7 @@ const Insights = () => {
       gap: "20px",
       marginTop: "4px",
     },
-    arrow: (disabled) => ({
+    arrow: {
       width: "42px",
       height: "42px",
       borderRadius: "50%",
@@ -198,10 +226,9 @@ const Insights = () => {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      cursor: disabled ? "default" : "pointer",
-      opacity: disabled ? 0.4 : 1,
+      cursor: "pointer",
       boxShadow: "0 4px 14px rgba(9,20,47,0.06)",
-    }),
+    },
     dots: { display: "flex", gap: "8px" },
     dot: (on) => ({
       width: on ? "22px" : "8px",
@@ -219,10 +246,26 @@ const Insights = () => {
       backgroundColor: C.white,
       border: `1px solid ${C.line}`,
       borderRadius: "16px",
-      padding: "22px 24px",
+      overflow: "hidden",
       boxShadow: "0 10px 30px rgba(9,20,47,0.06)",
       textDecoration: "none",
       transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    },
+    // Cover image runs edge to edge across the top at a fixed 16:9, so cards in
+    // a row line up whatever size the source image is.
+    cover: {
+      display: "block",
+      width: "100%",
+      aspectRatio: "16 / 9",
+      objectFit: "cover",
+      backgroundColor: C.surface,
+      borderBottom: `1px solid ${C.line}`,
+    },
+    body: {
+      display: "flex",
+      flexDirection: "column",
+      flex: 1,
+      padding: "20px 24px 22px",
     },
     meta: {
       display: "flex",
@@ -267,13 +310,18 @@ const Insights = () => {
       tabIndex={hidden ? -1 : undefined}
       style={{ ...styles.card, flex: 1 }}
     >
-      <div style={styles.meta}>
-        <PostTag post={p} />
-        <span style={styles.date}>{p.date}</span>
+      {p.image && (
+        <img src={p.image} alt="" loading="lazy" style={styles.cover} />
+      )}
+      <div style={styles.body}>
+        <div style={styles.meta}>
+          <PostTag post={p} />
+          <span style={styles.date}>{p.date}</span>
+        </div>
+        <h3 style={styles.title}>{p.title}</h3>
+        {p.excerpt && <p style={styles.excerpt}>{p.excerpt}</p>}
+        <span style={styles.read}>Read →</span>
       </div>
-      <h3 style={styles.title}>{p.title}</h3>
-      {p.excerpt && <p style={styles.excerpt}>{p.excerpt}</p>}
-      <span style={styles.read}>Read →</span>
     </a>
   );
 
@@ -306,14 +354,14 @@ const Insights = () => {
             {isCarousel ? (
               <>
                 <div style={styles.viewport}>
-                  <div style={styles.track}>
-                    {previews.map((p, i) => (
+                  <div style={styles.track} onTransitionEnd={handleTransitionEnd}>
+                    {loop.map((p, i) => (
                       <div
-                        key={`${p.date}-${p.title}`}
+                        key={`${p.date}-${p.title}-${i}`}
                         style={styles.slide}
-                        aria-hidden={i < first || i >= first + perView}
+                        aria-hidden={i < index || i >= index + perView}
                       >
-                        {renderCard(p, i < first || i >= first + perView)}
+                        {renderCard(p, i < index || i >= index + perView)}
                       </div>
                     ))}
                   </div>
@@ -321,26 +369,24 @@ const Insights = () => {
                 <div style={styles.controls}>
                   <button
                     aria-label="Previous posts"
-                    style={styles.arrow(first === 0)}
-                    disabled={first === 0}
+                    style={styles.arrow}
                     onClick={() => step(-1)}
                   >
                     <Chevron dir="prev" />
                   </button>
                   <div style={styles.dots}>
-                    {Array.from({ length: maxStart + 1 }, (_, i) => (
+                    {previews.map((_, i) => (
                       <button
                         key={i}
                         aria-label={`Show posts from ${i + 1}`}
-                        style={styles.dot(i === first)}
-                        onClick={() => setStart(i)}
+                        style={styles.dot(i === active)}
+                        onClick={() => goTo(N + i)}
                       />
                     ))}
                   </div>
                   <button
                     aria-label="Next posts"
-                    style={styles.arrow(first === maxStart)}
-                    disabled={first === maxStart}
+                    style={styles.arrow}
                     onClick={() => step(1)}
                   >
                     <Chevron dir="next" />

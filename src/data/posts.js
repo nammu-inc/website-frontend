@@ -1,3 +1,9 @@
+import bt6 from "../assets/posts/between-tides-6.jpg";
+import bt5 from "../assets/posts/between-tides-5.jpg";
+import bt4 from "../assets/posts/between-tides-4.jpg";
+import whyNammu from "../assets/posts/why-nammu.jpg";
+import bt3 from "../assets/posts/between-tides-3.jpg";
+
 // Everything Nammu writes itself: Between Tides issues and blog posts. The full
 // posts live off-site (newsletter issues on LinkedIn, blog posts on Substack);
 // the site only indexes them in the Insights section on home. Outside coverage
@@ -12,8 +18,22 @@
 //   title: "Post title as it appears on LinkedIn",
 //   excerpt: "One or two sentences on what the post covers.",
 //   url: "https://www.linkedin.com/pulse/...",
+//   image: coverImport,
 // },
+//
+// `image` is the post's cover (its og:image), saved into src/assets/posts and
+// imported above. Save a copy rather than linking LinkedIn's media URLs, which
+// are signed and can expire. Resize to ~800px wide JPEG; cards show it at 16:9.
 export const POSTS = [
+  {
+    type: "newsletter",
+    date: "November 4, 2026",
+    title: "Between Tides #6: What an AI bust could mean for seafood",
+    excerpt:
+      "Cracks in the AI boom, how AI suppliers are financing their own customers, and what a bust would mean for seafood: customer spending, access to credit, and the software tools you rely on. Plus a Topgolf get-together with Colorado seafood folks.",
+    url: "https://www.linkedin.com/pulse/between-tides-6-what-ai-bust-could-mean-seafood-nammu-ai-w8tlc",
+    image: bt6,
+  },
   {
     type: "newsletter",
     date: "October 21, 2026",
@@ -21,6 +41,7 @@ export const POSTS = [
     excerpt:
       "What OpenAI's proposed Navier-Stokes solution and 700+ new papers mean for mathematics, why the same shift is coming for seafood buyers, and what a study of 1,000 students says about learning when AI does the work.",
     url: "https://www.linkedin.com/pulse/between-tides-5-ai-changing-mathematics-whats-next-nammu-ai-lmrhe",
+    image: bt5,
   },
   {
     type: "newsletter",
@@ -29,6 +50,7 @@ export const POSTS = [
     excerpt:
       "Scotland's farmed salmon harvest climbs 3% as more fish survive to harvest, how that survival rate compares with Norway, Chile, and land-based livestock, and what early users are getting from Meta's new Muse agent (and where it's gone wrong).",
     url: "https://www.linkedin.com/pulse/between-tides-4-scottish-salmon-metas-muse-why-nammu-nammu-ai-2vrbc",
+    image: bt4,
   },
   {
     type: "blog",
@@ -37,6 +59,7 @@ export const POSTS = [
     excerpt:
       "How a ChatGPT brainstorm and a Sumerian sea goddess gave us our name.",
     url: "https://nammuai.substack.com/p/why-were-called-nammu",
+    image: whyNammu,
   },
   {
     type: "newsletter",
@@ -45,6 +68,7 @@ export const POSTS = [
     excerpt:
       "Takeaways from the Sushi Summit in DC: where U.S. sushi still has room to grow, how Norway spent two decades turning farmed cod into a business now reaching U.S. markets, and the story of how Norwegian salmon first made it onto sushi menus in Japan.",
     url: "https://www.linkedin.com/pulse/between-tides-3-special-sushi-edition-nammu-ai-jzvie",
+    image: bt3,
   },
 ];
 
