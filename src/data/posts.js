@@ -1,19 +1,15 @@
 import bt6 from "../assets/posts/between-tides-6.jpg";
 import bt5 from "../assets/posts/between-tides-5.jpg";
 import bt4 from "../assets/posts/between-tides-4.jpg";
-import whyNammu from "../assets/posts/why-nammu.jpg";
 import bt3 from "../assets/posts/between-tides-3.jpg";
 
-// Everything Nammu writes itself: Between Tides issues and blog posts. The full
-// posts live off-site (newsletter issues on LinkedIn, blog posts on Substack);
-// the site only indexes them in the Insights section on home. Outside coverage
-// belongs in Press, not here.
+// Between Tides issues, listed in the Newsletter section on home. Issues so far
+// live on LinkedIn; the cards link out to them. Case studies are separate (see
+// caseStudies.js), and outside coverage belongs in Press.
 //
-// Add new entries at the top (newest first). `type` picks the tag:
-//   "newsletter" -> Between Tides,  "blog" -> Blog
+// Add new entries at the top (newest first):
 //
 // {
-//   type: "newsletter",
 //   date: "October 1, 2026",
 //   title: "Post title as it appears on LinkedIn",
 //   excerpt: "One or two sentences on what the post covers.",
@@ -26,7 +22,6 @@ import bt3 from "../assets/posts/between-tides-3.jpg";
 // are signed and can expire. Resize to ~800px wide JPEG; cards show it at 16:9.
 export const POSTS = [
   {
-    type: "newsletter",
     date: "November 4, 2026",
     title: "Between Tides #6: What an AI bust could mean for seafood",
     excerpt:
@@ -35,7 +30,6 @@ export const POSTS = [
     image: bt6,
   },
   {
-    type: "newsletter",
     date: "October 21, 2026",
     title: "Between Tides #5: AI is changing mathematics. What's next?",
     excerpt:
@@ -44,7 +38,6 @@ export const POSTS = [
     image: bt5,
   },
   {
-    type: "newsletter",
     date: "October 7, 2026",
     title: "Between Tides #4: Scottish salmon, Meta's Muse, and why \"Nammu\"",
     excerpt:
@@ -53,16 +46,6 @@ export const POSTS = [
     image: bt4,
   },
   {
-    type: "blog",
-    date: "October 6, 2026",
-    title: "Why we're called Nammu",
-    excerpt:
-      "How a ChatGPT brainstorm and a Sumerian sea goddess gave us our name.",
-    url: "https://nammuai.substack.com/p/why-were-called-nammu",
-    image: whyNammu,
-  },
-  {
-    type: "newsletter",
     date: "September 24, 2026",
     title: "Between Tides #3: Special sushi edition!",
     excerpt:
@@ -75,5 +58,3 @@ export const POSTS = [
 export const NEWSLETTER_NAME = "Between Tides";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/nammu-ai";
 
-export const postLabel = (post) =>
-  post.type === "newsletter" ? NEWSLETTER_NAME : "Blog";

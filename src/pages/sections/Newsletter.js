@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { sharedStyles } from "../../styles";
 import { useIsMobile } from "../../hooks";
 import { Section, SectionHeading, Reveal, Button, Chevron } from "../../components/ui";
-import PostTag from "../../components/PostTag";
 import { POSTS, NEWSLETTER_NAME } from "../../data/posts";
 
 const C = sharedStyles.colors;
@@ -37,23 +36,20 @@ const subscribe = async (email) => {
 // carousel (one card at a time on mobile).
 const PER_VIEW = 3;
 // Fewer posts than this and the cards stay hidden: one or two read as a thin
-// section, so it shows just the Between Tides signup until there's a full row.
+// row, so it shows just the Between Tides signup until there's a full row.
 const MIN_POSTS = 3;
 const CARD_W = 360;
 const GAP = 20;
 
-// Insights: everything we write ourselves, after the press coverage, where the
-// reader has met us but isn't ready to book a call. Light like the rest of the
-// page (the footer is the site's only dark block); a soft blue wash sets it
-// apart from the surface gray of Press above and the white FAQ below.
+// Newsletter: Between Tides, after Press and Case studies, where the reader has
+// met us but isn't ready to book a call. Light like the rest of the page (the
+// footer is the site's only dark block); a soft blue wash sets it apart from the
+// white Case studies band above and the white FAQ below.
 //
-// Centered like the other home sections and kept short: a one-line heading, the
-// newest posts as a row of equal cards, then Between Tides in its own small
-// panel. The panel says what the newsletter is, so it reads as one thing we
-// publish rather than a label for the whole section. Past three posts the row
-// becomes a carousel instead of a separate page. Below MIN_POSTS it's the plain
-// newsletter signup alone.
-const Insights = () => {
+// Signup first: the heading names the newsletter and the form sits right under
+// it, so joining is the section's main action. Recent issues follow as a row of
+// equal cards (a carousel past three) for anyone who wants a sample first.
+const Newsletter = () => {
   const isMobile = useIsMobile();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -121,48 +117,18 @@ const Insights = () => {
   const rowCount = Math.min(previews.length, PER_VIEW);
 
   const styles = {
-    // With previews, Between Tides gets its own panel under the cards: what it
-    // is on the left, the signup form on the right.
-    panel: {
-      display: "flex",
-      flexDirection: isMobile ? "column" : "row",
-      alignItems: isMobile ? "stretch" : "center",
-      justifyContent: "space-between",
-      gap: isMobile ? "16px" : "32px",
-      // Matches the card row's width, but never narrower than two cards so the
-      // name and form still fit on one line.
-      maxWidth: `${Math.max(rowCount, 2) * CARD_W}px`,
-      margin: isMobile ? "28px auto 0" : "36px auto 0",
-      padding: isMobile ? "22px 22px" : "22px 26px",
-      backgroundColor: "rgba(255,255,255,0.7)",
-      border: `1px solid ${C.line}`,
-      borderRadius: "16px",
-      textAlign: "left",
-    },
-    panelName: {
-      ...sharedStyles.typography.body,
-      fontSize: "1.02rem",
-      fontWeight: 700,
-      color: C.navy,
-      margin: 0,
-    },
-    panelText: {
-      ...sharedStyles.typography.small,
-      color: C.slate,
-      margin: "2px 0 0",
-    },
     form: {
       display: "flex",
       flexDirection: isMobile ? "column" : "row",
       gap: "12px",
-      maxWidth: hasPreviews ? (isMobile ? "none" : "420px") : "520px",
-      margin: hasPreviews ? 0 : "32px auto 0",
+      maxWidth: "520px",
+      margin: isMobile ? "28px auto 0" : "32px auto 0",
       width: "100%",
     },
     input: {
       flex: 1,
       minWidth: 0,
-      padding: hasPreviews ? "12px 14px" : "14px 16px",
+      padding: "14px 16px",
       borderRadius: "10px",
       border: `1px solid ${C.line}`,
       background: C.white,
@@ -171,6 +137,13 @@ const Insights = () => {
       fontFamily: "inherit",
       boxSizing: "border-box",
       transition: "border-color 0.18s ease, box-shadow 0.18s ease",
+    },
+    // Small divider label between the signup and the issue cards.
+    issuesLabel: {
+      ...sharedStyles.typography.eyebrow,
+      fontSize: "0.78rem",
+      color: C.slate,
+      margin: isMobile ? "56px 0 0" : "72px 0 0",
     },
     message: (ok) => ({
       ...sharedStyles.typography.small,
@@ -185,16 +158,16 @@ const Insights = () => {
       gridTemplateColumns: isMobile ? "1fr" : `repeat(${rowCount}, 1fr)`,
       gap: `${GAP}px`,
       maxWidth: isMobile ? "none" : `${rowCount * CARD_W}px`,
-      margin: isMobile ? "32px auto 0" : "40px auto 0",
+      margin: isMobile ? "20px auto 0" : "24px auto 0",
       textAlign: "left",
     },
     // Carousel: the viewport clips the track; padding (offset by negative
     // margin) leaves room for the cards' hover lift and shadow.
     viewport: {
       overflow: "hidden",
-      // Plus the side padding, so the cards line up with the panel below.
+      // Plus the side padding, so the cards keep their width inside the clip.
       maxWidth: isMobile ? "none" : `${PER_VIEW * CARD_W + 24}px`,
-      margin: isMobile ? "20px -12px 0" : "28px auto 0",
+      margin: isMobile ? "8px -12px 0" : "12px auto 0",
       boxSizing: "border-box",
       padding: "12px 12px 28px",
       textAlign: "left",
@@ -267,13 +240,12 @@ const Insights = () => {
       flex: 1,
       padding: "20px 24px 22px",
     },
-    meta: {
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      marginBottom: "14px",
+    date: {
+      ...sharedStyles.typography.small,
+      fontSize: "0.85rem",
+      color: C.slate,
+      marginBottom: "10px",
     },
-    date: { ...sharedStyles.typography.small, fontSize: "0.85rem", color: C.slate },
     title: {
       ...sharedStyles.typography.h3,
       fontSize: "1.15rem",
@@ -314,10 +286,7 @@ const Insights = () => {
         <img src={p.image} alt="" loading="lazy" style={styles.cover} />
       )}
       <div style={styles.body}>
-        <div style={styles.meta}>
-          <PostTag post={p} />
-          <span style={styles.date}>{p.date}</span>
-        </div>
+        <div style={styles.date}>{p.date}</div>
         <h3 style={styles.title}>{p.title}</h3>
         {p.excerpt && <p style={styles.excerpt}>{p.excerpt}</p>}
         <span style={styles.read}>Read →</span>
@@ -327,7 +296,7 @@ const Insights = () => {
 
   return (
     <Section
-      id="insights"
+      id="newsletter"
       style={{
         background: "linear-gradient(180deg, #f1f7fd 0%, #e6f0fa 100%)",
         textAlign: "center",
@@ -347,133 +316,39 @@ const Insights = () => {
       `}</style>
 
       <Reveal>
-        {hasPreviews ? (
-          <>
-            <SectionHeading eyebrow="Insights" title="The latest from Nammu." />
-
-            {isCarousel ? (
-              <>
-                <div style={styles.viewport}>
-                  <div style={styles.track} onTransitionEnd={handleTransitionEnd}>
-                    {loop.map((p, i) => (
-                      <div
-                        key={`${p.date}-${p.title}-${i}`}
-                        style={styles.slide}
-                        aria-hidden={i < index || i >= index + perView}
-                      >
-                        {renderCard(p, i < index || i >= index + perView)}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div style={styles.controls}>
-                  <button
-                    aria-label="Previous posts"
-                    style={styles.arrow}
-                    onClick={() => step(-1)}
-                  >
-                    <Chevron dir="prev" />
-                  </button>
-                  <div style={styles.dots}>
-                    {previews.map((_, i) => (
-                      <button
-                        key={i}
-                        aria-label={`Show posts from ${i + 1}`}
-                        style={styles.dot(i === active)}
-                        onClick={() => goTo(N + i)}
-                      />
-                    ))}
-                  </div>
-                  <button
-                    aria-label="Next posts"
-                    style={styles.arrow}
-                    onClick={() => step(1)}
-                  >
-                    <Chevron dir="next" />
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div style={styles.grid}>{previews.map((p) => renderCard(p))}</div>
-            )}
-
-            <div style={styles.panel}>
-              <div>
-                <p style={styles.panelName}>{NEWSLETTER_NAME}</p>
-                <p style={styles.panelText}>
-                  Our newsletter on seafood markets and technology.
-                </p>
-              </div>
-              <form onSubmit={handleSubmit} style={styles.form}>
-                <input
-                  className="nm-newsletter-input"
-                  id="newsletter-email"
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  autoComplete="email"
-                  aria-label="Email address"
-                  required
-                  disabled={isSubmitting}
-                  style={styles.input}
-                />
-                <Button
-                  variant="accent"
-                  type="submit"
-                  disabled={isSubmitting}
-                  style={{
-                    opacity: isSubmitting ? 0.7 : 1,
-                    cursor: isSubmitting ? "not-allowed" : "pointer",
-                    whiteSpace: "nowrap",
-                    ...(hasPreviews ? { padding: "11px 20px" } : {}),
-                  }}
-                >
-                  {isSubmitting ? "Joining..." : "Join the list"}
-                </Button>
-              </form>
-            </div>
-          </>
-        ) : (
-          <>
-            <SectionHeading
-              eyebrow="Insights"
-              title={NEWSLETTER_NAME}
-              subtitle="Our newsletter on seafood markets and technology."
-            />
-            <form onSubmit={handleSubmit} style={styles.form}>
-              <input
-                className="nm-newsletter-input"
-                id="newsletter-email"
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                autoComplete="email"
-                aria-label="Email address"
-                required
-                disabled={isSubmitting}
-                style={styles.input}
-              />
-              <Button
-                variant="accent"
-                type="submit"
-                disabled={isSubmitting}
-                style={{
-                  opacity: isSubmitting ? 0.7 : 1,
-                  cursor: isSubmitting ? "not-allowed" : "pointer",
-                  whiteSpace: "nowrap",
-                  ...(hasPreviews ? { padding: "11px 20px" } : {}),
-                }}
-              >
-                {isSubmitting ? "Joining..." : "Join the list"}
-              </Button>
-            </form>
-          </>
-        )}
-
+        <SectionHeading
+          eyebrow="Newsletter"
+          title={NEWSLETTER_NAME}
+          subtitle="Seafood markets and technology, in your inbox every other week."
+        />
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <input
+            className="nm-newsletter-input"
+            id="newsletter-email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@company.com"
+            autoComplete="email"
+            aria-label="Email address"
+            required
+            disabled={isSubmitting}
+            style={styles.input}
+          />
+          <Button
+            variant="accent"
+            type="submit"
+            disabled={isSubmitting}
+            style={{
+              opacity: isSubmitting ? 0.7 : 1,
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {isSubmitting ? "Joining..." : "Join the list"}
+          </Button>
+        </form>
         {status === "success" && (
           <p style={styles.message(true)} role="status">
             You're on the list. Look for the next issue of {NEWSLETTER_NAME} in
@@ -486,9 +361,60 @@ const Insights = () => {
             {NOTIFY_EMAIL}.
           </p>
         )}
+
+        {hasPreviews && (
+          <>
+            <div style={styles.issuesLabel}>Recent issues</div>
+              {isCarousel ? (
+                <>
+                  <div style={styles.viewport}>
+                    <div style={styles.track} onTransitionEnd={handleTransitionEnd}>
+                      {loop.map((p, i) => (
+                        <div
+                          key={`${p.date}-${p.title}-${i}`}
+                          style={styles.slide}
+                          aria-hidden={i < index || i >= index + perView}
+                        >
+                          {renderCard(p, i < index || i >= index + perView)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={styles.controls}>
+                    <button
+                      aria-label="Previous posts"
+                      style={styles.arrow}
+                      onClick={() => step(-1)}
+                    >
+                      <Chevron dir="prev" />
+                    </button>
+                    <div style={styles.dots}>
+                      {previews.map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Show posts from ${i + 1}`}
+                          style={styles.dot(i === active)}
+                          onClick={() => goTo(N + i)}
+                        />
+                      ))}
+                    </div>
+                    <button
+                      aria-label="Next posts"
+                      style={styles.arrow}
+                      onClick={() => step(1)}
+                    >
+                      <Chevron dir="next" />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div style={styles.grid}>{previews.map((p) => renderCard(p))}</div>
+              )}
+          </>
+        )}
       </Reveal>
     </Section>
   );
 };
 
-export default Insights;
+export default Newsletter;

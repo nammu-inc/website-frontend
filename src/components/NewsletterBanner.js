@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { sharedStyles } from "../styles";
+import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks";
 import { NEWSLETTER_NAME } from "../data/posts";
 
@@ -25,6 +26,7 @@ const readDismissed = () => {
 // newsletter gets one impression without permanently costing viewport height.
 const NewsletterBanner = () => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [dismissed, setDismissed] = useState(readDismissed);
 
   if (dismissed) return null;
@@ -39,8 +41,12 @@ const NewsletterBanner = () => {
   };
 
   const goToSignup = () => {
-    const el = document.getElementById("insights");
-    if (!el) return;
+    const el = document.getElementById("newsletter");
+    // Off home (e.g. on a case study) the signup isn't on the page: go to it.
+    if (!el) {
+      navigate("/#newsletter");
+      return;
+    }
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Center the form rather than the section's top: on home the signup sits
     // below the post cards, so the top can leave it off-screen.

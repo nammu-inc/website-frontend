@@ -10,7 +10,8 @@ const NAV = [
   { label: "Product", id: "capabilities" },
   { label: "Team", id: "team" },
   { label: "Press", id: "press" },
-  { label: "Insights", id: "insights" },
+  { label: "Case studies", id: "case-studies" },
+  { label: "Newsletter", id: "newsletter" },
   { label: "FAQ", id: "faq" },
 ];
 
@@ -82,7 +83,8 @@ const Header = () => {
     nav: {
       display: "flex",
       alignItems: "center",
-      gap: "30px",
+      // Tighter just above the mobile breakpoint so all six tabs fit on one line.
+      gap: "clamp(18px, 2.4vw, 30px)",
       marginLeft: "auto",
     },
     navLink: (active) => ({
@@ -91,10 +93,12 @@ const Header = () => {
       fontWeight: 600,
       color: active ? C.accent : C.navy,
       textDecoration: "none",
+      whiteSpace: "nowrap",
       transition: "color 0.18s ease",
     }),
     button: {
       ...sharedStyles.elements.button,
+      whiteSpace: "nowrap",
       display: "inline-flex",
       alignItems: "center",
       backgroundColor: C.accent,

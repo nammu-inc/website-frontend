@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
 import Hotjar from "./components/Hotjar";
 import Home from "./pages/Home";
+import CaseStudy from "./pages/CaseStudy";
 import LinkedInBanner from "./pages/LinkedInBanner";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
@@ -21,6 +22,14 @@ const App = () => (
         element={
           <Layout>
             <Home />
+          </Layout>
+        }
+      />
+      <Route
+        path="/case-studies/:slug"
+        element={
+          <Layout>
+            <CaseStudy />
           </Layout>
         }
       />
