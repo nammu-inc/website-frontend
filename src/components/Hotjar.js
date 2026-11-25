@@ -2,6 +2,10 @@ import { useEffect } from "react";
 
 const Hotjar = () => {
   useEffect(() => {
+    // Load once per page. StrictMode runs effects twice in development, and a
+    // second copy of the tag throws ("another Contentsquare tag already runs").
+    if (window.hj) return undefined;
+
     const script = document.createElement("script");
     const scriptContent = `
       (function(h,o,t,j,a,r){

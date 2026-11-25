@@ -41,10 +41,10 @@ const MIN_POSTS = 3;
 const CARD_W = 360;
 const GAP = 20;
 
-// Newsletter: Between Tides, after Press and Case studies, where the reader has
-// met us but isn't ready to book a call. Light like the rest of the page (the
+// Newsletter: Between Tides, after Case studies, Team, and Press, where the
+// reader has met us but isn't ready to book a call. Light like the rest of the page (the
 // footer is the site's only dark block); a soft blue wash sets it apart from the
-// white Case studies band above and the white FAQ below.
+// white Press band above and the white FAQ below.
 //
 // Signup first: the heading names the newsletter and the form sits right under
 // it, so joining is the section's main action. Recent issues follow as a row of

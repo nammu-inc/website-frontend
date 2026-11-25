@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { sharedStyles } from "../../styles";
-import { useIsMobile } from "../../hooks";
+import { useIsMobile, useMediaQuery } from "../../hooks";
 import { Section, Eyebrow } from "../../components/ui";
 import stavisLogo from "../../assets/Stavis.png";
 import nfiLogo from "../../assets/NFI Logo.jpg";
 import cwLogo from "../../assets/cw-logo.png";
+import greenheadLogo from "../../assets/greenhead-mark.png";
 
 const C = sharedStyles.colors;
 
 // Social proof right under the hero. Short, punchy pulls (the full quotes were
 // too long for cards). A continuous, looping carousel driven by side arrows: the
-// quotes form a ring (Tiffany -> Todd -> Rob -> Dick -> Tiffany ...), so every
-// click advances exactly one card in the pressed direction with a seamless wrap.
+// quotes form a ring (Tiffany -> Todd -> Rob -> Dick -> Allison -> Tiffany ...),
+// so every click advances exactly one card in the pressed direction with a
+// seamless wrap. It also advances on its own every AUTOPLAY_MS, pausing on mouse
+// hover or keyboard focus, and not at all for visitors who prefer reduced motion.
 //
 // Implementation: the set is rendered three times and a transform slides the
 // track by one card per step. After each step we silently recenter into the
@@ -43,6 +46,14 @@ const TESTIMONIALS = [
   },
   {
     quote:
+      "Orders used to come by email and text in all sorts of formats. Now customers have a clean, easy way to order, and as soon as we confirm, it's in our shipping system with no manual entry.",
+    author: "Allison Melvin",
+    role: "Marketing Director, Greenhead Lobster",
+    logo: greenheadLogo,
+    company: "Greenhead Lobster",
+  },
+  {
+    quote:
       "They took the time to understand our day-to-day sales needs and delivered a platform we use daily, with data that's easy to navigate and act on.",
     author: "Tiffany Walker",
     role: "Sales Manager, Stavis Seafoods",
@@ -53,12 +64,17 @@ const TESTIMONIALS = [
 
 const N = TESTIMONIALS.length;
 const LOOP = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+const AUTOPLAY_MS = 6000;
 
 const Testimonials = () => {
   const isMobile = useIsMobile();
   const [index, setIndex] = useState(N); // start at the middle copy
   const [animate, setAnimate] = useState(true);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
   const slidingRef = useRef(false);
+  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const autoplay = !reducedMotion && !hovered && !focused;
 
   const go = (dir) => {
     if (slidingRef.current || !animate) return;
@@ -90,6 +106,19 @@ const Testimonials = () => {
       return () => cancelAnimationFrame(id);
     }
   }, [animate]);
+
+  // Depends on index so any move, including an arrow click, restarts the clock.
+  // An interval rather than a timeout so a tick skipped while the tab is hidden
+  // gets another chance when the visitor comes back.
+  useEffect(() => {
+    if (!autoplay || !animate) return undefined;
+    const id = setInterval(() => {
+      if (document.hidden || slidingRef.current) return;
+      slidingRef.current = true;
+      setIndex((i) => i + 1);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [autoplay, animate, index]);
 
   const cardW = isMobile ? "min(82vw, 340px)" : "385px";
   const gap = isMobile ? 16 : 22;
@@ -158,7 +187,15 @@ const Testimonials = () => {
         <Eyebrow>Trusted in the industry</Eyebrow>
       </div>
 
-      <div style={styles.wrapper}>
+      {/* Mouse only and focus-visible only: a tap or click on an arrow leaves
+          emulated hover and focus behind, which would stop autoplay for good. */}
+      <div
+        style={styles.wrapper}
+        onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
+        onFocus={(e) => e.target.matches(":focus-visible") && setFocused(true)}
+        onBlur={() => setFocused(false)}
+      >
         <div style={styles.viewport}>
           <div style={styles.track} onTransitionEnd={handleTransitionEnd}>
             {LOOP.map((t, i) => (

@@ -1,3 +1,4 @@
+import bt7 from "../assets/posts/between-tides-7.jpg";
 import bt6 from "../assets/posts/between-tides-6.jpg";
 import bt5 from "../assets/posts/between-tides-5.jpg";
 import bt4 from "../assets/posts/between-tides-4.jpg";
@@ -21,6 +22,14 @@ import bt3 from "../assets/posts/between-tides-3.jpg";
 // imported above. Save a copy rather than linking LinkedIn's media URLs, which
 // are signed and can expire. Resize to ~800px wide JPEG; cards show it at 16:9.
 export const POSTS = [
+  {
+    date: "November 18, 2026",
+    title: "Between Tides #7: Seafood without fish?",
+    excerpt:
+      "Why cultivated seafood is so hard to scale, where plant-based seafood has a better shot (and why texture is the sticking point), and what Beyond Meat's slump says about demand. Plus a look inside Nemo with Todd Rushing of Stavis Seafoods.",
+    url: "https://www.linkedin.com/pulse/between-tides-7-seafood-without-fish-nammu-ai-wwujc",
+    image: bt7,
+  },
   {
     date: "November 4, 2026",
     title: "Between Tides #6: What an AI bust could mean for seafood",

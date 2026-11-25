@@ -8,9 +8,9 @@ const C = sharedStyles.colors;
 // Anchor tabs that jump to home-page sections (by element id).
 const NAV = [
   { label: "Product", id: "capabilities" },
+  { label: "Case studies", id: "case-studies" },
   { label: "Team", id: "team" },
   { label: "Press", id: "press" },
-  { label: "Case studies", id: "case-studies" },
   { label: "Newsletter", id: "newsletter" },
   { label: "FAQ", id: "faq" },
 ];

@@ -15,9 +15,9 @@ const Home = () => (
     <Testimonials />
     <Capabilities />
     <CTA />
+    <CaseStudies />
     <Team />
     <Press />
-    <CaseStudies />
     <Newsletter />
     <FAQ />
   </>

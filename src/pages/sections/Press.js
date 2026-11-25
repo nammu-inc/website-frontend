@@ -194,7 +194,7 @@ const Press = () => {
   };
 
   return (
-    <Section background={C.surface} id="press">
+    <Section background={C.white} id="press">
       <style>{`
         @keyframes nm-pfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
         @media (prefers-reduced-motion: reduce){ .nm-pfade { animation: none !important; } }

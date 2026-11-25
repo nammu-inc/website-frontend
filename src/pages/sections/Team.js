@@ -298,7 +298,7 @@ const Team = () => {
   };
 
   return (
-    <Section background={C.white} id="team">
+    <Section background={C.surface} id="team">
       <style>{`
         .nm-team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(9,20,47,0.11); }
         .nm-team-linkedin:hover { color: ${C.accent}; }

@@ -10,8 +10,8 @@ const CARD_W = 400;
 const GAP = 24;
 
 // Case studies: walkthroughs written with customers, hosted on nammu.ai. Sits
-// between Press (outside coverage) and Newsletter (our own writing), on white
-// so it reads apart from the gray Press band above and the blue wash below.
+// right after the product and CTA as proof, on white so it reads apart from the
+// blue CTA band above and the gray Team band below.
 // Cards size to how many there are, so two sit centered rather than stretched.
 const CaseStudies = () => {
   const isMobile = useIsMobile();
